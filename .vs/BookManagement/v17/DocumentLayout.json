@@ -1,0 +1,877 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ProjectCSharp\\BookManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2158397-2C60-44C2-B274-E7F131B0FB06}|BookManagement.Api\\BookManagement.Api.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2158397-2C60-44C2-B274-E7F131B0FB06}|BookManagement.Api\\BookManagement.Api.csproj|solutionrelative:bookmanagement.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E905F19-581B-4412-806C-158C5D596EAA}|BookManagement.Infrastructure\\BookManagement.Infrastructure.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.infrastructure\\dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E905F19-581B-4412-806C-158C5D596EAA}|BookManagement.Infrastructure\\BookManagement.Infrastructure.csproj|solutionrelative:bookmanagement.infrastructure\\dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\download.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\download.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\ihasmedia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\ihasmedia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\mediafile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\mediafile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\mediafolder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\mediafolder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\mediastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\mediastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\chatmessageparticipantstates.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\chatmessageparticipantstates.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\participant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\participant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\billdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\billdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\bill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\bill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\shippingmethodbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\shippingmethodbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\shippingmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\shippingmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\paymentmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\paymentmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\rankcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\rankcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\bookreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\bookreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\favoritebook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\favoritebook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\eventbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\eventbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\discountevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\discountevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\uservoucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\uservoucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\voucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\voucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\topicbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\topicbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\collection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\collection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\confirmemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\confirmemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\addressuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\addressuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7839A383-2237-4EF5-BCFA-3E9FB7107BB4}|BookManagement.Domain\\BookManagement.Domain.csproj|solutionrelative:bookmanagement.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\base\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\base\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\features\\iactivatable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\features\\iactivatable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\enums\\enumerate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\enums\\enumerate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\features\\ihasmodificationtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\features\\ihasmodificationtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\features\\ihascreationtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\features\\ihascreationtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\features\\ideletable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\features\\ideletable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\features\\icloneable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\features\\icloneable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\base\\ihaskey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\base\\ihaskey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|d:\\projectcsharp\\bookmanagement\\bookmanagement.commons\\base\\ientity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE30572C-0D93-42F3-A082-C8ACB2613828}|BookManagement.Commons\\BookManagement.Commons.csproj|solutionrelative:bookmanagement.commons\\base\\ientity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 23,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:142:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:143:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:144:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:145:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "BookManagement.Api\\appsettings.json",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Api\\appsettings.json",
+              "RelativeToolTip": "BookManagement.Api\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-03T16:59:34.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Infrastructure\\DataAccess\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "BookManagement.Infrastructure\\DataAccess\\AppDbContext.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Infrastructure\\DataAccess\\AppDbContext.cs",
+              "RelativeToolTip": "BookManagement.Infrastructure\\DataAccess\\AppDbContext.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAkwBwAAABYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:50:50.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IHasMedia.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\IHasMedia.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\IHasMedia.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\IHasMedia.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\IHasMedia.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:49:16.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MediaStorage.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\MediaStorage.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\MediaStorage.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\MediaStorage.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\MediaStorage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:48:55.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MediaFolder.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\MediaFolder.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\MediaFolder.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\MediaFolder.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\MediaFolder.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAzwCMAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:48:33.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MediaFile.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\MediaFile.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\MediaFile.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\MediaFile.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\MediaFile.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAUwCMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:47:48.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Download.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Download.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Download.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Download.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Download.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:47:12.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ChatMessageParticipantStates.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ChatMessageParticipantStates.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\ChatMessageParticipantStates.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ChatMessageParticipantStates.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\ChatMessageParticipantStates.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:44:53.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Conversation.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Conversation.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Conversation.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Conversation.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Conversation.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:44:34.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Participant.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Participant.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Participant.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Participant.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Participant.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:44:16.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ChatMessage.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ChatMessage.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\ChatMessage.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ChatMessage.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\ChatMessage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:43:57.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BillDetail.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\BillDetail.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\BillDetail.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\BillDetail.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\BillDetail.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:43:41.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Bill.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Bill.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Bill.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Bill.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Bill.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:43:20.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Contact.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Contact.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Contact.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Contact.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:43:03.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ShippingMethodBook.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ShippingMethodBook.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\ShippingMethodBook.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ShippingMethodBook.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\ShippingMethodBook.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:42:43.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ShippingMethod.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ShippingMethod.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\ShippingMethod.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ShippingMethod.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\ShippingMethod.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:42:16.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CartItem.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\CartItem.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\CartItem.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\CartItem.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\CartItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:41:58.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Cart.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Cart.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Cart.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Cart.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:41:41.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PaymentMethod.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\PaymentMethod.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\PaymentMethod.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\PaymentMethod.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\PaymentMethod.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:41:18.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "RankCustomer.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\RankCustomer.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\RankCustomer.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\RankCustomer.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\RankCustomer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:41:02.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "BookReview.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\BookReview.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\BookReview.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\BookReview.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\BookReview.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:40:44.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FavoriteBook.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\FavoriteBook.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\FavoriteBook.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\FavoriteBook.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\FavoriteBook.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:40:26.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Book.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Book.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Book.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Book.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Book.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:40:10.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "EventBook.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\EventBook.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\EventBook.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\EventBook.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\EventBook.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:39:53.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DiscountEvent.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\DiscountEvent.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\DiscountEvent.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\DiscountEvent.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\DiscountEvent.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:39:34.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "UserVoucher.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\UserVoucher.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\UserVoucher.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\UserVoucher.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\UserVoucher.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:39:17.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Voucher.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Voucher.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Voucher.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Voucher.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Voucher.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:38:59.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "TopicBook.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\TopicBook.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\TopicBook.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\TopicBook.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\TopicBook.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:38:35.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Category.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Category.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Category.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:37:44.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Collection.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Collection.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Collection.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Collection.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Collection.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:37:29.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\UserRole.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\UserRole.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\UserRole.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\UserRole.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:37:02.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Role.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Role.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\Role.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\Role.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\Role.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:36:44.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "RefreshToken.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\RefreshToken.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\RefreshToken.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\RefreshToken.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\RefreshToken.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:36:22.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ConfirmEmail.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ConfirmEmail.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\ConfirmEmail.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\ConfirmEmail.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\ConfirmEmail.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:35:59.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AddressUser.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\AddressUser.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\AddressUser.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\AddressUser.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\AddressUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:35:33.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "BookManagement.Domain\\Entities\\User.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Domain\\Entities\\User.cs",
+              "RelativeToolTip": "BookManagement.Domain\\Entities\\User.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:29:12.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Enumerate.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Enums\\Enumerate.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Enums\\Enumerate.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Enums\\Enumerate.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Enums\\Enumerate.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:27:54.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "IHasModificationTime.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IHasModificationTime.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Features\\IHasModificationTime.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IHasModificationTime.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Features\\IHasModificationTime.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:24:51.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "IHasCreationTime.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IHasCreationTime.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Features\\IHasCreationTime.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IHasCreationTime.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Features\\IHasCreationTime.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:24:19.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IDeletable.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IDeletable.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Features\\IDeletable.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IDeletable.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Features\\IDeletable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:23:58.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "ICloneable.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\ICloneable.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Features\\ICloneable.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\ICloneable.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Features\\ICloneable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:23:35.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "IActivatable.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IActivatable.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Features\\IActivatable.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Features\\IActivatable.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Features\\IActivatable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:23:02.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "IHasKey.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Base\\IHasKey.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Base\\IHasKey.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Base\\IHasKey.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Base\\IHasKey.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:20:44.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "IEntity.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Base\\IEntity.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Base\\IEntity.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Base\\IEntity.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Base\\IEntity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:20:25.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Base\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "BookManagement.Commons\\Base\\BaseEntity.cs",
+              "ToolTip": "D:\\ProjectCSharp\\BookManagement\\BookManagement.Commons\\Base\\BaseEntity.cs",
+              "RelativeToolTip": "BookManagement.Commons\\Base\\BaseEntity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T16:20:10.552Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
