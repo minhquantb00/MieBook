@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookManagement.Infrastructure.DataAccess
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext, IDbContext
     {
         public AppDbContext() { }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -48,5 +48,15 @@ namespace BookManagement.Infrastructure.DataAccess
         public DbSet<Voucher> Voucher { get; set; }
         public DbSet<BookReview> BookReview { get; set; }
         public DbSet<Contact> Contact { get; set; }
+
+        public async Task<int> CommitChangesAsync()
+        {
+            return await base.SaveChangesAsync();
+        }
+
+        public DbSet<TEntity> SetEntity<TEntity>() where TEntity : class
+        {
+            return base.Set<TEntity>();
+        }
     }
 }
