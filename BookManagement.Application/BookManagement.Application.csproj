@@ -18,7 +18,6 @@
     <Folder Include="UseCases\User_UseCase\ForgotPassword\" />
     <Folder Include="UseCases\User_UseCase\ChangePassword\" />
     <Folder Include="UseCases\User_UseCase\ConfirmCreateNewPassword\" />
-    <Folder Include="UseCases\User_UseCase\Register\" />
   </ItemGroup>
 
 </Project>
