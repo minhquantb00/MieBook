@@ -11,4 +11,14 @@
     <ProjectReference Include="..\BookManagement.Domain\BookManagement.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\User_UseCase\Login\" />
+    <Folder Include="UseCases\User_UseCase\GetUser\" />
+    <Folder Include="UseCases\User_UseCase\GetUserById\" />
+    <Folder Include="UseCases\User_UseCase\ForgotPassword\" />
+    <Folder Include="UseCases\User_UseCase\ChangePassword\" />
+    <Folder Include="UseCases\User_UseCase\ConfirmCreateNewPassword\" />
+    <Folder Include="UseCases\User_UseCase\Register\" />
+  </ItemGroup>
+
 </Project>
