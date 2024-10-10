@@ -9,5 +9,8 @@ namespace BookManagement.Domain.Entities
 {
     public class Role : BaseEntity<long>
     {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<UserRole>? UserRoles { get; set; }
     }
 }

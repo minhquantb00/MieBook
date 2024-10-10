@@ -9,5 +9,8 @@ namespace BookManagement.Domain.Entities
 {
     public class RankCustomer : BaseEntity<long>
     {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public double DiscountPercent { get; set; }
     }
 }

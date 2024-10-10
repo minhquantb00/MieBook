@@ -20,4 +20,8 @@
     <Folder Include="UseCases\User_UseCase\ConfirmCreateNewPassword\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
 </Project>

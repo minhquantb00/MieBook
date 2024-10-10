@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookManagement.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,6 +10,16 @@ namespace BookManagement.Domain.Repositories
 {
     public interface IRepository<TEntity>
     {
+        #region Get User InformaTion by keyword
+        Task<User> GetUserByEmail(string email);
+
+
+        Task<User> GetUserByPhoneNumber(string phoneNumber);
+        #endregion
+        #region Get Role, Add Roles
+        Task AddUserToRoleAsync(User user, IEnumerable<string> listRoles);
+        Task<IEnumerable<string>> GetRolesOfUserAsync(User user);
+        #endregion
         #region GetAllAsync
         Task<IEnumerable<TEntity>> GetAsync(ISpecification<TEntity> specification = null);
         Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> property = null);

@@ -1,4 +1,5 @@
-﻿using BookManagement.Domain.Repositories;
+﻿using BookManagement.Domain.Entities;
+using BookManagement.Domain.Repositories;
 using BookManagement.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -36,6 +37,126 @@ namespace BookManagement.Infrastructure.Repositories
                 return this.AutoCommitEnabled ?? true;
             }
         }
+        #region Get User InformaTion by keyword
+        public async Task<User> GetUserByEmail(string email)
+        {
+            var user = await _context.User.SingleOrDefaultAsync(x => x.Email.ToLower().Equals(email.ToLower()));
+            return user;
+        }
+
+
+        public async Task<User> GetUserByPhoneNumber(string phoneNumber)
+        {
+            var user = await _context.User.SingleOrDefaultAsync(x => x.PhoneNumber.ToLower().Equals(phoneNumber.ToLower()));
+            return user;
+        }
+        #endregion
+        #region Thêm danh sách quyền cho một người dùng
+        public virtual async Task AddUserToRoleAsync(User user, IEnumerable<string> listRoles)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (listRoles == null)
+            {
+                throw new ArgumentNullException(nameof(listRoles));
+            }
+            foreach (var role in listRoles.Distinct())
+            {
+                var rolesOfUser = await GetRolesOfUserAsync(user);
+                if (await IsStringInListAsync(role, rolesOfUser.ToList()))
+                {
+                    throw new ArgumentException("Người dùng đã có quyền này rồi");
+                }
+                else
+                {
+                    var roleItem = await _context.Role.SingleOrDefaultAsync(x => x.Code.Equals(role));
+                    if (roleItem == null)
+                    {
+                        throw new ArgumentNullException("Không có quyền này");
+                    }
+                    _context.UserRole.Add(new UserRole { UserId = int.Parse((user.Id).ToString()), RoleId = int.Parse((roleItem.Id).ToString()) });
+                }
+            }
+            _context.SaveChanges();
+        }
+        public virtual async Task<IEnumerable<string>> GetRolesOfUserAsync(User user)
+        {
+            List<string> roles = new List<string>();
+            var listRoles = _context.UserRole.Where(x => x.UserId == user.Id).AsQueryable();
+            foreach (var item in listRoles.Distinct())
+            {
+                var role = _context.Role.SingleOrDefault(x => x.Id == item.RoleId);
+                roles.Add(role.Code);
+            }
+            return roles.AsEnumerable();
+        }
+        public async Task DeleteRolesOfUserAsync(User user, List<string> listRoles)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (listRoles == null)
+            {
+                throw new ArgumentNullException(nameof(listRoles));
+            }
+            foreach (var role in listRoles.Distinct())
+            {
+                var rolesOfUser = await GetRolesOfUserAsync(user);
+                var listPermission = new List<UserRole>();
+                if (await IsStringInListAsync(role, rolesOfUser.ToList()))
+                {
+                    var roleItem = await _context.Role.SingleOrDefaultAsync(x => x.Code.Equals(role));
+                    var permission = await _context.UserRole.SingleOrDefaultAsync(x => x.UserId == user.Id && x.RoleId == roleItem.Id);
+                    if (permission != null)
+                    {
+                        listPermission.Add(permission);
+                    }
+                }
+                else
+                {
+
+                    throw new ArgumentNullException("Không có quyền này");
+
+                }
+                _context.UserRole.RemoveRange(listPermission);
+            }
+            _context.SaveChanges();
+        }
+
+        #endregion
+        #region Xử lí chuỗi
+        private Task<bool> CompareStringAsync(string str1, string str2)
+        {
+            return Task.FromResult(string.Equals(str1.ToLowerInvariant(), str2.ToLowerInvariant()));
+        }
+
+
+
+        private async Task<bool> IsStringInListAsync(string inputString, List<string> listString)
+        {
+            if (inputString == null)
+            {
+                throw new ArgumentNullException(nameof(inputString));
+            }
+
+            if (listString == null)
+            {
+                throw new ArgumentNullException(nameof(listString));
+            }
+
+            foreach (var str in listString)
+            {
+                if (await CompareStringAsync(inputString, str))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        #endregion
         public Repository(AppDbContext context, IDbContext idbContext)
         {
             _context = context;

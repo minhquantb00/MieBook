@@ -9,5 +9,7 @@ namespace BookManagement.Domain.Entities
 {
     public class PaymentMethod : BaseEntity<long>
     {
+        public string Name { get; set; }
+        public virtual ICollection<Bill>? Bills { get; set; }
     }
 }

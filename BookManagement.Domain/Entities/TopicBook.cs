@@ -9,5 +9,8 @@ namespace BookManagement.Domain.Entities
 {
     public class TopicBook : BaseEntity<long>
     {
+        public string Banner {  get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Book>? Books { get; set; }
     }
 }
