@@ -1,6 +1,11 @@
+using BookManagement.Application.IUseCases;
+using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Commons.Configuration;
+using BookManagement.Domain.Entities;
+using BookManagement.Domain.Repositories;
 using BookManagement.Infrastructure.Configure;
 using BookManagement.Infrastructure.DataAccess;
+using BookManagement.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +17,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddCors(x => x.AddPolicy("corsGlobalPolicy", builder =>
 {
     builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "http://localhost:5173", "http://localhost:5174")
@@ -53,6 +59,10 @@ builder.Services.AddSingleton(emailConfig);
 
 
 builder.Services.AddScoped<IDbContext, AppDbContext>();
+builder.Services.AddScoped<IUseCase<RegisterUserUseCaseInput, RegisterUserUseCaseOutput>, RegisterUserUseCase>();
+builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
+builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 
 builder.Services.AddControllers();

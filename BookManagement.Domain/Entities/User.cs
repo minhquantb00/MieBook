@@ -19,11 +19,11 @@ namespace BookManagement.Domain.Entities
         public string Password {  get; set; }
         public string PhoneNumber { get; set; }
         public string PinCode { get; set; }
-        public long AddressDefaultId { get; set; }
+        public long? AddressDefaultId { get; set; }
         public int Point { get; set; } = 0;
         public DateTime CreateTime { get; set; }
         public DateTime? UpdateTime { get; set; }
-        public long RankCustomerId { get; set; }
+        public long? RankCustomerId { get; set; }
         public bool IsActive { get; set; } = true;
         public bool IsDeleted { get; set; } = false;
         public virtual ICollection<UserRole>? UserRoles { get; set; }

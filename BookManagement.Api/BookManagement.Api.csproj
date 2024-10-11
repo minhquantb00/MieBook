@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BookManagement.Application\BookManagement.Application.csproj" />
     <ProjectReference Include="..\BookManagement.Commons\BookManagement.Commons.csproj" />
     <ProjectReference Include="..\BookManagement.Domain\BookManagement.Domain.csproj" />
