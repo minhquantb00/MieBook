@@ -1,12 +1,6 @@
-<script>
-import Rightbar from "@/components/right-bar.vue"
-
-export default {
-    name: "LOGIN",
-    components: {
-        Rightbar
-    }
-}
+<script setup>
+import Rightbar from "@/components/right-bar.vue";
+import {RouterLink} from "vue-router";
 </script>
 
 <template>
@@ -18,9 +12,9 @@ export default {
                         <div class="text-center">
                             <img src="@/assets/images/authentication/img-auth-login.png" alt="images"
                                 class="img-fluid mb-3">
-                            <h4 class="f-w-500 mb-1">Login with your email dcdcd</h4>
-                            <p class="mb-3">Don't have an Account? <a href="@/pages/register-v1.html"
-                                    class="link-primary ms-1">Create Account</a></p>
+                            <h4 class="f-w-500 mb-1"></h4>
+                            <p class="mb-3">Don't have an Account? <RouterLink href="#" :to="{name: 'register-v1'}"
+                                    class="link-primary ms-1">Create Account</RouterLink></p>
                         </div>
                         <div class="form-group mb-3">
                             <input type="email" class="form-control" id="floatingInput" placeholder="Email Address">
