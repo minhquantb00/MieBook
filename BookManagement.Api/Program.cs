@@ -1,4 +1,5 @@
 using BookManagement.Application.IUseCases;
+using BookManagement.Application.UseCases.User_UseCase.ChangePassword;
 using BookManagement.Application.UseCases.User_UseCase.Login;
 using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Commons.Configuration;
@@ -62,6 +63,7 @@ builder.Services.AddSingleton(emailConfig);
 builder.Services.AddScoped<IDbContext, AppDbContext>();
 builder.Services.AddScoped<IUseCase<RegisterUserUseCaseInput, RegisterUserUseCaseOutput>, RegisterUserUseCase>();
 builder.Services.AddScoped<IUseCase<LoginUserUseCaseInput, LoginUserUseCaseOutput>, LoginUserUseCase>();
+builder.Services.AddScoped<IUseCase<ChangePasswordUseCaseInput, ChangePasswordUseCaseOutput>, ChangePasswordUseCase>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
 builder.Services.AddScoped<IRepository<UserRole>, Repository<UserRole>>();

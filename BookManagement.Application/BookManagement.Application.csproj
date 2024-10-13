@@ -15,7 +15,6 @@
     <Folder Include="UseCases\User_UseCase\GetUser\" />
     <Folder Include="UseCases\User_UseCase\GetUserById\" />
     <Folder Include="UseCases\User_UseCase\ForgotPassword\" />
-    <Folder Include="UseCases\User_UseCase\ChangePassword\" />
     <Folder Include="UseCases\User_UseCase\ConfirmCreateNewPassword\" />
   </ItemGroup>
 
