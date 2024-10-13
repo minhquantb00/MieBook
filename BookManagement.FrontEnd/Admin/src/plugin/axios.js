@@ -30,7 +30,7 @@ axiosIns.interceptors.request.use((response) => {
     localStorage.removeItem(LocalStorageKey.ACCESS_TOKEN);
     localStorage.removeItem(LocalStorageKey.USER_INFO);
     localStorage.removeItem(LocalStorageKey.REFRESH_TOKEN);
-    router.push('/login');
+    router.push('/login-v1');
   }else{
     return Promise.reject(error);
   }

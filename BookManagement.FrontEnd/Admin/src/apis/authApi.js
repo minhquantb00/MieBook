@@ -1,5 +1,6 @@
 import { AuthMessage } from "@/constants/enum";
 import axiosIns from "@/plugin/axios";
+import axios from "axios";
 
 const CONTROLLER_NAME = "User";
 const errorList = {
@@ -16,6 +17,19 @@ const errorList = {
   [AuthMessage.ErrorAccountVerified]: {
     error: { detail: AuthMessage.AccountVerified },
   },
+};
+
+const login = async (params) => {
+  try {
+      const result = await axios.post(`https://localhost:7027/api/${CONTROLLER_NAME}/Login`, params);
+      return result;
+  } catch (error) {
+      if (error.response && error.response.data && error.response.data.detail) {
+          return errorList[error.response.data.detail];
+      } else {
+          return { error: AuthMessage.LoginFail };
+      }
+  }
 };
 
 const register = async (params) => {
@@ -37,5 +51,6 @@ const register = async (params) => {
 
 
 export const AuthApi = {
-  register
+  register,
+  login
 }

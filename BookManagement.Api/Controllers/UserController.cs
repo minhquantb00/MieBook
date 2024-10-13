@@ -1,4 +1,5 @@
 ﻿using BookManagement.Application.IUseCases;
+using BookManagement.Application.UseCases.User_UseCase.Login;
 using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Commons.Constants;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,17 @@ namespace BookManagement.Api.Controllers
         public async Task<IActionResult> Register([FromForm] RegisterUserUseCaseInput input)
         {
             var useCase = _serviceProvider.GetService<IUseCase<RegisterUserUseCaseInput, RegisterUserUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(input);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginUserUseCaseInput input)
+        {
+            var useCase = _serviceProvider.GetService<IUseCase<LoginUserUseCaseInput, LoginUserUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(input);
             if (!result.Succeeded)
             {
