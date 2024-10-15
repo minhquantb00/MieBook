@@ -1,5 +1,8 @@
+using BookManagement.Application.Handle.Email;
 using BookManagement.Application.IUseCases;
 using BookManagement.Application.UseCases.User_UseCase.ChangePassword;
+using BookManagement.Application.UseCases.User_UseCase.ConfirmCreateNewPassword;
+using BookManagement.Application.UseCases.User_UseCase.ForgotPassword;
 using BookManagement.Application.UseCases.User_UseCase.Login;
 using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Commons.Configuration;
@@ -64,10 +67,14 @@ builder.Services.AddScoped<IDbContext, AppDbContext>();
 builder.Services.AddScoped<IUseCase<RegisterUserUseCaseInput, RegisterUserUseCaseOutput>, RegisterUserUseCase>();
 builder.Services.AddScoped<IUseCase<LoginUserUseCaseInput, LoginUserUseCaseOutput>, LoginUserUseCase>();
 builder.Services.AddScoped<IUseCase<ChangePasswordUseCaseInput, ChangePasswordUseCaseOutput>, ChangePasswordUseCase>();
+builder.Services.AddScoped<IUseCase<ForgotPasswordUseCaseInput, ForgotPasswordUseCaseOutput>, ForgotPasswordUseCase>();
+builder.Services.AddScoped<IUseCase<ConfirmCreateNewPasswordUseCaseInput, ConfirmCreateNewPasswordUseCaseOutput>, ConfirmCreateNewPasswordUseCase>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
 builder.Services.AddScoped<IRepository<UserRole>, Repository<UserRole>>();
 builder.Services.AddScoped<IRepository<RefreshToken>, Repository<RefreshToken>>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IRepository<ConfirmEmail>, Repository<ConfirmEmail>>();
 builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 

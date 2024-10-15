@@ -1,5 +1,7 @@
 ﻿using BookManagement.Application.IUseCases;
 using BookManagement.Application.UseCases.User_UseCase.ChangePassword;
+using BookManagement.Application.UseCases.User_UseCase.ConfirmCreateNewPassword;
+using BookManagement.Application.UseCases.User_UseCase.ForgotPassword;
 using BookManagement.Application.UseCases.User_UseCase.Login;
 using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Commons.Constants;
@@ -46,6 +48,29 @@ namespace BookManagement.Api.Controllers
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordUseCaseInput input)
         {
             var useCase = _serviceProvider.GetService<IUseCase<ChangePasswordUseCaseInput, ChangePasswordUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(input);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordUseCaseInput input)
+        {
+            var useCase = _serviceProvider.GetService<IUseCase<ForgotPasswordUseCaseInput, ForgotPasswordUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(input);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmCreateNewPassword([FromBody] ConfirmCreateNewPasswordUseCaseInput input)
+        {
+            var useCase = _serviceProvider.GetService<IUseCase<ConfirmCreateNewPasswordUseCaseInput, ConfirmCreateNewPasswordUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(input);
             if (!result.Succeeded)
             {
