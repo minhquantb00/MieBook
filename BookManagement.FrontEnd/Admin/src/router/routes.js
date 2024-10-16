@@ -422,6 +422,12 @@ export default [
         meta: { title: "plans" },
         component: () => import("../views/live-preview/application/plans.vue"),
     },
+    {
+      path: "/home",
+      name: "home",
+      meta: { title: "home" },
+      component: () => import("../views/live-preview/pages/home/index.vue"),
+  },
 
     // Users
     {

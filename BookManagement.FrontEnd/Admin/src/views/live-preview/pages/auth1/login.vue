@@ -41,7 +41,7 @@ const login = async () => {
       dangerouslyHTMLString: true,
     });
     time.value = setTimeout(() => {
-      router.push("/dashboard");
+      router.push("/home");
     }, 1500);
   } else {
     toast(result.data.error[0], {
