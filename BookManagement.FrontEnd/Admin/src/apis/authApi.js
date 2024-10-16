@@ -49,8 +49,35 @@ const register = async (params) => {
   }
 };
 
+const forgotPassword = async (params) => {
+  try {
+    const result = await axios.post(`https://localhost:7027/api/${CONTROLLER_NAME}/ForgotPassword`, params);
+    return result;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.detail) {
+      return errorList[error.response.data.detail];
+    } else {
+      return { error: AuthMessage.LoginFail };
+    }
+  }
+};
+
+const confirmCreateNewPassword = async (params) => {
+  try {
+    const result = await axios.post(`https://localhost:7027/api/${CONTROLLER_NAME}/ConfirmCreateNewPassword`, params);
+    return result;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.detail) {
+      return errorList[error.response.data.detail];
+    } else {
+      return { error: AuthMessage.LoginFail };
+    }
+  }
+};
 
 export const AuthApi = {
   register,
-  login
+  login,
+  forgotPassword,
+  confirmCreateNewPassword
 }

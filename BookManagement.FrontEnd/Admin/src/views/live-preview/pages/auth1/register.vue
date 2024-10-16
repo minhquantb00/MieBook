@@ -21,7 +21,7 @@ const register = async () => {
       type: "error",
       transition: "flip",
       theme: "dark",
-      autoClose: 2000,
+      autoClose: 1500,
       dangerouslyHTMLString: true,
     });
   }
@@ -29,19 +29,19 @@ const register = async () => {
     toast("Đăng ký tài khoản thành công", {
       type: "success",
       transition: "flip",
-      autoClose: 2000,
+      autoClose: 1500,
       theme: "dark",
       dangerouslyHTMLString: true,
     });
     time.value = setTimeout(() => {
       router.push("/login-v1");
-    }, 2000);
+    }, 1500);
   } else {
     toast(result.data.error[0], {
       type: "error",
       transition: "flip",
       theme: "dark",
-      autoClose: 2000,
+      autoClose: 1500,
       dangerouslyHTMLString: true,
     });
   }

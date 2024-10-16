@@ -25,7 +25,7 @@ builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builde
 
 builder.Services.AddCors(x => x.AddPolicy("corsGlobalPolicy", builder =>
 {
-    builder.WithOrigins("http://localhost:8080", "https://localhost:8080", "http://localhost:5173", "http://localhost:5174", "http://localhost:7027")
+    builder.WithOrigins("http://localhost:8080", "http://localhost:8081", "https://localhost:8081", "https://localhost:8080", "http://localhost:5173", "http://localhost:5174", "http://localhost:7027")
     .SetIsOriginAllowedToAllowWildcardSubdomains()
     .AllowAnyHeader()
     .AllowAnyMethod()

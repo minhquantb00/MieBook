@@ -36,19 +36,19 @@ const login = async () => {
     toast("Đăng nhập thành công", {
       type: "success",
       transition: "flip",
-      "autoClose": 2000,
+      "autoClose": 1500,
       theme: "dark",
       dangerouslyHTMLString: true,
     });
     time.value = setTimeout(() => {
       router.push("/dashboard");
-    }, 2000);
+    }, 1500);
   } else {
     toast(result.data.error[0], {
       type: "error",
       transition: "flip",
       theme: "dark",
-      "autoClose": 2000,
+      "autoClose": 1500,
       dangerouslyHTMLString: true,
     });
   }
@@ -97,9 +97,9 @@ const parseJwt = (token) => {
                                 <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="">
                                 <label class="form-check-label text-muted" for="customCheckc1">Nhớ mật khẩu</label>
                             </div>
-                            <a href="../pages/forgot-password-v1.html">
+                            <RouterLink href="#" :to="{path: '/forgot-password-v1'}">
                                 <h6 class="f-w-400 mb-0">Quên mật khẩu?</h6>
-                            </a>
+                            </RouterLink>
                         </div>
                         <div class="d-grid mt-4">
                             <button type="button" class="btn btn-primary" @click="login">Đăng nhập</button>

@@ -1,11 +1,42 @@
-<script>
+<script setup>
 import Rightbar from "@/components/right-bar.vue"
+import { RouterLink, useRouter } from "vue-router";
+import { confirmCreateNewPassword } from "@/interfaces/requestModels/user/confirmCreateNewPassword";
+import { AuthApi } from "@/apis/authApi";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+import {ref} from 'vue';
 
-export default {
-    name: "RESET-PASSWORD",
-    components: {
-        Rightbar
-    }
+const loading = ref(false);
+const businessExecute = ref(confirmCreateNewPassword);
+const time = ref();
+const router = useRouter();
+
+const confirmNewPassword = async () => {
+  loading.value = false;
+  const result = await AuthApi.confirmCreateNewPassword(businessExecute.value);
+  console.log(result);
+  if (result.data.succeeded === true) {
+    toast("Tạo tài khoản mới thành công!", {
+      type: "success",
+      transition: "flip",
+      autoClose: 1500,
+      theme: "dark",
+      dangerouslyHTMLString: true,
+    });
+    time.value = setTimeout(() => {
+      router.push("/login-v1");
+    }, 1500);
+  } else {
+    toast(result.data.error[0], {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+  }
+  loading.value = false;
 }
 </script>
 
@@ -19,19 +50,23 @@ export default {
                             <img src="@/assets/images/authentication/img-auth-reset-password.png" alt="images"
                                 class="img-fluid mb-3">
                             <h4 class="f-w-500 mb-1">Reset password</h4>
-                            <p class="mb-3">Back to <a href="../pages/login-v1.html" class="link-primary ms-1">Log in</a>
+                            <p class="mb-3">Back to <RouterLink href="#" :to="{path: '/login-v1'}" class="link-primary ms-1">Log in</RouterLink>
                             </p>
                         </div>
                         <div class="form-group mb-3">
+                          <label class="form-label">Confirm code</label>
+                          <input type="text" class="form-control" id="floatingInput" placeholder="Confirm code" v-model="businessExecute.confirmCode">
+                      </div>
+                        <div class="form-group mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" id="floatingInput" placeholder="Password">
+                            <input type="password" class="form-control" id="floatingInput" placeholder="Password" v-model="businessExecute.newPassword">
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="floatingInput1" placeholder="Confirm Password">
+                            <input type="password" class="form-control" id="floatingInput1" placeholder="Confirm Password" v-model="businessExecute.confirmNewPassword">
                         </div>
                         <div class="d-grid mt-4">
-                            <button type="button" class="btn btn-primary">Reset Password</button>
+                            <button type="button" class="btn btn-primary" @click="confirmNewPassword">Reset Password</button>
                         </div>
                         <div class="saprator my-3">
                             <span>Or continue with</span>
