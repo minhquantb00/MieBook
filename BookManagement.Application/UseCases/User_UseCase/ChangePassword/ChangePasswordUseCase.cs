@@ -62,7 +62,7 @@ namespace BookManagement.Application.UseCases.User_UseCase.ChangePassword
             }
         }
 
-        public Task<ChangePasswordUseCaseOutput> ExcuteAsync(int? id, ChangePasswordUseCaseInput input)
+        public Task<ChangePasswordUseCaseOutput> ExcuteAsync(long? id, ChangePasswordUseCaseInput input)
         {
             throw new NotImplementedException();
         }

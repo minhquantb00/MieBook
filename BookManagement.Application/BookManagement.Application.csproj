@@ -12,11 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\User_UseCase\GetUser\" />
-    <Folder Include="UseCases\User_UseCase\GetUserById\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.10.0" />
     <PackageReference Include="MailKit" Version="4.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
@@ -29,6 +24,15 @@
     <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\TopicBook_UseCase\CreateTopicBook\" />
+    <Folder Include="UseCases\TopicBook_UseCase\DeleteTopicBook\" />
+    <Folder Include="UseCases\TopicBook_UseCase\MapperGlobal\" />
+    <Folder Include="UseCases\TopicBook_UseCase\GetTopicBook\" />
+    <Folder Include="UseCases\TopicBook_UseCase\GetTopicBookById\" />
+    <Folder Include="UseCases\TopicBook_UseCase\UpdateTopicBook\" />
   </ItemGroup>
 
 </Project>

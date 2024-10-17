@@ -120,7 +120,7 @@ import pageheader from "@/components/page-header.vue";
                                                       <li class="list-group-item border-0 px-0 py-2">
                                                           <a v-b-toggle.filtercollapse1 variant="primary" class="border-0 px-0 text-start w-100 pb-0">
                                                               <div class="float-end"><i class="ti ti-chevron-down"></i>
-                                                              </div> Gender
+                                                              </div> Chủ đề
                                                           </a>
                                                           <BCollapse visible id="filtercollapse1">
                                                               <div>
@@ -142,7 +142,7 @@ import pageheader from "@/components/page-header.vue";
                                                       <li class="list-group-item border-0 px-0 py-2">
                                                           <a v-b-toggle.filtercollapse2 variant="primary" class="border-0 px-0 text-start w-100 pb-0">
                                                               <div class="float-end"><i class="ti ti-chevron-down"></i>
-                                                              </div> Categories
+                                                              </div> Danh mục
                                                           </a>
                                                           <BCollapse visible id="filtercollapse2">
                                                               <div>
@@ -173,48 +173,11 @@ import pageheader from "@/components/page-header.vue";
                                                               </div>
                                                           </BCollapse>
                                                       </li>
-                                                      <li class="list-group-item border-0 px-0 py-2">
-                                                          <a v-b-toggle.filtercollapse3 variant="primary" class="border-0 px-0 text-start w-100 pb-0">
-                                                              <div class="float-end"><i class="ti ti-chevron-down"></i>
-                                                              </div> Colors
-                                                          </a>
-                                                          <BCollapse visible id="filtercollapse3">
-                                                              <div>
-                                                                  <div class="form-check form-check-inline color-checkbox">
-                                                                      <input class="form-check-input" type="checkbox">
-                                                                      <i class="fas fa-circle text-primary"></i>
-                                                                  </div>
-                                                                  <div class="form-check form-check-inline color-checkbox">
-                                                                      <input class="form-check-input" type="checkbox">
-                                                                      <i class="fas fa-circle text-secondary"></i>
-                                                                  </div>
-                                                                  <div class="form-check form-check-inline color-checkbox">
-                                                                      <input class="form-check-input" type="checkbox">
-                                                                      <i class="fas fa-circle text-danger"></i>
-                                                                  </div>
-                                                                  <div class="form-check form-check-inline color-checkbox">
-                                                                      <input class="form-check-input" type="checkbox">
-                                                                      <i class="fas fa-circle text-success"></i>
-                                                                  </div>
-                                                                  <div class="form-check form-check-inline color-checkbox">
-                                                                      <input class="form-check-input" type="checkbox">
-                                                                      <i class="fas fa-circle text-warning"></i>
-                                                                  </div>
-                                                                  <div class="form-check form-check-inline color-checkbox">
-                                                                      <input class="form-check-input" type="checkbox">
-                                                                      <i class="fas fa-circle text-info"></i>
-                                                                  </div>
-                                                                  <div class="form-check form-check-inline color-checkbox">
-                                                                      <input class="form-check-input" type="checkbox">
-                                                                      <i class="fas fa-circle text-dark"></i>
-                                                                  </div>
-                                                              </div>
-                                                          </BCollapse>
-                                                      </li>
+
                                                       <li class="list-group-item border-0 px-0 py-2">
                                                           <a v-b-toggle.filtercollapse4 variant="primary" class="border-0 px-0 text-start w-100 pb-0">
                                                               <div class="float-end"><i class="ti ti-chevron-down"></i>
-                                                              </div> Price
+                                                              </div> Khoảng giá
                                                           </a>
                                                           <BCollapse visible id="filtercollapse4">
                                                               <BRow>
@@ -249,43 +212,6 @@ import pageheader from "@/components/page-header.vue";
                                                               </BRow>
                                                           </BCollapse>
                                                       </li>
-                                                      <li class="list-group-item border-0 px-0 py-2">
-                                                          <a v-b-toggle.filtercollapse5 variant="primary" class="border-0 px-0 text-start w-100 pb-0">
-                                                              <div class="float-end"><i class="ti ti-chevron-down"></i>
-                                                              </div> Price
-                                                          </a>
-                                                          <BCollapse visible id="filtercollapse5">
-                                                              <div>
-                                                                  <div class="form-check mb-2">
-                                                                      <input class="form-check-input" type="checkbox" value="" id="chkratt1">
-                                                                      <label class="form-check-label" for="chkratt1">4★
-                                                                          &amp;
-                                                                          above</label>
-                                                                  </div>
-                                                                  <div class="form-check mb-2">
-                                                                      <input class="form-check-input" type="checkbox" value="" id="chkratt2">
-                                                                      <label class="form-check-label" for="chkratt2">3★
-                                                                          &amp;
-                                                                          above</label>
-                                                                  </div>
-                                                                  <div class="form-check mb-2">
-                                                                      <input class="form-check-input" type="checkbox" value="" id="chkratt3">
-                                                                      <label class="form-check-label" for="chkratt3">2★
-                                                                          &amp;
-                                                                          above</label>
-                                                                  </div>
-                                                                  <div class="form-check mb-2">
-                                                                      <input class="form-check-input" type="checkbox" value="" id="chkratt4">
-                                                                      <label class="form-check-label" for="chkratt4">1★
-                                                                          &amp;
-                                                                          above</label>
-                                                                  </div>
-                                                              </div>
-                                                          </BCollapse>
-                                                      </li>
-                                                      <li class="list-group-item border-0 px-0 py-2">
-                                                          <a href="#" class="btn btn-light-danger w-100">Clear All</a>
-                                                      </li>
                                                   </ul>
                                               </div>
                                           </simplebar>
@@ -302,20 +228,11 @@ import pageheader from "@/components/page-header.vue";
                           <li class="list-inline-item">
                               <form class="form-search">
                                   <i class="ph-duotone ph-magnifying-glass icon-search"></i>
-                                  <input type="search" class="form-control" placeholder="Search Products">
+                                  <input type="search" class="form-control" placeholder="Tìm kiếm">
                               </form>
                           </li>
                       </ul>
                       <ul class="list-inline ms-auto my-1">
-                          <li class="list-inline-item">
-                              <select class="form-select">
-                                  <option>Price: High To Low</option>
-                                  <option>Price: Low To High</option>
-                                  <option>Popularity</option>
-                                  <option>Discount</option>
-                                  <option>Fresh Arrivals</option>
-                              </select>
-                          </li>
                           <li class="list-inline-item align-bottom">
                               <BButton variant="link-secondary" v-b-toggle.collapse-3 class="m-1"> <i class="ti ti-filter f-16"></i>Filter</BButton>
                           </li>

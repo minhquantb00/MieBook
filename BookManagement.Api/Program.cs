@@ -1,9 +1,18 @@
 using BookManagement.Application.Handle.Email;
 using BookManagement.Application.IUseCases;
+using BookManagement.Application.UseCases.Category_UseCase.CreateCategory;
+using BookManagement.Application.UseCases.Category_UseCase.DeleteCategory;
+using BookManagement.Application.UseCases.Category_UseCase.GetCategory;
+using BookManagement.Application.UseCases.Category_UseCase.GetCategoryById;
+using BookManagement.Application.UseCases.Category_UseCase.MapperGlobal;
+using BookManagement.Application.UseCases.Category_UseCase.UpdateCategory;
 using BookManagement.Application.UseCases.User_UseCase.ChangePassword;
 using BookManagement.Application.UseCases.User_UseCase.ConfirmCreateNewPassword;
 using BookManagement.Application.UseCases.User_UseCase.ForgotPassword;
+using BookManagement.Application.UseCases.User_UseCase.GetUser;
+using BookManagement.Application.UseCases.User_UseCase.GetUserById;
 using BookManagement.Application.UseCases.User_UseCase.Login;
+using BookManagement.Application.UseCases.User_UseCase.MapperGlobal;
 using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Commons.Configuration;
 using BookManagement.Domain.Entities;
@@ -69,13 +78,25 @@ builder.Services.AddScoped<IUseCase<LoginUserUseCaseInput, LoginUserUseCaseOutpu
 builder.Services.AddScoped<IUseCase<ChangePasswordUseCaseInput, ChangePasswordUseCaseOutput>, ChangePasswordUseCase>();
 builder.Services.AddScoped<IUseCase<ForgotPasswordUseCaseInput, ForgotPasswordUseCaseOutput>, ForgotPasswordUseCase>();
 builder.Services.AddScoped<IUseCase<ConfirmCreateNewPasswordUseCaseInput, ConfirmCreateNewPasswordUseCaseOutput>, ConfirmCreateNewPasswordUseCase>();
+builder.Services.AddScoped<IUseCase<CreateCategoryUseCaseInput, CreateCategoryUseCaseOutput>, CreateCategoryUseCase>();
+builder.Services.AddScoped<IRepository<Category>, Repository<Category>>();
+builder.Services.AddScoped<IRepository<Book>, Repository<Book>>();
+builder.Services.AddScoped<IUseCase<DeleteCategoryUseCaseInput, DeleteCategoryUseCaseOutput>,  DeleteCategoryUseCase>();  
+builder.Services.AddScoped<IUseCase<UpdateCategoryUseCaseInput, UpdateCategoryUseCaseOutput>, UpdateCategoryUseCase>();
+builder.Services.AddScoped<IUseCase<GetCategoryUseCaseInput, GetCategoryUseCaseOutput>, GetCategoryUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<long, GetCategoryByIdUseCaseOutput>, GetCategoryByIdUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<long, GetUserByIdUseCaseOutput>, GetUserByIdUserCase>();
+builder.Services.AddScoped<IUseCase<GetUserUseCaseInput, GetUserUseCaseOutput>, GetUserUseCase>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
+builder.Services.AddScoped<CategoryConverter>();
 builder.Services.AddScoped<IRepository<UserRole>, Repository<UserRole>>();
 builder.Services.AddScoped<IRepository<RefreshToken>, Repository<RefreshToken>>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IRepository<ConfirmEmail>, Repository<ConfirmEmail>>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IRepository<AddressUser>, Repository<AddressUser>>();
+builder.Services.AddScoped<UserConverter>();
 // Add services to the container.
 
 builder.Services.AddControllers();

@@ -1,9 +1,9 @@
 export default [
     {
         path: "/",
-        name: "live-preview",
-        meta: { title: "Live Preview" },
-        component: () => import("../views/live-preview/pages/index.vue"),
+        name: "",
+        meta: { title: "" },
+        component: () => import("../views/live-preview/pages/home/index.vue"),
     },
     {
         path: "/landing",

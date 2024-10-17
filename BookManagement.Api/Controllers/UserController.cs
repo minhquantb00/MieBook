@@ -2,6 +2,8 @@
 using BookManagement.Application.UseCases.User_UseCase.ChangePassword;
 using BookManagement.Application.UseCases.User_UseCase.ConfirmCreateNewPassword;
 using BookManagement.Application.UseCases.User_UseCase.ForgotPassword;
+using BookManagement.Application.UseCases.User_UseCase.GetUser;
+using BookManagement.Application.UseCases.User_UseCase.GetUserById;
 using BookManagement.Application.UseCases.User_UseCase.Login;
 using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Commons.Constants;
@@ -72,6 +74,30 @@ namespace BookManagement.Api.Controllers
         {
             var useCase = _serviceProvider.GetService<IUseCase<ConfirmCreateNewPasswordUseCaseInput, ConfirmCreateNewPasswordUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(input);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers([FromQuery] GetUserUseCaseInput? input)
+        {
+            var userCase = _serviceProvider.GetService<IUseCase<GetUserUseCaseInput, GetUserUseCaseOutput>>();
+            var result = await userCase.ExcuteAsync(input);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById([FromRoute] long id)
+        {
+            var userCase = _serviceProvider.GetService<IUseCaseGetById<long, GetUserByIdUseCaseOutput>>();
+            var result = await userCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {
                 return BadRequest(result);

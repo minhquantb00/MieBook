@@ -9,6 +9,6 @@ namespace BookManagement.Application.IUseCases
     public interface IUseCase<TUseCaseInput, TUseCaseOutput> where TUseCaseInput : class where TUseCaseOutput : class
     {
         Task<TUseCaseOutput> ExcuteAsync(TUseCaseInput input);
-        Task<TUseCaseOutput> ExcuteAsync(int? id, TUseCaseInput input);
+        Task<TUseCaseOutput> ExcuteAsync(long? id, TUseCaseInput input);
     }
 }

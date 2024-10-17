@@ -22,7 +22,7 @@ export default {
   },
   mounted() {
     document.body.setAttribute('data-pc-layout', "horizontal");
-   
+
   }
 }
 </script>

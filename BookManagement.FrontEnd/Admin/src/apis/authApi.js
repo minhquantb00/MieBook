@@ -75,9 +75,43 @@ const confirmCreateNewPassword = async (params) => {
   }
 };
 
+const getAllUsers = async (param) => {
+  try{
+    const result = await axios.get(`https://localhost:7027/api/${CONTROLLER_NAME}/GetAllUsers`, {
+      params: {
+        keyWord: param.keyWord
+      }
+    });
+    return result;
+  }
+  catch(error){
+    if (error.response && error.response.data && error.response.data.detail) {
+      return errorList[error.response.data.detail];
+    } else {
+      return { error: AuthMessage.LoginFail };
+    }
+  }
+}
+
+const getUserById = async (id) => {
+  try{
+    const result = await axios.get(`https://localhost:7027/api/${CONTROLLER_NAME}/GetUserById/${id}`);
+    return result;
+  }
+  catch(error){
+    if (error.response && error.response.data && error.response.data.detail) {
+      return errorList[error.response.data.detail];
+    } else {
+      return { error: AuthMessage.LoginFail };
+    }
+  }
+}
+
 export const AuthApi = {
   register,
   login,
   forgotPassword,
-  confirmCreateNewPassword
+  confirmCreateNewPassword,
+  getAllUsers,
+  getUserById
 }

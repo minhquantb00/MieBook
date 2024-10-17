@@ -72,7 +72,7 @@ namespace BookManagement.Application.UseCases.User_UseCase.Login
             }
         }
 
-        public Task<LoginUserUseCaseOutput> ExcuteAsync(int? id, LoginUserUseCaseInput input)
+        public Task<LoginUserUseCaseOutput> ExcuteAsync(long? id, LoginUserUseCaseInput input)
         {
             throw new NotImplementedException();
         }
