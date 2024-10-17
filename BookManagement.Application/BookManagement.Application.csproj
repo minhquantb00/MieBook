@@ -26,13 +26,4 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\TopicBook_UseCase\CreateTopicBook\" />
-    <Folder Include="UseCases\TopicBook_UseCase\DeleteTopicBook\" />
-    <Folder Include="UseCases\TopicBook_UseCase\MapperGlobal\" />
-    <Folder Include="UseCases\TopicBook_UseCase\GetTopicBook\" />
-    <Folder Include="UseCases\TopicBook_UseCase\GetTopicBookById\" />
-    <Folder Include="UseCases\TopicBook_UseCase\UpdateTopicBook\" />
-  </ItemGroup>
-
 </Project>

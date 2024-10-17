@@ -6,6 +6,12 @@ using BookManagement.Application.UseCases.Category_UseCase.GetCategory;
 using BookManagement.Application.UseCases.Category_UseCase.GetCategoryById;
 using BookManagement.Application.UseCases.Category_UseCase.MapperGlobal;
 using BookManagement.Application.UseCases.Category_UseCase.UpdateCategory;
+using BookManagement.Application.UseCases.TopicBook_UseCase.CreateTopicBook;
+using BookManagement.Application.UseCases.TopicBook_UseCase.DeleteTopicBook;
+using BookManagement.Application.UseCases.TopicBook_UseCase.GetTopicBook;
+using BookManagement.Application.UseCases.TopicBook_UseCase.GetTopicBookById;
+using BookManagement.Application.UseCases.TopicBook_UseCase.MapperGlobal;
+using BookManagement.Application.UseCases.TopicBook_UseCase.UpdateTopicBook;
 using BookManagement.Application.UseCases.User_UseCase.ChangePassword;
 using BookManagement.Application.UseCases.User_UseCase.ConfirmCreateNewPassword;
 using BookManagement.Application.UseCases.User_UseCase.ForgotPassword;
@@ -87,6 +93,11 @@ builder.Services.AddScoped<IUseCase<GetCategoryUseCaseInput, GetCategoryUseCaseO
 builder.Services.AddScoped<IUseCaseGetById<long, GetCategoryByIdUseCaseOutput>, GetCategoryByIdUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<long, GetUserByIdUseCaseOutput>, GetUserByIdUserCase>();
 builder.Services.AddScoped<IUseCase<GetUserUseCaseInput, GetUserUseCaseOutput>, GetUserUseCase>();
+builder.Services.AddScoped<IUseCase<CreateTopicBookUseCaseInput, CreateTopicBookUseCaseOutput>, CreateTopicBookUseCase>();
+builder.Services.AddScoped<IUseCase<UpdateTopicBookUseCaseInput, UpdateTopicBookUseCaseOutput>, UpdateTopicBookUseCase>();
+builder.Services.AddScoped<IUseCase<DeleteTopicBookUseCaseInput, DeleteTopicBookUseCaseOutput>, DeleteTopicBookUseCase>();
+builder.Services.AddScoped<IUseCase<GetTopicUseCaseInput, GetTopicUseCaseOutput>, GetTopicUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<long, GetTopicBookByIdUseCaseOutput>, GetTopicBookByIdUseCase>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
 builder.Services.AddScoped<CategoryConverter>();
@@ -97,6 +108,8 @@ builder.Services.AddScoped<IRepository<ConfirmEmail>, Repository<ConfirmEmail>>(
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IRepository<AddressUser>, Repository<AddressUser>>();
 builder.Services.AddScoped<UserConverter>();
+builder.Services.AddScoped<IRepository<TopicBook>, Repository<TopicBook>>();
+builder.Services.AddScoped<TopicBookConverter>();
 // Add services to the container.
 
 builder.Services.AddControllers();
