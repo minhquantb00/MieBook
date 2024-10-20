@@ -26,10 +26,4 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Voucher_UseCase\GetVoucher\" />
-    <Folder Include="UseCases\Voucher_UseCase\GetVoucherById\" />
-    <Folder Include="UseCases\Voucher_UseCase\MapperGlobal\" />
-  </ItemGroup>
-
 </Project>

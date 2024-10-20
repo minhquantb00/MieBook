@@ -23,6 +23,9 @@ using BookManagement.Application.UseCases.User_UseCase.Register;
 using BookManagement.Application.UseCases.Voucher_UseCase;
 using BookManagement.Application.UseCases.Voucher_UseCase.CreateVoucher;
 using BookManagement.Application.UseCases.Voucher_UseCase.DeleteVoucher;
+using BookManagement.Application.UseCases.Voucher_UseCase.GetVoucher;
+using BookManagement.Application.UseCases.Voucher_UseCase.GetVoucherById;
+using BookManagement.Application.UseCases.Voucher_UseCase.MapperGlobal;
 using BookManagement.Application.UseCases.Voucher_UseCase.UpdateVoucher;
 using BookManagement.Commons.Configuration;
 using BookManagement.Domain.Entities;
@@ -101,11 +104,13 @@ builder.Services.AddScoped<IUseCase<CreateTopicBookUseCaseInput, CreateTopicBook
 builder.Services.AddScoped<IUseCase<UpdateTopicBookUseCaseInput, UpdateTopicBookUseCaseOutput>, UpdateTopicBookUseCase>();
 builder.Services.AddScoped<IUseCase<DeleteTopicBookUseCaseInput, DeleteTopicBookUseCaseOutput>, DeleteTopicBookUseCase>();
 builder.Services.AddScoped<IUseCase<GetTopicUseCaseInput, GetTopicUseCaseOutput>, GetTopicUseCase>();
+builder.Services.AddScoped<IUseCase<GetVoucherUseCaseInput, GetVoucherUseCaseOutput>, GetVoucherUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<long, GetTopicBookByIdUseCaseOutput>, GetTopicBookByIdUseCase>();
 builder.Services.AddScoped<IRepository<Voucher>, Repository<Voucher>>();
 builder.Services.AddScoped<IUseCase<CreateVoucherUseCaseInput, CreateVoucherUseCaseOutput>, CreateVoucherUseCase>();
 builder.Services.AddScoped<IUseCase<DeleteVoucherUseCaseInput, DeleteVoucherUseCaseOutput>, DeleteVoucherUseCase>();
 builder.Services.AddScoped<IUseCase<UpdateVoucherUseCaseInput, UpdateVoucherUseCaseOutput>, UpdateVoucherUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<long, GetVoucherByIdUseCaseOutput>, GetVoucherByIdUseCase>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
 builder.Services.AddScoped<CategoryConverter>();
@@ -118,6 +123,7 @@ builder.Services.AddScoped<IRepository<AddressUser>, Repository<AddressUser>>();
 builder.Services.AddScoped<UserConverter>();
 builder.Services.AddScoped<IRepository<TopicBook>, Repository<TopicBook>>();
 builder.Services.AddScoped<TopicBookConverter>();
+builder.Services.AddScoped<VoucherConverter>();
 // Add services to the container.
 
 builder.Services.AddControllers();
