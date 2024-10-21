@@ -4,7 +4,11 @@ using BookManagement.Application.UseCases.Category_UseCase.DeleteCategory;
 using BookManagement.Application.UseCases.Category_UseCase.GetCategory;
 using BookManagement.Application.UseCases.Category_UseCase.GetCategoryById;
 using BookManagement.Application.UseCases.Category_UseCase.UpdateCategory;
-using BookManagement.Application.UseCases.User_UseCase.Login;
+using BookManagement.Application.UseCases.DiscountEvent_UseCase.CreateDiscountEvent;
+using BookManagement.Application.UseCases.DiscountEvent_UseCase.DeleteDiscountEvent;
+using BookManagement.Application.UseCases.DiscountEvent_UseCase.GetDiscountEvent;
+using BookManagement.Application.UseCases.DiscountEvent_UseCase.GetDiscountEventById;
+using BookManagement.Application.UseCases.DiscountEvent_UseCase.UpdateDiscountEvent;
 using BookManagement.Commons.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -15,20 +19,20 @@ namespace BookManagement.Api.Controllers
 {
     [Route(Constant.DefaultValue.DEFAULT_CONTROLLER_ROUTE)]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class DiscountEventController : ControllerBase
     {
         private readonly IServiceProvider _serviceProvider;
-        public CategoryController(IServiceProvider serviceProvider)
+        public DiscountEventController(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> DeleteCategory([FromRoute] long id)
+        public async Task<IActionResult> DeleteDiscountEvent([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<DeleteCategoryUseCaseInput, DeleteCategoryUseCaseOutput>>();
-            var result = await useCase.ExcuteAsync(new DeleteCategoryUseCaseInput { Id = id});
+            var useCase = _serviceProvider.GetService<IUseCase<DeleteDiscountEventUseCaseInput, DeleteDiscountEventUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(new DeleteDiscountEventUseCaseInput { Id = id });
             if (!result.Succeeded)
             {
                 return BadRequest(result);
@@ -38,9 +42,10 @@ namespace BookManagement.Api.Controllers
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryUseCaseInput request)
+        [Consumes(contentType: "multipart/form-data")]
+        public async Task<IActionResult> CreateDiscountEvent([FromForm] CreateDiscountEventUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<CreateCategoryUseCaseInput, CreateCategoryUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<CreateDiscountEventUseCaseInput, CreateDiscountEventUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -51,9 +56,10 @@ namespace BookManagement.Api.Controllers
 
         [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryUseCaseInput request)
+        [Consumes(contentType: "multipart/form-data")]
+        public async Task<IActionResult> UpdateDiscountEvent([FromForm] UpdateDiscountEventUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<UpdateCategoryUseCaseInput, UpdateCategoryUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<UpdateDiscountEventUseCaseInput, UpdateDiscountEventUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -63,9 +69,10 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCategories([FromQuery] GetCategoryUseCaseInput request)
+        [Consumes(contentType: "multipart/form-data")]
+        public async Task<IActionResult> GetAllCategories([FromForm] GetDiscountEventUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<GetCategoryUseCaseInput, GetCategoryUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<GetDiscountEventUseCaseInput, GetDiscountEventUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -75,9 +82,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCategoryById([FromRoute] long id)
+        public async Task<IActionResult> GetDiscountEventById([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetCategoryByIdUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetDiscountEventByIdUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {

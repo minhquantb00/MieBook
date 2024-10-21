@@ -4,7 +4,11 @@ using BookManagement.Application.UseCases.Category_UseCase.DeleteCategory;
 using BookManagement.Application.UseCases.Category_UseCase.GetCategory;
 using BookManagement.Application.UseCases.Category_UseCase.GetCategoryById;
 using BookManagement.Application.UseCases.Category_UseCase.UpdateCategory;
-using BookManagement.Application.UseCases.User_UseCase.Login;
+using BookManagement.Application.UseCases.Contact_UseCase.CreateContact;
+using BookManagement.Application.UseCases.Contact_UseCase.DeleteContact;
+using BookManagement.Application.UseCases.Contact_UseCase.GetContact;
+using BookManagement.Application.UseCases.Contact_UseCase.GetContactById;
+using BookManagement.Application.UseCases.Contact_UseCase.UpdateContact;
 using BookManagement.Commons.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -15,20 +19,20 @@ namespace BookManagement.Api.Controllers
 {
     [Route(Constant.DefaultValue.DEFAULT_CONTROLLER_ROUTE)]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class ContactController : ControllerBase
     {
         private readonly IServiceProvider _serviceProvider;
-        public CategoryController(IServiceProvider serviceProvider)
+        public ContactController(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> DeleteCategory([FromRoute] long id)
+        public async Task<IActionResult> DeleteContact([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<DeleteCategoryUseCaseInput, DeleteCategoryUseCaseOutput>>();
-            var result = await useCase.ExcuteAsync(new DeleteCategoryUseCaseInput { Id = id});
+            var useCase = _serviceProvider.GetService<IUseCase<DeleteContactUseCaseInput, DeleteContactUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(new DeleteContactUseCaseInput { Id = id });
             if (!result.Succeeded)
             {
                 return BadRequest(result);
@@ -38,9 +42,9 @@ namespace BookManagement.Api.Controllers
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryUseCaseInput request)
+        public async Task<IActionResult> CreateContact([FromBody] CreateContactUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<CreateCategoryUseCaseInput, CreateCategoryUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<CreateContactUseCaseInput, CreateContactUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -51,9 +55,9 @@ namespace BookManagement.Api.Controllers
 
         [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryUseCaseInput request)
+        public async Task<IActionResult> UpdateContact([FromBody] UpdateContactUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<UpdateCategoryUseCaseInput, UpdateCategoryUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<UpdateContactUseCaseInput, UpdateContactUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -63,9 +67,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCategories([FromQuery] GetCategoryUseCaseInput request)
+        public async Task<IActionResult> GetAllContacts([FromQuery] GetContactUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<GetCategoryUseCaseInput, GetCategoryUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<GetContactUseCaseInput, GetContactUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -75,9 +79,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCategoryById([FromRoute] long id)
+        public async Task<IActionResult> GetContactById([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetCategoryByIdUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetContactByIdUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {
