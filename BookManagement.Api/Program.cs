@@ -22,6 +22,7 @@ using BookManagement.Application.UseCases.Role_UseCase.CreateRole;
 using BookManagement.Application.UseCases.Role_UseCase.GetRole;
 using BookManagement.Application.UseCases.Role_UseCase.GetRoleById;
 using BookManagement.Application.UseCases.Role_UseCase.MapperGlobal;
+using BookManagement.Application.UseCases.Role_UseCase.UpdateRole;
 using BookManagement.Application.UseCases.TopicBook_UseCase.CreateTopicBook;
 using BookManagement.Application.UseCases.TopicBook_UseCase.DeleteTopicBook;
 using BookManagement.Application.UseCases.TopicBook_UseCase.GetTopicBook;
@@ -139,6 +140,7 @@ builder.Services.AddScoped<IUseCase<GetContactUseCaseInput, GetContactUseCaseOut
 builder.Services.AddScoped<IUseCaseGetById<long, GetContactByIdUseCaseOutput>, GetContactByIdUseCase>();
 builder.Services.AddScoped<IUseCase<GetRoleUseCaseInput, GetRoleUseCaseOutput>, GetRoleUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<long, GetRoleByIdUseCaseOutput>, GetRoleByIdUseCase>();
+builder.Services.AddScoped<IUseCase<UpdateRoleUseCaseInput, UpdateRoleUseCaseOutput>, UpdateRoleUseCase>();
 builder.Services.AddScoped<IRepository<Contact>, Repository<Contact>>();
 builder.Services.AddScoped<IUseCaseGetById<long, GetVoucherByIdUseCaseOutput>, GetVoucherByIdUseCase>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();

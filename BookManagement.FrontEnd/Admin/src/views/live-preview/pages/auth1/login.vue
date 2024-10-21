@@ -20,18 +20,9 @@ const login = async () => {
   loading.value = true;
   const result = await AuthApi.login(businessExecute.value);
   const decode = parseJwt(result.data.accessToken);
-  if (rememberMe.value) {
     localStorage.setItem(LocalStorageKey.ACCESS_TOKEN, result.data.accessToken);
     localStorage.setItem(LocalStorageKey.REFRESH_TOKEN, result.data.refreshToken);
     localStorage.setItem(LocalStorageKey.USER_INFO, JSON.stringify(decode));
-  } else {
-    sessionStorage.setItem(
-      LocalStorageKey.ACCESS_TOKEN,
-      result.data.accessToken
-    );
-    sessionStorage.setItem(LocalStorageKey.REFRESH_TOKEN, result.data.refreshToken);
-    sessionStorage.setItem(LocalStorageKey.USER_INFO, JSON.stringify(decode));
-  }
   if (result.data.succeeded === true) {
     toast("Đăng nhập thành công", {
       type: "success",
@@ -94,8 +85,8 @@ const parseJwt = (token) => {
                         </div>
                         <div class="d-flex mt-1 justify-content-between align-items-center">
                             <div class="form-check">
-                                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="">
-                                <label class="form-check-label text-muted" for="customCheckc1">Nhớ mật khẩu</label>
+                                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" v-model="rememberMe">
+                                <label class="form-check-label text-muted" for="customCheckc1" >Nhớ mật khẩu</label>
                             </div>
                             <RouterLink href="#" :to="{path: '/forgot-password-v1'}">
                                 <h6 class="f-w-400 mb-0">Quên mật khẩu?</h6>

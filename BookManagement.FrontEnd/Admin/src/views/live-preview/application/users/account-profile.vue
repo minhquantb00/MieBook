@@ -1,13 +1,24 @@
-<script>
+<script setup>
 import Layout from "@/layout/main.vue"
 import pageheader from "@/components/page-header.vue"
+import { AuthApi } from "@/apis/authApi";
+// import { RouterLink, useRouter } from "vue-router";
+import {onMounted, ref} from 'vue';
 
-export default {
-    name: "ACCOUNT-PROFILE",
-    components: {
-        Layout, pageheader
-    },
+const dataUser = ref({});
+const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+const getUserById = async () => {
+  const result = await AuthApi.getUserById(userInfo.Id);
+  dataUser.value = result.data.dataResponseUser
+  console.log(dataUser.value);
 }
+
+onMounted(async () => {
+  console.log(userInfo)
+  getUserById();
+});
+
 </script>
 
 <template>
@@ -15,23 +26,6 @@ export default {
         <pageheader title="Account Profile" pageTitle="Users" />
         <BRow>
             <BCol class="col-sm-12">
-                <div class="card bg-primary">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1 me-3">
-                                <h3 class="text-white">Email Verification</h3>
-                                <p class="text-white text-opacity-75 text-opa mb-0">Your email is not confirmed. Please
-                                    check your
-                                    inbox.
-                                    <a href="#" class="link-light"><u>Resend confirmation</u></a>
-                                </p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <img src="@/assets/images/application/img-accout-alert.png" alt="img" class="img-fluid wid-80">
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <BRow>
                     <BCol class="col-lg-5 col-xxl-3">
                         <BCard no-body class="overflow-hidden">
@@ -41,8 +35,8 @@ export default {
                                         <img class="rounded-circle img-fluid wid-90 img-thumbnail" src="@/assets/images/user/avatar-1.jpg" alt="User image">
                                         <i class="chat-badge bg-success me-2 mb-2"></i>
                                     </div>
-                                    <h5 class="mb-0">William Bond</h5>
-                                    <p class="text-muted text-sm">DM on <a href="#" class="link-primary"> @williambond </a>
+                                    <h5 class="mb-0">{{ dataUser.fullName }}</h5>
+                                    <p class="text-muted text-sm"> {{dataUser.nickName}}
                                         😍</p>
                                     <ul class="list-inline mx-auto my-4">
                                         <li class="list-inline-item">
@@ -84,42 +78,38 @@ export default {
                             </BCardBody>
                             <div class="nav flex-column nav-pills list-group list-group-flush account-pills mb-0" id="user-set-tab" role="tablist" aria-orientation="vertical">
                                 <a class="nav-link list-group-item list-group-item-action active" id="user-set-profile-tab" data-bs-toggle="pill" href="#user-set-profile" role="tab" aria-controls="user-set-profile" aria-selected="true">
-                                    <span class="f-w-500"><i class="ph-duotone ph-user-circle m-r-10"></i>Profile
-                                        Overview</span>
+                                    <span class="f-w-500"><i class="ph-duotone ph-user-circle m-r-10"></i>Tổng quan</span>
                                 </a>
                                 <a class="nav-link list-group-item list-group-item-action" id="user-set-information-tab" data-bs-toggle="pill" href="#user-set-information" role="tab" aria-controls="user-set-information" aria-selected="false">
-                                    <span class="f-w-500"><i class="ph-duotone ph-clipboard-text m-r-10"></i>Personal
-                                        Information</span>
+                                    <span class="f-w-500"><i class="ph-duotone ph-clipboard-text m-r-10"></i>Thông tin cá nhân</span>
                                 </a>
                                 <a class="nav-link list-group-item list-group-item-action" id="user-set-account-tab" data-bs-toggle="pill" href="#user-set-account" role="tab" aria-controls="user-set-account" aria-selected="false">
-                                    <span class="f-w-500"><i class="ph-duotone ph-notebook m-r-10"></i>Account
-                                        Information</span>
+                                    <span class="f-w-500"><i class="ph-duotone ph-notebook m-r-10"></i>Thông tin tài khoản</span>
                                 </a>
                                 <a class="nav-link list-group-item list-group-item-action" id="user-set-passwort-tab" data-bs-toggle="pill" href="#user-set-passwort" role="tab" aria-controls="user-set-passwort" aria-selected="false">
-                                    <span class="f-w-500"><i class="ph-duotone ph-key m-r-10"></i>Change Password</span>
+                                    <span class="f-w-500"><i class="ph-duotone ph-key m-r-10"></i>Đổi mật khẩu</span>
                                 </a>
                                 <a class="nav-link list-group-item list-group-item-action" id="user-set-email-tab" data-bs-toggle="pill" href="#user-set-email" role="tab" aria-controls="user-set-email" aria-selected="false">
-                                    <span class="f-w-500"><i class="ph-duotone ph-envelope-open m-r-10"></i>Email
-                                        settings</span>
+                                    <span class="f-w-500"><i class="ph-duotone ph-envelope-open m-r-10"></i>Cài đặt email</span>
                                 </a>
                             </div>
                         </BCard>
                         <BCard no-body>
                             <BCardHeader>
-                                <h5>Personal information</h5>
+                                <h5>Thông tin cá nhân</h5>
                             </BCardHeader>
                             <BCardBody class="position-relative">
                                 <div class="d-inline-flex align-items-center justify-content-between w-100 mb-3">
                                     <p class="mb-0 text-muted me-1">Email</p>
-                                    <p class="mb-0">anshan@gmail.com</p>
+                                    <p class="mb-0">{{ dataUser.email }}</p>
                                 </div>
                                 <div class="d-inline-flex align-items-center justify-content-between w-100 mb-3">
-                                    <p class="mb-0 text-muted me-1">Phone</p>
-                                    <p class="mb-0">(+1-876) 8654 239 581</p>
+                                    <p class="mb-0 text-muted me-1">Số điện thoại</p>
+                                    <p class="mb-0">{{dataUser.phoneNumber}}</p>
                                 </div>
                                 <div class="d-inline-flex align-items-center justify-content-between w-100">
-                                    <p class="mb-0 text-muted me-1">Location</p>
-                                    <p class="mb-0">New York</p>
+                                    <p class="mb-0 text-muted me-1">Vị trí</p>
+                                    <p class="mb-0">Việt Nam</p>
                                 </div>
                             </BCardBody>
                         </BCard>
@@ -238,7 +228,7 @@ export default {
                             <div class="tab-pane fade show active" id="user-set-profile" role="tabpanel" aria-labelledby="user-set-profile-tab">
                                 <BCard no-body>
                                     <BCardHeader>
-                                        <h5>About me</h5>
+                                        <h5>Giới thiệu</h5>
                                     </BCardHeader>
                                     <BCardBody>
                                         <p class="mb-0">Hello, I’m Anshan Handgun Creative Graphic Designer & User
@@ -250,31 +240,31 @@ export default {
                                 </BCard>
                                 <BCard no-body>
                                     <BCardHeader>
-                                        <h5>Personal Details</h5>
+                                        <h5>Thông tin chi tiết</h5>
                                     </BCardHeader>
                                     <BCardBody>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item px-0 pt-0">
                                                 <BRow>
                                                     <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Full Name</p>
-                                                        <p class="mb-0">Anshan Handgun</p>
+                                                        <p class="mb-1 text-muted">Họ và tên</p>
+                                                        <p class="mb-0">{{dataUser.fullName}}</p>
                                                     </BCol>
                                                     <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Father Name</p>
-                                                        <p class="mb-0">Mr. Deepen Handgun</p>
+                                                        <p class="mb-1 text-muted">Nick name</p>
+                                                        <p class="mb-0">{{ dataUser.nickName }}</p>
                                                     </BCol>
                                                 </BRow>
                                             </li>
                                             <li class="list-group-item px-0">
                                                 <BRow>
                                                     <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Phone</p>
-                                                        <p class="mb-0">(+1-876) 8654 239 581</p>
+                                                        <p class="mb-1 text-muted">Số điện thoại</p>
+                                                        <p class="mb-0">{{dataUser.phoneNumber}}</p>
                                                     </BCol>
                                                     <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Country</p>
-                                                        <p class="mb-0">New York</p>
+                                                        <p class="mb-1 text-muted">Quốc gia</p>
+                                                        <p class="mb-0">Việt Nam</p>
                                                     </BCol>
                                                 </BRow>
                                             </li>
@@ -282,62 +272,17 @@ export default {
                                                 <BRow class="row">
                                                     <BCol class="col-md-6">
                                                         <p class="mb-1 text-muted">Email</p>
-                                                        <p class="mb-0">anshan.dh81@gmail.com</p>
+                                                        <p class="mb-0">{{dataUser.email}}</p>
                                                     </BCol>
                                                     <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Zip Code</p>
-                                                        <p class="mb-0">956 754</p>
+                                                        <p class="mb-1 text-muted">Pin Code</p>
+                                                        <p class="mb-0">{{dataUser.pinCode}}</p>
                                                     </BCol>
                                                 </BRow>
                                             </li>
                                             <li class="list-group-item px-0 pb-0">
-                                                <p class="mb-1 text-muted">Address</p>
-                                                <p class="mb-0">Street 110-B Kalians Bag, Dewan, M.P. New York</p>
-                                            </li>
-                                        </ul>
-                                    </BCardBody>
-                                </BCard>
-                                <BCard no-body>
-                                    <BCardHeader>
-                                        <h5>Education</h5>
-                                    </BCardHeader>
-                                    <BCardBody>
-                                        <ul class="list-group list-group-flush acc-feeds-list">
-                                            <li class="list-group-item p-0">
-                                                <BRow>
-                                                    <BCol class="col-md-4 feed-title">
-                                                        <p class="mb-1 text-muted">Master Degree (Year)</p>
-                                                        <p class="mb-0">2014-2017</p>
-                                                    </BCol>
-                                                    <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Institute</p>
-                                                        <p class="mb-0">-</p>
-                                                    </BCol>
-                                                </BRow>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <BRow>
-                                                    <BCol class="col-md-4 feed-title">
-                                                        <p class="mb-1 text-muted">Bachelor (Year)</p>
-                                                        <p class="mb-0">2011-2013</p>
-                                                    </BCol>
-                                                    <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Institute</p>
-                                                        <p class="mb-0">Imperial College London</p>
-                                                    </BCol>
-                                                </BRow>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <BRow class="row">
-                                                    <BCol class="col-md-4 feed-title">
-                                                        <p class="mb-1 text-muted">School (Year)</p>
-                                                        <p class="mb-0">2009-2011</p>
-                                                    </BCol>
-                                                    <BCol class="col-md-6">
-                                                        <p class="mb-1 text-muted">Institute</p>
-                                                        <p class="mb-0">School of London, England</p>
-                                                    </BCol>
-                                                </BRow>
+                                                <p class="mb-1 text-muted">Địa chỉ</p>
+                                                <p class="mb-0">Ngõ 147 Phú Đô, Nam Từ Liêm, Hà Nội</p>
                                             </li>
                                         </ul>
                                     </BCardBody>
@@ -394,26 +339,20 @@ export default {
                             <div class="tab-pane fade" id="user-set-information" role="tabpanel" aria-labelledby="user-set-information-tab">
                                 <BCard no-body>
                                     <BCardHeader>
-                                        <h5>Personal Information</h5>
+                                        <h5>Thông tin cá nhân</h5>
                                     </BCardHeader>
                                     <BCardBody class="card-body">
                                         <BRow>
                                             <BCol class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" value="Anshan">
+                                                    <label class="form-label">Họ và tên</label>
+                                                    <input type="text" class="form-control" v-model="dataUser.fullName">
                                                 </div>
                                             </BCol>
                                             <BCol class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" value="Handgun">
-                                                </div>
-                                            </BCol>
-                                            <BCol class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Country</label>
-                                                    <input type="text" class="form-control" value="New York">
+                                                    <label class="form-label">Quốc gia</label>
+                                                    <input type="text" class="form-control" value="VD: Viet Nam">
                                                 </div>
                                             </BCol>
                                             <BCol class="col-sm-6">
@@ -446,7 +385,7 @@ export default {
                                 </BCard>
                                 <BCard no-body>
                                     <BCardHeader>
-                                        <h5>Social Network</h5>
+                                        <h5>Mạng xã hội</h5>
                                     </BCardHeader>
                                     <BCardBody>
                                         <div class="d-flex align-items-center mb-2">
@@ -463,7 +402,7 @@ export default {
                                                 </div>
                                             </div>
                                             <div class="flex-shrink-0">
-                                                <button class="btn btn-link-primary">Connect</button>
+                                                <button class="btn btn-link-primary">Kết nối</button>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center mb-2">
@@ -475,13 +414,12 @@ export default {
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Facebook <small class="text-muted f-w-400">/Anshan
-                                                                Handgun</small></h6>
+                                                        <h6 class="mb-0">Facebook <small class="text-muted f-w-400">/{{dataUser.fullName}}</small></h6>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="flex-shrink-0">
-                                                <button class="btn btn-link-danger">Remove</button>
+                                                <button class="btn btn-link-danger">Xóa</button>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -498,39 +436,33 @@ export default {
                                                 </div>
                                             </div>
                                             <div class="flex-shrink-0">
-                                                <button class="btn btn-link-primary">Connect</button>
+                                                <button class="btn btn-link-primary">Kết nối</button>
                                             </div>
                                         </div>
                                     </BCardBody>
                                 </BCard>
                                 <BCard no-body>
                                     <BCardHeader>
-                                        <h5>Contact Information</h5>
+                                        <h5>Thông tin liên hệ</h5>
                                     </BCardHeader>
                                     <BCardBody>
                                         <BRow>
                                             <BCol class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Contact Phone</label>
-                                                    <input type="text" class="form-control" value="(+99) 9999 999 999">
+                                                    <label class="form-label">Số điện thoại</label>
+                                                    <input type="text" class="form-control" v-model="dataUser.phoneNumber">
                                                 </div>
                                             </BCol>
                                             <BCol class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Email <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" value="demo@sample.com">
-                                                </div>
-                                            </BCol>
-                                            <BCol class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Portfolio Url</label>
-                                                    <input type="text" class="form-control" value="https://demo.com">
+                                                    <input type="email" class="form-control"  v-model="dataUser.email">
                                                 </div>
                                             </BCol>
                                             <BCol class="col-sm-12">
                                                 <div class="form-group mb-0">
-                                                    <label class="form-label">Address</label>
-                                                    <textarea class="form-control">3379 Monroe Avenue, Fort Myers, Florida(33912)</textarea>
+                                                    <label class="form-label">Địa chỉ</label>
+                                                    <textarea class="form-control">Ngõ 147 Phú Đô, Nam Từ Liêm, Hà Nội</textarea>
                                                 </div>
                                             </BCol>
                                         </BRow>
@@ -967,12 +899,12 @@ export default {
                                     </div>
                                 </BCard>
                             </div>
-                            <div class="card">
+                            <!-- <div class="card">
                                 <div class="card-body text-end btn-page">
                                     <div class="btn btn-outline-secondary">Cancel</div>
                                     <div class="btn btn-primary">Update Profile</div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </BCol>
                 </BRow>
