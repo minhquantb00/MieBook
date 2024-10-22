@@ -27,10 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\EventBook_UseCase\" />
     <Folder Include="UseCases\FavoriteBook_UseCase\" />
-    <Folder Include="UseCases\Role_UseCase\DeleteRole\" />
-    <Folder Include="UseCases\ShippingMethod_UseCase\" />
     <Folder Include="UseCases\RankCustomer_UseCase\" />
     <Folder Include="UseCases\PaymentMethod_UseCase\" />
   </ItemGroup>

@@ -1,13 +1,14 @@
 ﻿using BookManagement.Application.IUseCases;
-using BookManagement.Application.UseCases.Category_UseCase.DeleteCategory;
-using BookManagement.Application.UseCases.Category_UseCase.GetCategory;
-using BookManagement.Application.UseCases.Category_UseCase.GetCategoryById;
-using BookManagement.Application.UseCases.Contact_UseCase.CreateContact;
 using BookManagement.Application.UseCases.Role_UseCase.CreateRole;
 using BookManagement.Application.UseCases.Role_UseCase.DeleteRole;
 using BookManagement.Application.UseCases.Role_UseCase.GetRole;
 using BookManagement.Application.UseCases.Role_UseCase.GetRoleById;
 using BookManagement.Application.UseCases.Role_UseCase.UpdateRole;
+using BookManagement.Application.UseCases.ShippingMethod_UseCase.CreateShippingMethod;
+using BookManagement.Application.UseCases.ShippingMethod_UseCase.DeleteShippingMethod;
+using BookManagement.Application.UseCases.ShippingMethod_UseCase.GetShippingMethod;
+using BookManagement.Application.UseCases.ShippingMethod_UseCase.GetShippingMethodById;
+using BookManagement.Application.UseCases.ShippingMethod_UseCase.UpdateShippingMethod;
 using BookManagement.Commons.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -18,19 +19,19 @@ namespace BookManagement.Api.Controllers
 {
     [Route(Constant.DefaultValue.DEFAULT_CONTROLLER_ROUTE)]
     [ApiController]
-    public class RoleController : ControllerBase
+    public class ShippingMethodController : ControllerBase
     {
         private readonly IServiceProvider _serviceProvider;
-        public RoleController(IServiceProvider serviceProvider)
+        public ShippingMethodController(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateRole([FromBody] CreateRoleUseCaseInput request)
+        public async Task<IActionResult> CreateShippingMethod([FromBody] CreateShippingMethodUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<CreateRoleUseCaseInput, CreateRoleUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<CreateShippingMethodUseCaseInput, CreateShippingMethodUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -40,9 +41,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllRoles([FromQuery] GetRoleUseCaseInput request)
+        public async Task<IActionResult> GetAllShippingMethods([FromQuery] GetShippingMethodUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<GetRoleUseCaseInput, GetRoleUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<GetShippingMethodUseCaseInput, GetShippingMethodUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -52,9 +53,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRoleById([FromRoute] long id)
+        public async Task<IActionResult> GetShippingMethodById([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetRoleByIdUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetShippingMethodByIdUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {
@@ -64,9 +65,9 @@ namespace BookManagement.Api.Controllers
         }
         [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleUseCaseInput input)
+        public async Task<IActionResult> UpdateShippingMethod([FromBody] UpdateShippingMethodUseCaseInput input)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<UpdateRoleUseCaseInput, UpdateRoleUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<UpdateShippingMethodUseCaseInput, UpdateShippingMethodUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(input);
             if (!result.Succeeded)
             {
@@ -77,10 +78,10 @@ namespace BookManagement.Api.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> DeleteRole([FromRoute] long id)
+        public async Task<IActionResult> DeleteShippingMethod([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<DeleteRoleUseCaseInput, DeleteRoleUseCaseOutput>>();
-            var result = await useCase.ExcuteAsync(new DeleteRoleUseCaseInput { Id = id });
+            var useCase = _serviceProvider.GetService<IUseCase<DeleteShippingMethodUseCaseInput, DeleteShippingMethodUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(new DeleteShippingMethodUseCaseInput { Id = id });
             if (!result.Succeeded)
             {
                 return BadRequest(result);

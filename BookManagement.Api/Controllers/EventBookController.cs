@@ -1,8 +1,9 @@
 ﻿using BookManagement.Application.IUseCases;
-using BookManagement.Application.UseCases.Category_UseCase.DeleteCategory;
-using BookManagement.Application.UseCases.Category_UseCase.GetCategory;
-using BookManagement.Application.UseCases.Category_UseCase.GetCategoryById;
-using BookManagement.Application.UseCases.Contact_UseCase.CreateContact;
+using BookManagement.Application.UseCases.EventBook_UseCase.CreateEventBook;
+using BookManagement.Application.UseCases.EventBook_UseCase.DeleteEventBook;
+using BookManagement.Application.UseCases.EventBook_UseCase.GetEventBook;
+using BookManagement.Application.UseCases.EventBook_UseCase.GetEventBookById;
+using BookManagement.Application.UseCases.EventBook_UseCase.UpdateEventBook;
 using BookManagement.Application.UseCases.Role_UseCase.CreateRole;
 using BookManagement.Application.UseCases.Role_UseCase.DeleteRole;
 using BookManagement.Application.UseCases.Role_UseCase.GetRole;
@@ -18,19 +19,19 @@ namespace BookManagement.Api.Controllers
 {
     [Route(Constant.DefaultValue.DEFAULT_CONTROLLER_ROUTE)]
     [ApiController]
-    public class RoleController : ControllerBase
+    public class EventBookController : ControllerBase
     {
         private readonly IServiceProvider _serviceProvider;
-        public RoleController(IServiceProvider serviceProvider)
+        public EventBookController(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateRole([FromBody] CreateRoleUseCaseInput request)
+        public async Task<IActionResult> CreateEventBook([FromBody] CreateEventBookUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<CreateRoleUseCaseInput, CreateRoleUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<CreateEventBookUseCaseInput, CreateEventBookUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -40,9 +41,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllRoles([FromQuery] GetRoleUseCaseInput request)
+        public async Task<IActionResult> GetAllEventBooks([FromQuery] GetEventBookUseCaseInput request)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<GetRoleUseCaseInput, GetRoleUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<GetEventBookUseCaseInput, GetEventBookUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
             if (!result.Succeeded)
             {
@@ -52,9 +53,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRoleById([FromRoute] long id)
+        public async Task<IActionResult> GetEventBookById([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetRoleByIdUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetEventBookByIdUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {
@@ -64,9 +65,9 @@ namespace BookManagement.Api.Controllers
         }
         [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleUseCaseInput input)
+        public async Task<IActionResult> UpdateEventBook([FromBody] UpdateEventBookUseCaseInput input)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<UpdateRoleUseCaseInput, UpdateRoleUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCase<UpdateEventBookUseCaseInput, UpdateEventBookUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(input);
             if (!result.Succeeded)
             {
@@ -77,10 +78,10 @@ namespace BookManagement.Api.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> DeleteRole([FromRoute] long id)
+        public async Task<IActionResult> DeleteEventBook([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCase<DeleteRoleUseCaseInput, DeleteRoleUseCaseOutput>>();
-            var result = await useCase.ExcuteAsync(new DeleteRoleUseCaseInput { Id = id });
+            var useCase = _serviceProvider.GetService<IUseCase<DeleteEventBookUseCaseInput, DeleteEventBookUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(new DeleteEventBookUseCaseInput { Id = id });
             if (!result.Succeeded)
             {
                 return BadRequest(result);
