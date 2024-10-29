@@ -1,50 +1,55 @@
-<script>
-import simplebar from "simplebar-vue"
+<script setup>
+import simplebar from "simplebar-vue";
+import { onMounted, ref } from 'vue';
+import { useStore } from 'vuex';
+import { AuthApi } from "@/apis/authApi";
+import { useRouter } from "vue-router";
 
-export default {
-    name: "NAVBAR",
-    components: {
-        simplebar
-    },
-    data() {
-        return {
-            isFullscreen: false,
-            isSidebarHidden: false,
-            currentMode: 'light'
-        };
-    },
-    methods: {
-        changeMode(mode) {
-            this.currentMode = mode;
-            if (mode == "dark") {
-                document.body.setAttribute("data-pc-theme", "dark");
-                document.body.setAttribute("data-topbar", "dark");
-                document.body.classList.remove("mode-auto");
-            } else if (mode == "auto") {
-                document.body.setAttribute("data-pc-theme", "light");
-                document.body.setAttribute("data-topbar", "light");
-                document.body.classList.add("mode-auto");
-            } else {
-                document.body.setAttribute("data-pc-theme", "light");
-                document.body.setAttribute("data-topbar", "light");
-                document.body.classList.remove("mode-auto");
-            }
-        },
-        toggleSidebar() {
-            this.$store.commit('toggleSidebar');
-        },
-        toggleMobileSidebar() {
-            this.$store.commit('toggleMobileSidebar');
-        },
-    },
-}
+const store = useStore();
+const currentMode = ref('light');
+const dataUser = ref({});
+const router = useRouter();
+const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+const getUserById = async () => {
+  const result = userInfo !== null ? await AuthApi.getUserById(userInfo.Id) : {};
+  dataUser.value = result.data !== null && result.data !== undefined ? result.data.dataResponseUser : {};
+};
+
+const logOut = () => {
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('userInfo');
+  router.push('/login-v1');
+};
+
+
+
+
+const toggleSidebar = () => {
+  store.commit('toggleSidebar');
+};
+
+const toggleMobileSidebar = () => {
+  store.commit('toggleMobileSidebar');
+};
+
+const changeMode = (mode) => {
+  currentMode.value = mode;
+  document.body.setAttribute("data-pc-theme", mode === 'dark' ? 'dark' : 'light');
+  document.body.classList.toggle("mode-auto", mode === 'auto');
+};
+
+onMounted(() => {
+  getUserById();
+});
 </script>
 
+
 <template>
-    <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+    <div class="header-wrapper">
         <div class="me-auto pc-mob-drp">
             <ul class="list-unstyled">
-                <!-- ======= Menu collapse Icon ===== -->
                 <li class="pc-h-item pc-sidebar-collapse">
                     <a href="#" class="pc-head-link ms-0" id="sidebar-hide" @click="toggleSidebar">
                         <i class="ti ti-menu-2"></i>
@@ -101,23 +106,19 @@ export default {
                     </template>
                     <a href="#!" class="dropdown-item">
                         <i class="ph-duotone ph-user"></i>
-                        <span>My Account</span>
+                        <span>Tài khoản</span>
                     </a>
                     <a href="#!" class="dropdown-item">
                         <i class="ph-duotone ph-gear"></i>
-                        <span>Settings</span>
+                        <span>Cài đặt</span>
                     </a>
                     <a href="#!" class="dropdown-item">
                         <i class="ph-duotone ph-lifebuoy"></i>
-                        <span>Support</span>
-                    </a>
-                    <a href="#!" class="dropdown-item">
-                        <i class="ph-duotone ph-lock-key"></i>
-                        <span>Lock Screen</span>
+                        <span>Hỗ trợ</span>
                     </a>
                     <a href="#!" class="dropdown-item">
                         <i class="ph-duotone ph-power"></i>
-                        <span>Logout</span>
+                        <span>Đăng xuất</span>
                     </a>
                 </BDropdown>
                 <BDropdown v-model="show" variant="link-secondary" auto-close="outside" class="card-header-dropdown pb-0 pt-3" toggle-class="text-reset dropdown-btn arrow-none me-0" menu-class="dropdown-menu-end dropdown-notification pc-h-dropdown" aria-haspopup="true" :offset="{ alignmentAxis: -145, crossAxis: 0, mainAxis: 20 }">
@@ -131,7 +132,7 @@ export default {
                     <BDropdownHeader class=" align-items-center justify-content-between">
                         <BRow class="align-items-center justify-content-between">
                             <BCol xl="8" sm="6">
-                                <h5 class="m-0">Notifications</h5>
+                                <h5 class="m-0">Thông báo</h5>
                             </BCol>
                             <BCol xl="4" sm="6">
                                 <ul class="list-inline ms-auto mb-0">
@@ -310,12 +311,15 @@ export default {
                         </BRow>
                     </div>
                 </BDropdown>
-                <BDropdown variant="link-secondary" auto-close="outside" class="card-header-dropdown py-0" toggle-class="text-reset dropdown-btn arrow-none me-0" menu-class="dropdown-menu-end dropdown-user-profile dropdown-menu-end pc-h-dropdown" aria-haspopup="true" :offset="{ alignmentAxis: -145, crossAxis: 0, mainAxis: 20 }">
+                <div v-if="userInfo === null">
+                      <BLink href="#" class="btn btn-primary" target="_blank" style="margin-top: 10px;" :to="{path: '/login-v1'}" >Đăng nhập</BLink>
+              </div>
+                <BDropdown v-else variant="link-secondary" auto-close="outside" class="card-header-dropdown py-0" toggle-class="text-reset dropdown-btn arrow-none me-0" menu-class="dropdown-menu-end dropdown-user-profile dropdown-menu-end pc-h-dropdown" aria-haspopup="true" :offset="{ alignmentAxis: -145, crossAxis: 0, mainAxis: 20 }">
                     <template #button-content><span class="text-muted"> <img src="@/assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
                         </span>
                     </template>
                     <div class="dropdown-header d-flex align-items-center justify-content-between">
-                        <h4 class="m-0">Profile</h4>
+                        <h4 class="m-0">Hồ sơ</h4>
                     </div>
                     <div class="dropdown-body">
                         <simplebar data-simplebar style="max-height: 500px;">
@@ -327,122 +331,46 @@ export default {
                                                 <img src="@/assets/images/user/avatar-2.jpg" alt="user-image" class="wid-50 rounded-circle">
                                             </div>
                                             <div class="flex-grow-1 mx-3">
-                                                <h5 class="mb-0">Carson Darrin</h5>
-                                                <a class="link-primary" href="mailto:carson.darrin@company.io">carson.darrin@company.io</a>
+                                                <h5 class="mb-0">{{ dataUser.fullName }}</h5>
+                                                <a class="link-primary" href="mailto:carson.darrin@company.io">{{ dataUser.email }}</a>
                                             </div>
-                                            <span class="badge bg-primary">PRO</span>
                                         </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#" class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-key"></i>
-                                                <span>Change password</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-envelope-simple"></i>
-                                                <span>Recently mail</span>
-                                            </span>
-                                            <div class="user-group">
-                                                <img src="@/assets/images/user/avatar-1.jpg" alt="user-image" class="avtar">
-                                                <img src="@/assets/images/user/avatar-2.jpg" alt="user-image" class="avtar">
-                                                <img src="@/assets/images/user/avatar-3.jpg" alt="user-image" class="avtar">
-                                            </div>
-                                        </a>
-                                        <a href="#" class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-calendar-blank"></i>
-                                                <span>Schedule meetings</span>
-                                            </span>
-                                        </a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="#" class="dropdown-item">
                                             <span class="d-flex align-items-center">
                                                 <i class="ph-duotone ph-heart"></i>
-                                                <span>Favorite</span>
+                                                <span>Sản phẩm yêu thích</span>
                                             </span>
-                                        </a>
-                                        <a href="#" class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-arrow-circle-down"></i>
-                                                <span>Download</span>
-                                            </span>
-                                            <span class="avtar avtar-xs rounded-circle bg-danger text-white">10</span>
                                         </a>
                                     </li>
-                                    <li class="list-group-item">
-                                        <div class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-globe-hemisphere-west"></i>
-                                                <span>Languages</span>
-                                            </span>
-                                            <span class="flex-shrink-0">
-                                                <select class="form-select bg-transparent form-select-sm border-0 shadow-none">
-                                                    <option value="1">English</option>
-                                                    <option value="2">Spain</option>
-                                                    <option value="3">Arbic</option>
-                                                </select>
-                                            </span>
-                                        </div>
-                                        <a href="#" class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-flag"></i>
-                                                <span>Country</span>
-                                            </span>
-                                        </a>
-                                        <div class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-moon"></i>
-                                                <span>Dark mode</span>
-                                            </span>
-                                            <div class="form-check form-switch form-check-reverse m-0">
-                                                <input class="form-check-input f-18" id="dark-mode" type="checkbox" @click="changeMode('dark')" role="switch">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#" class="dropdown-item">
+                                    <li class="list-group-item" >
+                                        <RouterLink href="#" class="dropdown-item" :to="{path: '/account-profile'}">
                                             <span class="d-flex align-items-center">
                                                 <i class="ph-duotone ph-user-circle"></i>
-                                                <span>Edit profile</span>
+                                                <span>Chỉnh sửa hồ sơ</span>
                                             </span>
-                                        </a>
-                                        <a href="#" class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-star text-warning"></i>
-                                                <span>Upgrade account</span>
-                                                <span class="badge bg-light-success border border-success ms-2">NEW</span>
-                                            </span>
-                                        </a>
+                                        </RouterLink>
                                         <a href="#" class="dropdown-item">
                                             <span class="d-flex align-items-center">
                                                 <i class="ph-duotone ph-bell"></i>
-                                                <span>Notifications</span>
+                                                <span>Thông báo</span>
                                             </span>
                                         </a>
                                         <a href="#" class="dropdown-item">
                                             <span class="d-flex align-items-center">
                                                 <i class="ph-duotone ph-gear-six"></i>
-                                                <span>Settings</span>
+                                                <span>Cài đặt</span>
                                             </span>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="#" class="dropdown-item">
-                                            <span class="d-flex align-items-center">
-                                                <i class="ph-duotone ph-plus-circle"></i>
-                                                <span>Add account</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="dropdown-item">
+                                        <button href="#" class="dropdown-item" @click="logOut">
                                             <span class="d-flex align-items-center">
                                                 <i class="ph-duotone ph-power"></i>
-                                                <span>Logout</span>
+                                                <span>Đăng xuất</span>
                                             </span>
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>

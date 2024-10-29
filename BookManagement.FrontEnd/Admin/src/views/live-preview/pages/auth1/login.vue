@@ -4,7 +4,7 @@ import { RouterLink, useRouter } from "vue-router";
 import { AuthApi } from "@/apis/authApi";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { loginRequest } from "@/interfaces/requestModels/user/loginRequest";
 import LocalStorageKey from "@/constants/LocalStorageKey";
 
@@ -19,11 +19,21 @@ const rememberMe = ref(false);
 const login = async () => {
   loading.value = true;
   const result = await AuthApi.login(businessExecute.value);
-  const decode = parseJwt(result.data.accessToken);
+  console.log(result)
+  if(result.error !== undefined){
+    toast(result.error, {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      "autoClose": 1500,
+      dangerouslyHTMLString: true,
+    });
+  }else{
+    if (result.data.succeeded === true) {
+    const decode = parseJwt(result.data.accessToken);
     localStorage.setItem(LocalStorageKey.ACCESS_TOKEN, result.data.accessToken);
     localStorage.setItem(LocalStorageKey.REFRESH_TOKEN, result.data.refreshToken);
     localStorage.setItem(LocalStorageKey.USER_INFO, JSON.stringify(decode));
-  if (result.data.succeeded === true) {
     toast("Đăng nhập thành công", {
       type: "success",
       transition: "flip",
@@ -42,6 +52,7 @@ const login = async () => {
       "autoClose": 1500,
       dangerouslyHTMLString: true,
     });
+  }
   }
 
   loading.value = false;
@@ -62,6 +73,11 @@ const parseJwt = (token) => {
 
   return JSON.parse(jsonPayload);
 };
+onMounted(() => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("userInfo");
+});
 </script>
 
 <template>

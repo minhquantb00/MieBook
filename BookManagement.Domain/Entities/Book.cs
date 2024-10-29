@@ -26,11 +26,11 @@ namespace BookManagement.Domain.Entities
         public int AverageRating { get; set; }
         public Enumerate.BookStatus Status { get; set; } = Enumerate.BookStatus.DangBan;
         public int InventoryNumber { get; set; }
-        public long CollectionId { get; set; }
+        public long? CollectionId { get; set; }
         public virtual Collection? Collection { get; set; }
-        public long CategoryId { get; set; }
+        public long? CategoryId { get; set; }
         public virtual Category? Category { get; set; }
-        public long TopicBookId { get; set; }   
+        public long? TopicBookId { get; set; }   
         public virtual TopicBook? TopicBook { get; set; }
         public virtual ICollection<EventBook>? EventBooks { get; set; }
         public virtual ICollection<FavoriteBook>? FavoriteBooks { get; set; }

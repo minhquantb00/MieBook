@@ -393,7 +393,7 @@ export default [
         component: () => import("../views/live-preview/application/e-commerce/add-product.vue"),
     },
     {
-        path: "/product-details",
+        path: "/product-details/:id",
         name: "product-details",
         meta: { title: "product Details" },
         component: () => import("../views/live-preview/application/e-commerce/product-details.vue"),

@@ -4,23 +4,9 @@ import axios from 'axios';
 
 const axiosIns = axios.create({
   baseURL: 'https://localhost:7027/api',
-  timeout: 1000,
-  // headers: {
-  //   Accept: "application/json",
-  //   "Content-Type": "application/json",
-  //   "Access-Control-Allow-Origin": "*",
-  // }
+  timeout: 3000,
 });
 
-axiosIns.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem(LocalStorageKey.ACCESS_TOKEN) || localStorage.getItem(LocalStorageKey.ACCESS_TOKEN);
-  if(token){
-    config.headers = config.headers || {};
-    config.headers.Authorization = token ? `Bearer ${JSON.parse(token)}` : "";
-  }
-
-  return config;
-});
 
 axiosIns.interceptors.request.use((response) => {
   return response;

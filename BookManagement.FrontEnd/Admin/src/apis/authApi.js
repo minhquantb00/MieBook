@@ -1,7 +1,10 @@
 import { AuthMessage } from "@/constants/enum";
 import axiosIns from "@/plugin/axios";
-import axios from "axios";
+// import axios from "axios";
 
+const authorization = localStorage.getItem("accessToken")
+  ? localStorage.getItem("accessToken")
+  : "";
 const CONTROLLER_NAME = "User";
 const errorList = {
   [AuthMessage.ErrorEmailNotActivated]: {
@@ -21,7 +24,7 @@ const errorList = {
 
 const login = async (params) => {
   try {
-      const result = await axios.post(`https://localhost:7027/api/${CONTROLLER_NAME}/Login`, params);
+      const result = await axiosIns.post(`${CONTROLLER_NAME}/Login`, params);
       return result;
   } catch (error) {
       if (error.response && error.response.data && error.response.data.detail) {
@@ -51,7 +54,7 @@ const register = async (params) => {
 
 const forgotPassword = async (params) => {
   try {
-    const result = await axios.post(`https://localhost:7027/api/${CONTROLLER_NAME}/ForgotPassword`, params);
+    const result = await axiosIns.post(`${CONTROLLER_NAME}/ForgotPassword`, params);
     return result;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.detail) {
@@ -64,7 +67,7 @@ const forgotPassword = async (params) => {
 
 const confirmCreateNewPassword = async (params) => {
   try {
-    const result = await axios.post(`https://localhost:7027/api/${CONTROLLER_NAME}/ConfirmCreateNewPassword`, params);
+    const result = await axiosIns.post(`${CONTROLLER_NAME}/ConfirmCreateNewPassword`, params);
     return result;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.detail) {
@@ -77,7 +80,7 @@ const confirmCreateNewPassword = async (params) => {
 
 const getAllUsers = async (param) => {
   try{
-    const result = await axios.get(`https://localhost:7027/api/${CONTROLLER_NAME}/GetAllUsers`, {
+    const result = await axiosIns.get(`${CONTROLLER_NAME}/GetAllUsers`, {
       params: {
         keyWord: param.keyWord
       }
@@ -95,10 +98,27 @@ const getAllUsers = async (param) => {
 
 const getUserById = async (id) => {
   try{
-    const result = await axios.get(`https://localhost:7027/api/${CONTROLLER_NAME}/GetUserById/${id}`);
+    const result = await axiosIns.get(`${CONTROLLER_NAME}/GetUserById/${id}`);
     return result;
   }
   catch(error){
+    if (error.response && error.response.data && error.response.data.detail) {
+      return errorList[error.response.data.detail];
+    } else {
+      return { error: AuthMessage.LoginFail };
+    }
+  }
+}
+
+const changePassword = async (params) => {
+  try {
+    const result = await axiosIns.put(`${CONTROLLER_NAME}/ChangePassword`, params, {
+      headers: {
+        Authorization: `Bearer ${authorization}`,
+      }
+    });
+    return result;
+  } catch (error) {
     if (error.response && error.response.data && error.response.data.detail) {
       return errorList[error.response.data.detail];
     } else {
@@ -113,5 +133,6 @@ export const AuthApi = {
   forgotPassword,
   confirmCreateNewPassword,
   getAllUsers,
-  getUserById
+  getUserById,
+  changePassword
 }
