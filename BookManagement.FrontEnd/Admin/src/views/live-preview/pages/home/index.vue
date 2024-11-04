@@ -6,18 +6,8 @@ import { BookApi } from "@/apis/bookApi";
 import { useRouter } from "vue-router";
 import { filterProductRequest } from "@/interfaces/requestModels/book/filterProductRequest";
 
-const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+// const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 const router = useRouter();
-const backItem = () => {
-  if (userInfo) {
-    // setTimeout(() => {
-    //   localStorage.removeItem("accessToken");
-    //   localStorage.removeItem("refreshToken");
-    //   localStorage.removeItem("userInfo");
-    //   location.reload();
-    // }, 10800000);
-  }
-};
 const dataProducts = ref([]);
 const businessExecute = ref(filterProductRequest);
 const getAllBooks = async () => {
@@ -25,7 +15,6 @@ const getAllBooks = async () => {
   dataProducts.value = result.data.dataResponseBooks;
 };
 const viewBook = (id) => {
-  console.log("id" + id);
   router.push({
     name: "product-details",
     params: { id },
@@ -33,7 +22,6 @@ const viewBook = (id) => {
 };
 onMounted(async () => {
   await getAllBooks();
-  backItem();
 });
 </script>
 

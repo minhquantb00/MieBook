@@ -18,6 +18,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
         public int SoldQuantity { get; set; }
         public string ImageUrl { get; set; }
         public string Author { get; set; }
+        public int? Quantity { get; set; }
         public DateTime ManufactureDate { get; set; }
         public int NumberOfPages { get; set; }
         public double PriceAfterDiscount { get; set; }

@@ -61,6 +61,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.UpdateBook
                 book.CategoryId = input.CategoryId;
                 book.TopicBookId = input.TopicBookId;
                 book.Author = input.Author;
+                book.Quantity = input.Quantity.HasValue ? input.Quantity.Value : book.Quantity;
                
                 book = await _bookRepository.UpdateAsync(book);
                 result.Succeeded = true;

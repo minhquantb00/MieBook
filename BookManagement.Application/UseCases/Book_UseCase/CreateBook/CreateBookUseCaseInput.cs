@@ -14,6 +14,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public int Quantity { get; set; }
         public double Price { get; set; }
         [DataType(DataType.Upload)]
         public IFormFile ImageUrl { get; set; }

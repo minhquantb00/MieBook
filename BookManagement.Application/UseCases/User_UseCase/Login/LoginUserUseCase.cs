@@ -89,7 +89,9 @@ namespace BookManagement.Application.UseCases.User_UseCase.Login
                 new Claim("Id", user.Id.ToString()),
                 new Claim("Email", user.Email),
                 new Claim("FullName", user.FullName),
+                new Claim("ExpiredTime", DateTime.Now.AddHours(3).ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                
             };
             var listRoleId = permissions.Select(x => x.RoleId).ToHashSet();
             var listId = roles.Select(x => x.Id).ToHashSet();

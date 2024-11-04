@@ -45,6 +45,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
                 Status = book.Status.ToString(),
                 TopicBookName = book.TopicBookId.HasValue ? _topicBookRepository.GetAsync(item => item.Id == book.TopicBookId).Result.Name : "",
                 UpdateTime = book.UpdateTime,
+                Quantity = book.Quantity
             };
         }
     }

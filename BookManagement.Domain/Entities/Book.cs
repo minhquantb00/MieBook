@@ -16,6 +16,7 @@ namespace BookManagement.Domain.Entities
         public string Description { get; set; }
         public double Price { get; set; }
         public int SoldQuantity { get; set; } = 0;
+        public int? Quantity { get; set; }
         public string ImageUrl { get; set; }
         public string Author { get; set; }
         public DateTime ManufactureDate { get; set; }

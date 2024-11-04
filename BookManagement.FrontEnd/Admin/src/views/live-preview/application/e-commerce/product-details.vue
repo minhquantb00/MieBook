@@ -254,7 +254,7 @@ onMounted(async () => {
                 <BRow class="form-group">
                   <BCol class="col-form-label col-lg-3 col-sm-12"
                     >Số lượng
-                    <span class="text-danger">*: {{ book.soldQuantity }}</span></BCol
+                    <span class="text-danger">*: {{ book.quantity }}</span></BCol
                   >
                   <BCol class="col-lg-6 col-md-12 col-sm-12">
                     <div class="btn-group btn-group-sm mb-2 border" role="group">
@@ -318,7 +318,7 @@ onMounted(async () => {
                         <td class="text-muted py-1">
                           Số trang : {{ book.numberOfPages }}
                         </td>
-                        <td class="py-1">...</td>
+                        <td class="py-1"></td>
                       </tr>
                     </tbody>
                   </table>

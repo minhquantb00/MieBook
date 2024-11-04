@@ -173,22 +173,15 @@ onMounted(() => {
             <i class="ph-duotone ph-user"></i>
             <span>Tài khoản</span>
           </a>
-          <a
+          <RouterLink
             href="#!"
             class="dropdown-item"
-            v-if="listRole && listRole.includes('Admin')"
+            v-if="listRole && listRole.includes('User')"
+            :to="{ path: '/home' }"
           >
             <i class="ph-duotone ph-user"></i>
-            <span>Trang quản trị</span>
-          </a>
-          <a href="#!" class="dropdown-item">
-            <i class="ph-duotone ph-gear"></i>
-            <span>Cài đặt</span>
-          </a>
-          <a href="#!" class="dropdown-item">
-            <i class="ph-duotone ph-lifebuoy"></i>
-            <span>Hỗ trợ</span>
-          </a>
+            <span>Trang người dùng</span>
+          </RouterLink>
           <a href="#!" class="dropdown-item">
             <i class="ph-duotone ph-power"></i>
             <span>Đăng xuất</span>
@@ -488,21 +481,15 @@ onMounted(() => {
                     </div>
                   </li>
                   <li class="list-group-item">
-                    <a href="#" class="dropdown-item">
-                      <span class="d-flex align-items-center">
-                        <i class="ph-duotone ph-heart"></i>
-                        <span>Sản phẩm yêu thích</span>
-                      </span>
-                    </a>
                     <RouterLink
                       href="#"
                       class="dropdown-item"
-                      v-if="listRole && listRole.includes('Admin')"
-                      :to="{ path: '/product-list' }"
+                      v-if="listRole && listRole.includes('User')"
+                      :to="{ path: '/home' }"
                     >
                       <span class="d-flex align-items-center">
                         <i class="ph-duotone ph-heart"></i>
-                        <span>Trang quản trị</span>
+                        <span>Trang người dùng</span>
                       </span>
                     </RouterLink>
                   </li>

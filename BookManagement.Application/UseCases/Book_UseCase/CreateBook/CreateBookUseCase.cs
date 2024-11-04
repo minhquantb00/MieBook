@@ -63,6 +63,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
                     TopicBookId = input.TopicBookId,
                     SoldQuantity = 0,
                     Status = Commons.Enums.Enumerate.BookStatus.DangBan,
+                    Quantity = input.Quantity,
                 };
                 book = await _bookRepsitory.CreateAsync(book);
                 result.Succeeded = true;

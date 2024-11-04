@@ -6,6 +6,7 @@ using BookManagement.Application.UseCases.Book_UseCase.GetBook;
 using BookManagement.Application.UseCases.Book_UseCase.GetBookById;
 using BookManagement.Application.UseCases.Book_UseCase.MapperGlobal;
 using BookManagement.Application.UseCases.Book_UseCase.UpdateBook;
+using BookManagement.Application.UseCases.BookReview_UseCase.CreateBookReview;
 using BookManagement.Application.UseCases.Category_UseCase.CreateCategory;
 using BookManagement.Application.UseCases.Category_UseCase.DeleteCategory;
 using BookManagement.Application.UseCases.Category_UseCase.GetCategory;
@@ -162,6 +163,8 @@ builder.Services.AddScoped<IUseCase<GetBookUseCaseInput, GetBookUseCaseOutput>, 
 builder.Services.AddScoped<IUseCase<UpdateBookUseCaseInput, UpdateBookUseCaseOutput>, UpdateBookUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<long, GetBookByIdUseCaseOutput>, GetBookByIdUseCase>();
 builder.Services.AddScoped<BookConverter>();
+builder.Services.AddScoped<IRepository<BookReview>, Repository<BookReview>>();
+builder.Services.AddScoped<IUseCase<CreateBookReviewUseCaseInput, CreateBookReviewUseCaseOutput>, CreateBookReviewUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<long, GetRoleByIdUseCaseOutput>, GetRoleByIdUseCase>();
 builder.Services.AddScoped<IUseCase<UpdateRoleUseCaseInput, UpdateRoleUseCaseOutput>, UpdateRoleUseCase>();
 builder.Services.AddScoped<IUseCase<DeleteRoleUseCaseInput, DeleteRoleUseCaseOutput>, DeleteRoleUseCase>();
