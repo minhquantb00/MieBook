@@ -29,11 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\BookReview_UseCase\DeleteBookReview\" />
     <Folder Include="UseCases\BookReview_UseCase\GetBookReviewById\" />
-    <Folder Include="UseCases\BookReview_UseCase\GetBookReview\" />
-    <Folder Include="UseCases\BookReview_UseCase\MapperGlobal\" />
-    <Folder Include="UseCases\BookReview_UseCase\UpdateBookReview\" />
     <Folder Include="UseCases\FavoriteBook_UseCase\" />
     <Folder Include="UseCases\RankCustomer_UseCase\" />
     <Folder Include="UseCases\PaymentMethod_UseCase\" />
