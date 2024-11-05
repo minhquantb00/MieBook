@@ -29,7 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\BookReview_UseCase\GetBookReviewById\" />
+    <Folder Include="UseCases\CartItem_UseCase\DeleteCartItem\" />
+    <Folder Include="UseCases\CartItem_UseCase\GetCartItemById\" />
     <Folder Include="UseCases\FavoriteBook_UseCase\" />
     <Folder Include="UseCases\RankCustomer_UseCase\" />
     <Folder Include="UseCases\PaymentMethod_UseCase\" />

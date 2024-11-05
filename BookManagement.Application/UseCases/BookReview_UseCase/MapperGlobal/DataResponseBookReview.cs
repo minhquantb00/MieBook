@@ -9,6 +9,7 @@ namespace BookManagement.Application.UseCases.BookReview_UseCase.MapperGlobal
 {
     public class DataResponseBookReview
     {
+        public long Id { get; set; }
         public string FullName { get; set; }
         public string Content { get; set; }
         public string? ImageUrl { get; set; }

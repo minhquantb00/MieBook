@@ -1,8 +1,10 @@
 ﻿using BookManagement.Application.IUseCases;
 using BookManagement.Application.UseCases.Book_UseCase.CreateBook;
 using BookManagement.Application.UseCases.Book_UseCase.DeleteBook;
+using BookManagement.Application.UseCases.Book_UseCase.GetBookById;
 using BookManagement.Application.UseCases.BookReview_UseCase.CreateBookReview;
 using BookManagement.Application.UseCases.BookReview_UseCase.DeleteBookReview;
+using BookManagement.Application.UseCases.BookReview_UseCase.GetBookReviewById;
 using BookManagement.Commons.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -41,6 +43,17 @@ namespace BookManagement.Api.Controllers
         {
             var useCase = _serviceProvider.GetService<IUseCase<DeleteBookReviewUseCaseInput, DeleteBookReviewUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(new DeleteBookReviewUseCaseInput { Id = id });
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBookReviewById([FromRoute] long id)
+        {
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetBookReviewByIdUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {
                 return BadRequest(result);

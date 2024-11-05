@@ -19,6 +19,7 @@ namespace BookManagement.Application.UseCases.BookReview_UseCase.MapperGlobal
         {
             return new DataResponseBookReview
             {
+                Id = entity.Id,
                 ReviewTime = entity.ReviewTime,
                 Content = entity.Content,
                 FullName = _userRepository.GetByIdAsync(entity.UserId).Result.FullName,
