@@ -54,10 +54,5 @@ namespace BookManagement.Application.UseCases.Role_UseCase.DeleteRole
                 return result;
             }
         }
-
-        public Task<DeleteRoleUseCaseOutput> ExcuteAsync(long? id, DeleteRoleUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

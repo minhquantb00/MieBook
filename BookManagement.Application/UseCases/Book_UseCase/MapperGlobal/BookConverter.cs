@@ -1,7 +1,9 @@
-﻿using BookManagement.Application.UseCases.Category_UseCase.MapperGlobal;
+﻿using BookManagement.Application.UseCases.BookReview_UseCase.MapperGlobal;
+using BookManagement.Application.UseCases.Category_UseCase.MapperGlobal;
 using BookManagement.Application.UseCases.TopicBook_UseCase.MapperGlobal;
 using BookManagement.Domain.Entities;
 using BookManagement.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +18,16 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
         private readonly IRepository<TopicBook> _topicBookRepository;
         private readonly CategoryConverter _categoryConverter;
         private readonly TopicBookConverter _topicBookConverter;
-        public BookConverter(IRepository<Category> categoryRepository, IRepository<TopicBook> topicBookRepository, CategoryConverter categoryConverter, TopicBookConverter topicBookConverter)
+        private readonly IRepository<BookReview> _bookReviewRepository;
+        private readonly BookReviewConverter _bookReviewConverter;
+        public BookConverter(IRepository<Category> categoryRepository, IRepository<TopicBook> topicBookRepository, CategoryConverter categoryConverter, TopicBookConverter topicBookConverter, IRepository<BookReview> bookReviewRepository, BookReviewConverter bookReviewConverter)
         {
             _categoryRepository = categoryRepository;
             _topicBookRepository = topicBookRepository;
             _categoryConverter = categoryConverter;
             _topicBookConverter = topicBookConverter;
+            _bookReviewConverter = bookReviewConverter;
+            _bookReviewRepository = bookReviewRepository;
         }
         public DataResponseBook EntityToDTO(Book book)
         {
@@ -45,7 +51,9 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
                 Status = book.Status.ToString(),
                 TopicBookName = book.TopicBookId.HasValue ? _topicBookRepository.GetAsync(item => item.Id == book.TopicBookId).Result.Name : "",
                 UpdateTime = book.UpdateTime,
-                Quantity = book.Quantity
+                Quantity = book.Quantity,
+                ReviewQuantity = _bookReviewRepository.GetAllAsync(item => item.BookId == book.Id).Result.Count(),
+                DataResponseBookReviews = _bookReviewRepository.GetAllAsync().Result.AsNoTracking().Select(item => _bookReviewConverter.EntityToDTO(item)),
             };
         }
     }

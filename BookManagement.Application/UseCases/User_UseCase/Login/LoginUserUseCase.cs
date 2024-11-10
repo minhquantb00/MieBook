@@ -72,11 +72,6 @@ namespace BookManagement.Application.UseCases.User_UseCase.Login
             }
         }
 
-        public Task<LoginUserUseCaseOutput> ExcuteAsync(long? id, LoginUserUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
-
 
         #region Handle Token
         private async Task<DataResponseLogin> GetJwtTokenAsync(User user)

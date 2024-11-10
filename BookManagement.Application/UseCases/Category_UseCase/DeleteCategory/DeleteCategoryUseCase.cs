@@ -58,10 +58,5 @@ namespace BookManagement.Application.UseCases.Category_UseCase.DeleteCategory
                 return result;
             }
         }
-
-        public Task<DeleteCategoryUseCaseOutput> ExcuteAsync(long? id, DeleteCategoryUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

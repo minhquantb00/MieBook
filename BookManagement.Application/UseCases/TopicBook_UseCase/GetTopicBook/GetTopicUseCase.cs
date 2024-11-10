@@ -36,10 +36,5 @@ namespace BookManagement.Application.UseCases.TopicBook_UseCase.GetTopicBook
             result.DataResponseTopicBooks = query.AsNoTracking().Select(item => _topicBookConverter.EntityToDTO(item));
             return result;
         }
-
-        public Task<GetTopicUseCaseOutput> ExcuteAsync(long? id, GetTopicUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

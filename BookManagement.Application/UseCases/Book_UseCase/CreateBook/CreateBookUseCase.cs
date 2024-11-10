@@ -75,9 +75,5 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
             }
         }
 
-        public Task<CreateBookUseCaseOutput> ExcuteAsync(long? id, CreateBookUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

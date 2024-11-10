@@ -37,10 +37,5 @@ namespace BookManagement.Application.UseCases.EventBook_UseCase.GetEventBook
             result.Succeeded = true;
             return result;
         }
-
-        public Task<GetEventBookUseCaseOutput> ExcuteAsync(long? id, GetEventBookUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

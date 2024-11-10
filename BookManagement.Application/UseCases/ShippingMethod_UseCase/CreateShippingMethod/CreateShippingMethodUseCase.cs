@@ -55,10 +55,5 @@ namespace BookManagement.Application.UseCases.ShippingMethod_UseCase.CreateShipp
                 return result;
             }
         }
-
-        public Task<CreateShippingMethodUseCaseOutput> ExcuteAsync(long? id, CreateShippingMethodUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

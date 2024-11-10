@@ -57,10 +57,5 @@ namespace BookManagement.Application.UseCases.DiscountEvent_UseCase.GetDiscountE
             result.Succeeded = true;
             return result;
         }
-
-        public Task<GetDiscountEventUseCaseOutput> ExcuteAsync(long? id, GetDiscountEventUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

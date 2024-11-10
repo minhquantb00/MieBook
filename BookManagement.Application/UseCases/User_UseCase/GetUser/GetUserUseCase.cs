@@ -36,10 +36,5 @@ namespace BookManagement.Application.UseCases.User_UseCase.GetUser
             response.DataResponseUser = query.Select(item => _userConverter.EntityToDTO(item));
             return response;
         }
-
-        public Task<GetUserUseCaseOutput> ExcuteAsync(long? id, GetUserUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

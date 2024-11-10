@@ -67,10 +67,5 @@ namespace BookManagement.Application.UseCases.Contact_UseCase.CreateContact
                 return result;
             }
         }
-
-        public Task<CreateContactUseCaseOutput> ExcuteAsync(long? id, CreateContactUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -60,10 +60,5 @@ namespace BookManagement.Application.UseCases.DiscountEvent_UseCase.CreateDiscou
                 return result;
             }
         }
-
-        public Task<CreateDiscountEventUseCaseOutput> ExcuteAsync(long? id, CreateDiscountEventUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -57,10 +57,5 @@ namespace BookManagement.Application.UseCases.BookReview_UseCase.DeleteBookRevie
                 return result;
             }
         }
-
-        public Task<DeleteBookReviewUseCaseOutput> ExcuteAsync(long? id, DeleteBookReviewUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

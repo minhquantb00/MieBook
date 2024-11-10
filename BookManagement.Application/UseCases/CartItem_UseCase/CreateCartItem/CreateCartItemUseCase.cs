@@ -60,10 +60,5 @@ namespace BookManagement.Application.UseCases.CartItem_UseCase.CreateCartItem
                 return result;
             }
         }
-
-        public Task<CreateCartItemUseCaseOutput> ExcuteAsync(long? id, CreateCartItemUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

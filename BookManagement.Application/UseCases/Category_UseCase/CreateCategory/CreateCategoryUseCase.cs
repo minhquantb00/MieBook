@@ -55,10 +55,5 @@ namespace BookManagement.Application.UseCases.Category_UseCase.CreateCategory
                 return result;
             }
         }
-
-        public Task<CreateCategoryUseCaseOutput> ExcuteAsync(long? id, CreateCategoryUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

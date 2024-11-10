@@ -54,10 +54,5 @@ namespace BookManagement.Application.UseCases.TopicBook_UseCase.CreateTopicBook
                 return result;
             }
         }
-
-        public Task<CreateTopicBookUseCaseOutput> ExcuteAsync(long? id, CreateTopicBookUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

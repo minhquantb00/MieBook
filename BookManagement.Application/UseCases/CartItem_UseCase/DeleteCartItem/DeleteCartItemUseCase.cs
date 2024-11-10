@@ -53,10 +53,5 @@ namespace BookManagement.Application.UseCases.CartItem_UseCase.DeleteCartItem
                 return result;
             }
         }
-
-        public Task<DeleteCartItemUseCaseOutput> ExcuteAsync(long? id, DeleteCartItemUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

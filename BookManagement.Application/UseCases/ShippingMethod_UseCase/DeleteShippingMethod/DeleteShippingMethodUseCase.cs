@@ -55,10 +55,5 @@ namespace BookManagement.Application.UseCases.ShippingMethod_UseCase.DeleteShipp
                 return result;
             }
         }
-
-        public Task<DeleteShippingMethodUseCaseOutput> ExcuteAsync(long? id, DeleteShippingMethodUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

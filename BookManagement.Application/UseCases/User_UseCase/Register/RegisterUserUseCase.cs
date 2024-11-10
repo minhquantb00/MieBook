@@ -73,10 +73,5 @@ namespace BookManagement.Application.UseCases.User_UseCase.Register
                 return output;
             }
         }
-
-        public Task<RegisterUserUseCaseOutput> ExcuteAsync(long? id, RegisterUserUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -54,10 +54,5 @@ namespace BookManagement.Application.UseCases.DiscountEvent_UseCase.DeleteDiscou
                 return result;
             }
         }
-
-        public Task<DeleteDiscountEventUseCaseOutput> ExcuteAsync(long? id, DeleteDiscountEventUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

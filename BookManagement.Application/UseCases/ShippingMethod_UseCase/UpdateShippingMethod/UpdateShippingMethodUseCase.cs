@@ -56,10 +56,5 @@ namespace BookManagement.Application.UseCases.ShippingMethod_UseCase.UpdateShipp
                 return result;
             }
         }
-
-        public Task<UpdateShippingMethodUseCaseOutput> ExcuteAsync(long? id, UpdateShippingMethodUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

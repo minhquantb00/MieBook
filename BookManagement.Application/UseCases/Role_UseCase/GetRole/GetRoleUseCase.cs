@@ -36,10 +36,5 @@ namespace BookManagement.Application.UseCases.Role_UseCase.GetRole
             result.Succeeded = true;
             return result;
         }
-
-        public Task<GetRoleUseCaseOutput> ExcuteAsync(long? id, GetRoleUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

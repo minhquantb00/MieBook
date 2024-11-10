@@ -73,10 +73,5 @@ namespace BookManagement.Application.UseCases.Book_UseCase.UpdateBook
                 return result;
             }
         }
-
-        public Task<UpdateBookUseCaseOutput> ExcuteAsync(long? id, UpdateBookUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

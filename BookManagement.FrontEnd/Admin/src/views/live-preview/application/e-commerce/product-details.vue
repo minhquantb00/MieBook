@@ -12,11 +12,25 @@ const modules = [Autoplay, A11y];
 const router = useRoute();
 const idBook = router.params.id;
 const book = ref({});
+const dataBookReview = ref([]);
 const getBookById = async () => {
   const result = await BookApi.getBookById(idBook);
   book.value = result.data.dataResponseBook;
+  dataBookReview.value = book.value.dataResponseBookReviews;
 };
 
+const formatCurrency = (value) => {
+  if (value === undefined || value === null) return "0";
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
+const formatDate = (date) => {
+  const d = new Date(date);
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const year = d.getFullYear();
+
+  return `${day}/${month}/${year}`;
+};
 onMounted(async () => {
   console.log(router);
   await getBookById();
@@ -138,98 +152,6 @@ onMounted(async () => {
                         </swiper-slide>
                       </div>
                     </swiper>
-                    <ol
-                      class="list-inline carousel-indicators position-relative product-carousel-indicators my-sm-3 mx-0"
-                    >
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="0"
-                        class="list-inline-item w-25 h-auto active"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="1"
-                        class="list-inline-item w-25 h-auto"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="2"
-                        class="list-inline-item w-25 h-auto"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="3"
-                        class="list-inline-item w-25 h-auto"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="4"
-                        class="list-inline-item w-25 h-auto"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="5"
-                        class="list-inline-item w-25 h-auto"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="6"
-                        class="list-inline-item w-25 h-auto"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                      <li
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="7"
-                        class="list-inline-item w-25 h-auto"
-                      >
-                        <img
-                          :src="book.imageUrl"
-                          class="d-block wid-50 rounded"
-                          alt="Product images"
-                        />
-                      </li>
-                    </ol>
                   </div>
                 </div>
               </BCol>
@@ -254,7 +176,9 @@ onMounted(async () => {
                 <BRow class="form-group">
                   <BCol class="col-form-label col-lg-3 col-sm-12"
                     >Số lượng
-                    <span class="text-danger">*: {{ book.quantity }}</span></BCol
+                    <span class="text-danger"
+                      >*: {{ book.quantity === null ? 0 : book.quantity }}</span
+                    ></BCol
                   >
                   <BCol class="col-lg-6 col-md-12 col-sm-12">
                     <div class="btn-group btn-group-sm mb-2 border" role="group">
@@ -284,9 +208,9 @@ onMounted(async () => {
                   </BCol>
                 </BRow>
                 <h3 class="mb-4">
-                  <b>{{ book.price }} VND</b
+                  <b>{{ formatCurrency(book.price) }} VND</b
                   ><span class="mx-2 f-16 text-muted f-w-400 text-decoration-line-through"
-                    >{{ book.priceAfterDiscount }} VND</span
+                    >{{ formatCurrency(book.priceAfterDiscount) }} VND</span
                   >
                 </h3>
                 <BRow>
@@ -315,10 +239,32 @@ onMounted(async () => {
                   <table class="table table-borderless mb-0">
                     <tbody>
                       <tr>
+                        <td class="text-muted py-1">Tác giả : {{ book.author }}</td>
+
+                        <td class="py-1"></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted py-1">
+                          Tên thể loại : {{ book.categoryName }}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="text-muted py-1">
+                          Tên danh mục : {{ book.topicBookName }}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="text-muted py-1">
+                          Ngày xuất bản : {{ formatDate(book.manufactureDate) }}
+                        </td>
+                      </tr>
+
+                      <tr>
                         <td class="text-muted py-1">
                           Số trang : {{ book.numberOfPages }}
                         </td>
-                        <td class="py-1"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -333,23 +279,7 @@ onMounted(async () => {
               >
                 <div class="table-responsive">
                   <p class="text-muted">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting
-                    industry. Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s,
-                    <strong class="text-body"
-                      >“When an unknown printer took a galley of type and scrambled it to
-                      make a type specimen book.”</strong
-                    >
-                    It has survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged. It was
-                    popularized in the 1960s with the release of Lestrade sheets
-                    containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like PageMaker including versions of Lorem Ipsum.
-                  </p>
-                  <p class="text-muted mb-0">
-                    It was popularized in the 1960s with the release of Learjet sheets
-                    containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like PageMaker including versions of Lorem Ipsum.
+                    {{ book.description }}
                   </p>
                 </div>
               </BTab>
@@ -357,7 +287,9 @@ onMounted(async () => {
                 <template #title>
                   <div>
                     Reviews
-                    <span class="badge bg-light-primary rounded-pill px-2 ms-2">275</span>
+                    <span class="badge bg-light-primary rounded-pill px-2 ms-2">{{
+                      book.reviewQuantity
+                    }}</span>
                   </div>
                 </template>
                 <div class="card">
@@ -365,15 +297,27 @@ onMounted(async () => {
                     <BRow class="justify-content-between align-items-center">
                       <BCol class="col-xxl-4 col-xl-5">
                         <h2 class="mb-3">
-                          <b>3.5<small class="text-muted f-18">/5</small></b>
+                          <b
+                            >{{ book.averageRating
+                            }}<small class="text-muted f-18">/5</small></b
+                          >
                         </h2>
-                        <p class="mb-2 text-muted">275 lượt reviews</p>
+                        <p class="mb-2 text-muted">
+                          {{ book.reviewQuantity }} lượt reviews
+                        </p>
                         <div class="star mb-3 f-20">
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star-half-alt text-warning"></i>
-                          <i class="far fa-star text-muted"></i>
+                          <div v-if="book.averageRating === 0">
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                          </div>
+                          <i
+                            v-for="star in Array.from({ length: book.averageRating })"
+                            :key="star"
+                            class="fas fa-star text-warning"
+                          ></i>
                         </div>
                       </BCol>
                       <BCol xl="5" class="col-xxl-4 col-xl-5">
@@ -450,69 +394,38 @@ onMounted(async () => {
                     </BRow>
                   </div>
                 </div>
-                <BCard no-body>
-                  <BCardBody>
-                    <div class="media align-items-start">
-                      <div class="chat-avtar">
-                        <img
-                          class="img-radius img-fluid wid-40"
-                          src="@/assets/images/user/avatar-1.jpg"
-                          alt="User image"
-                        />
-                        <div class="bg-success chat-badge"></div>
-                      </div>
-                      <div class="media-body ms-3">
-                        <h6 class="mb-1">Minh Quân</h6>
-                        <p class="text-muted text-sm mb-1">2 hour ago</p>
-                        <div class="star">
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star-half-alt text-warning"></i>
-                          <i class="far fa-star text-muted"></i>
+                <div v-for="item in dataBookReview" :key="item.id">
+                  <BCard no-body>
+                    <BCardBody>
+                      <div class="media align-items-start">
+                        <div class="chat-avtar">
+                          <img
+                            class="img-radius img-fluid wid-40"
+                            src="@/assets/images/user/avatar-1.jpg"
+                            alt="User image"
+                          />
+                          <div class="bg-success chat-badge"></div>
                         </div>
-                        <p class="mb-0 text-muted mt-1">
-                          Lorem Ipsum is simply dummy text of the printing and typesetting
-                          industry. Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500.
-                        </p>
-                      </div>
-                    </div>
-                  </BCardBody>
-                </BCard>
-                <BCard no-body>
-                  <BCardBody>
-                    <div class="media align-items-start">
-                      <div class="chat-avtar">
-                        <img
-                          class="img-radius img-fluid wid-40"
-                          src="@/assets/images/user/avatar-2.jpg"
-                          alt="User image"
-                        />
-                        <div class="bg-success chat-badge"></div>
-                      </div>
-                      <div class="media-body ms-3">
-                        <h6 class="mb-1">Phương Đông</h6>
-                        <p class="text-muted text-sm mb-1">2 hour ago</p>
-                        <div class="star">
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star text-warning"></i>
-                          <i class="fas fa-star-half-alt text-warning"></i>
-                          <i class="far fa-star text-muted"></i>
-                          <i class="far fa-star text-muted"></i>
+                        <div class="media-body ms-3">
+                          <h6 class="mb-1">{{ item.fullName }}</h6>
+                          <p class="text-muted text-sm mb-1">
+                            {{ formatDate(item.reviewTime) }}
+                          </p>
+                          <div class="star">
+                            <i
+                              v-for="star in Array.from({ length: item.numberOfStars })"
+                              :key="star"
+                              class="fas fa-star text-warning"
+                            ></i>
+                          </div>
+                          <p class="mb-0 text-muted mt-1">
+                            {{ item.content }}
+                          </p>
                         </div>
-                        <p class="mb-2 text-muted mt-1">
-                          Lorem Ipsum is simply dummy text of the printing and typesetting
-                          industry. Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500.
-                        </p>
-                        <a href="#" class="link-primary mb-1"
-                          >https://phoenixcoded.net/</a
-                        >
                       </div>
-                    </div>
-                  </BCardBody>
-                </BCard>
+                    </BCardBody>
+                  </BCard>
+                </div>
                 <div class="text-center mt-3">
                   <button class="btn btn-link-primary">View more comments</button>
                 </div>

@@ -54,10 +54,5 @@ namespace BookManagement.Application.UseCases.Contact_UseCase.DeleteContact
                 return result;
             }
         }
-
-        public Task<DeleteContactUseCaseOutput> ExcuteAsync(long? id, DeleteContactUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

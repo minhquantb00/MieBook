@@ -56,10 +56,5 @@ namespace BookManagement.Application.UseCases.Role_UseCase.UpdateRole
                 return result;
             }
         }
-
-        public Task<UpdateRoleUseCaseOutput> ExcuteAsync(long? id, UpdateRoleUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

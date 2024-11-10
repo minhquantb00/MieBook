@@ -57,10 +57,5 @@ namespace BookManagement.Application.UseCases.Book_UseCase.GetBook
             result.Succeeded = true;
             return result;
         }
-
-        public Task<GetBookUseCaseOutput> ExcuteAsync(long? id, GetBookUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

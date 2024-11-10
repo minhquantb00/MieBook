@@ -61,10 +61,5 @@ namespace BookManagement.Application.UseCases.User_UseCase.ChangePassword
                 return result;
             }
         }
-
-        public Task<ChangePasswordUseCaseOutput> ExcuteAsync(long? id, ChangePasswordUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

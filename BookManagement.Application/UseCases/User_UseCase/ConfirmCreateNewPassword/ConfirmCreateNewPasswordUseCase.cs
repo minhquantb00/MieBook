@@ -60,10 +60,5 @@ namespace BookManagement.Application.UseCases.User_UseCase.ConfirmCreateNewPassw
             }
 
         }
-
-        public Task<ConfirmCreateNewPasswordUseCaseOutput> ExcuteAsync(long? id, ConfirmCreateNewPasswordUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

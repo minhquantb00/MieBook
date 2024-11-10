@@ -48,12 +48,16 @@ namespace BookManagement.Application.UseCases.BookReview_UseCase.CreateBookRevie
                 {
                     BookId = input.BookId,
                     Content = input.Content,
-                    ImageUrl = await HandleUploadImage.Upfile(input.ImageUrl),
+                    ImageUrl = input.ImageUrl != null ? await HandleUploadImage.Upfile(input.ImageUrl) : "",
                     NumberOfStars = input.NumberOfStars,
                     ReviewTime = DateTime.Now,
                     UserId = long.Parse(userId),
                 };
                 bookReview = await _bookReviewRepository.CreateAsync(bookReview);
+
+                book.AverageRating = (int) _bookReviewRepository.GetAllAsync(item => item.BookId == book.Id).Result.Average(x => x.NumberOfStars);
+
+                book = await _bookRepository.UpdateAsync(book);
                 result.Succeeded = true;
                 return result;
             }
@@ -62,11 +66,6 @@ namespace BookManagement.Application.UseCases.BookReview_UseCase.CreateBookRevie
                 result.Errors = new string[] { ex.Message };
                 return result;
             }
-        }
-
-        public Task<CreateBookReviewUseCaseOutput> ExcuteAsync(long? id, CreateBookReviewUseCaseInput input)
-        {
-            throw new NotImplementedException();
         }
     }
 }

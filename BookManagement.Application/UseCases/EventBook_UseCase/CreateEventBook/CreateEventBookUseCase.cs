@@ -70,10 +70,5 @@ namespace BookManagement.Application.UseCases.EventBook_UseCase.CreateEventBook
                 return result;
             }
         }
-
-        public Task<CreateEventBookUseCaseOutput> ExcuteAsync(long? id, CreateEventBookUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -60,10 +60,5 @@ namespace BookManagement.Application.UseCases.Contact_UseCase.UpdateContact
                 return result;
             }
         }
-
-        public Task<UpdateContactUseCaseOutput> ExcuteAsync(long? id, UpdateContactUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

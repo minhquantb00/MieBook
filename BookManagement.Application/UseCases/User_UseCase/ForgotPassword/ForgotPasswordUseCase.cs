@@ -56,10 +56,5 @@ namespace BookManagement.Application.UseCases.User_UseCase.ForgotPassword
                 return result;
             }
         }
-
-        public Task<ForgotPasswordUseCaseOutput> ExcuteAsync(long? id, ForgotPasswordUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -57,10 +57,5 @@ namespace BookManagement.Application.UseCases.Category_UseCase.UpdateCategory
             }
             
         }
-
-        public async Task<UpdateCategoryUseCaseOutput> ExcuteAsync(long? id, UpdateCategoryUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

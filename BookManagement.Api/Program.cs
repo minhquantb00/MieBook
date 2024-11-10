@@ -1,5 +1,10 @@
 using BookManagement.Application.Handle.Email;
 using BookManagement.Application.IUseCases;
+using BookManagement.Application.UseCases.AddressUser_UseCase.DeleteAddressUser;
+using BookManagement.Application.UseCases.AddressUser_UseCase.GetAddressUser;
+using BookManagement.Application.UseCases.AddressUser_UseCase.GetAddressUserById;
+using BookManagement.Application.UseCases.AddressUser_UseCase.MapperGlobal;
+using BookManagement.Application.UseCases.AddressUser_UseCase.UpdateAddressUser;
 using BookManagement.Application.UseCases.Book_UseCase.CreateBook;
 using BookManagement.Application.UseCases.Book_UseCase.DeleteBook;
 using BookManagement.Application.UseCases.Book_UseCase.GetBook;
@@ -142,6 +147,12 @@ builder.Services.AddScoped<IUseCase<CreateCartItemUseCaseInput, CreateCartItemUs
 builder.Services.AddScoped<IUseCase<DeleteCartItemUseCaseInput, DeleteCartItemUseCaseOutput>, DeleteCartItemUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<long, GetCartItemByIdUseCaseOutput>, GetCartItemByIdUseCase>();
 builder.Services.AddScoped<IRepository<Book>, Repository<Book>>();
+builder.Services.AddScoped<IRepository<AddressUser>, Repository<AddressUser>>();
+builder.Services.AddScoped<IUseCase<CreateBookReviewUseCaseInput, CreateBookReviewUseCaseOutput>, CreateBookReviewUseCase>();
+builder.Services.AddScoped<IUseCase<DeleteAddressUserUseCaseInput, DeleteAddressUserUseCaseOutput>, DeleteAddressUserUseCase>();
+builder.Services.AddScoped<AddressUserConverter>();
+builder.Services.AddScoped<IUseCase<GetAddressUserUseCaseInput, GetAddressUserUseCaseOutput>, GetAddressUserUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<long, GetAddressUserByIdUseCaseOutput>, GetAddressUserByIdUseCase>();
 builder.Services.AddScoped<IUseCase<DeleteCategoryUseCaseInput, DeleteCategoryUseCaseOutput>,  DeleteCategoryUseCase>();  
 builder.Services.AddScoped<IUseCase<UpdateCategoryUseCaseInput, UpdateCategoryUseCaseOutput>, UpdateCategoryUseCase>();
 builder.Services.AddScoped<IUseCase<GetCategoryUseCaseInput, GetCategoryUseCaseOutput>, GetCategoryUseCase>();
@@ -162,6 +173,7 @@ builder.Services.AddScoped<IUseCase<UpdateVoucherUseCaseInput, UpdateVoucherUseC
 builder.Services.AddScoped<IUseCase<CreateContactUseCaseInput, CreateContactUseCaseOutput>, CreateContactUseCase>();
 builder.Services.AddScoped<IUseCase<DeleteContactUseCaseInput, DeleteContactUseCaseOutput>, DeleteContactUseCase>();
 builder.Services.AddScoped<IUseCase<UpdateContactUseCaseInput, UpdateContactUseCaseOutput>, UpdateContactUseCase>();
+builder.Services.AddScoped<IUseCase<UpdateAddressUserUseCaseInput, UpdateAddressUserUseCaseOutput>, UpdateAddressUserUseCase>();
 builder.Services.AddScoped<IUseCase<CreateDiscountEventUseCaseInput, CreateDiscountEventUseCaseOutput>, CreateDiscountEventUseCase>();
 builder.Services.AddScoped<IUseCase<DeleteDiscountEventUseCaseInput, DeleteDiscountEventUseCaseOutput>, DeleteDiscountEventUseCase>();
 builder.Services.AddScoped<IUseCase<UpdateDiscountEventUseCaseInput, UpdateDiscountEventUseCaseOutput>, UpdateDiscountEventUseCase>();

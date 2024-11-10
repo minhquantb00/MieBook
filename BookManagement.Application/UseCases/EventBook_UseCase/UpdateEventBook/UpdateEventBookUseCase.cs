@@ -79,10 +79,5 @@ namespace BookManagement.Application.UseCases.EventBook_UseCase.UpdateEventBook
                 return result;
             }
         }
-
-        public Task<UpdateEventBookUseCaseOutput> ExcuteAsync(long? id, UpdateEventBookUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -36,10 +36,5 @@ namespace BookManagement.Application.UseCases.Contact_UseCase.GetContact
             result.Succeeded = true;
             return result;
         }
-
-        public Task<GetContactUseCaseOutput> ExcuteAsync(long? id, GetContactUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -53,10 +53,5 @@ namespace BookManagement.Application.UseCases.Role_UseCase.CreateRole
                 return result;
             }
         }
-
-        public Task<CreateRoleUseCaseOutput> ExcuteAsync(long? id, CreateRoleUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -63,10 +63,5 @@ namespace BookManagement.Application.UseCases.DiscountEvent_UseCase.UpdateDiscou
                 return result;
             }
         }
-
-        public Task<UpdateDiscountEventUseCaseOutput> ExcuteAsync(long? id, UpdateDiscountEventUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

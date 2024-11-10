@@ -1,4 +1,5 @@
-﻿using BookManagement.Commons.Enums;
+﻿using BookManagement.Application.UseCases.BookReview_UseCase.MapperGlobal;
+using BookManagement.Commons.Enums;
 using BookManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
         public int InventoryNumber { get; set; }
         public string CategoryName { get; set; }
         public string TopicBookName { get; set; }
+        public int ReviewQuantity { get; set; }
+        public IQueryable<DataResponseBookReview> DataResponseBookReviews { get; set; }
     }
 }

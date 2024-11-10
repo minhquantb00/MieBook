@@ -37,10 +37,5 @@ namespace BookManagement.Application.UseCases.Category_UseCase.GetCategory
             result.DataResponseCategories = query.AsNoTracking().Select(item => _categoryConverter.EntityToDTO(item));
             return result;
         }
-
-        public Task<GetCategoryUseCaseOutput> ExcuteAsync(long? id, GetCategoryUseCaseInput input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
