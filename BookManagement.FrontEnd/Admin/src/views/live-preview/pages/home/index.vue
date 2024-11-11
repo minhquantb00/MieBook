@@ -20,6 +20,10 @@ const viewBook = (id) => {
     params: { id },
   });
 };
+const formatCurrency = (value) => {
+  if (value === undefined || value === null) return "0";
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
 onMounted(async () => {
   await getAllBooks();
 });
@@ -453,11 +457,11 @@ onMounted(async () => {
                         class="mb-0 text-truncate"
                         style="display: flex; flex-direction: column"
                       >
-                        <b>{{ item.price }} VND</b>
+                        <b>{{ formatCurrency(item.price) }} VND</b>
                         <span
                           class="text-sm text-muted f-w-400 text-decoration-line-through"
                         >
-                          {{ item.priceAfterDiscount }} VND
+                          {{ formatCurrency(item.priceAfterDiscount) }} VND
                         </span>
                       </h4>
                       <div class="d-inline-flex align-items-center">

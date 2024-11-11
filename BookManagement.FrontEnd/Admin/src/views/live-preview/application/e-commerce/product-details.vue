@@ -3,38 +3,79 @@ import Layout from "@/layout/main.vue";
 import pageheader from "@/components/page-header.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, A11y } from "swiper/modules";
-import { HeartIcon } from "@zhuowenli/vue-feather-icons";
 import { BookApi } from "@/apis/bookApi";
-import { useRoute } from "vue-router";
-import { onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { onMounted, ref, watch } from "vue";
 
 const modules = [Autoplay, A11y];
-const router = useRoute();
-const idBook = router.params.id;
+const route = useRoute();
+const idBook = ref(route.params.id);
+const router = useRouter();
 const book = ref({});
 const dataBookReview = ref([]);
+const dataBooks = ref([]);
+
 const getBookById = async () => {
-  const result = await BookApi.getBookById(idBook);
-  book.value = result.data.dataResponseBook;
-  dataBookReview.value = book.value.dataResponseBookReviews;
+  try {
+    const result = await BookApi.getBookById(idBook.value);
+    if (result?.data?.dataResponseBook) {
+      book.value = result.data.dataResponseBook;
+      dataBookReview.value = book.value.dataResponseBookReviews || [];
+    } else {
+      console.error("Không tìm thấy dữ liệu sách cho ID:", idBook.value);
+      dataBookReview.value = [];
+    }
+  } catch (error) {
+    console.error("Lỗi khi lấy dữ liệu sách theo ID:", error);
+    dataBookReview.value = [];
+  }
+};
+
+const getAllBooks = async () => {
+  const result = await BookApi.getAllBooks({
+    keyword: "",
+    priceFrom: null,
+    priceTo: null,
+    categoryId: book.value.categoryId,
+    topicBookId: null,
+  });
+  dataBooks.value = result.data.dataResponseBooks;
+};
+
+const viewBook = (id) => {
+  router.push({
+    name: "product-details",
+    params: { id },
+  });
 };
 
 const formatCurrency = (value) => {
   if (value === undefined || value === null) return "0";
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
+
 const formatDate = (date) => {
   const d = new Date(date);
   const day = String(d.getDate()).padStart(2, "0");
-  const month = String(d.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const month = String(d.getMonth() + 1).padStart(2, "0");
   const year = d.getFullYear();
 
   return `${day}/${month}/${year}`;
 };
+
 onMounted(async () => {
-  console.log(router);
   await getBookById();
+  await getAllBooks();
 });
+
+// Lắng nghe sự thay đổi của route.params.id để cập nhật sách và đánh giá mới
+watch(
+  () => route.params.id,
+  async (newId) => {
+    idBook.value = newId;
+    await getBookById();
+  }
+);
 </script>
 
 <template>
@@ -99,55 +140,11 @@ onMounted(async () => {
                         </BCardBody>
 
                         <swiper-slide class="carousel-item active">
-                          <img src="" class="d-block w-100" alt="Product images" />
-                        </swiper-slide>
-                        <swiper-slide class="carousel-item">
                           <img
                             :src="book.imageUrl"
                             class="d-block w-100"
                             alt="Product images"
-                          />
-                        </swiper-slide>
-                        <swiper-slide class="carousel-item">
-                          <img
-                            :src="book.imageUrl"
-                            class="d-block w-100"
-                            alt="Product images"
-                          />
-                        </swiper-slide>
-                        <swiper-slide class="carousel-item">
-                          <img
-                            :src="book.imageUrl"
-                            class="d-block w-100"
-                            alt="Product images"
-                          />
-                        </swiper-slide>
-                        <swiper-slide class="carousel-item">
-                          <img
-                            :src="book.imageUrl"
-                            class="d-block w-100"
-                            alt="Product images"
-                          />
-                        </swiper-slide>
-                        <swiper-slide class="carousel-item">
-                          <img
-                            :src="book.imageUrl"
-                            class="d-block w-100"
-                            alt="Product images"
-                          />
-                        </swiper-slide>
-                        <swiper-slide class="carousel-item">
-                          <img
-                            :src="book.imageUrl"
-                            class="d-block w-100"
-                            alt="Product images"
-                          />
-                        </swiper-slide>
-                        <swiper-slide class="carousel-item">
-                          <img
-                            :src="book.imageUrl"
-                            class="d-block w-100"
-                            alt="Product images"
+                            style="object-fit: cover"
                           />
                         </swiper-slide>
                       </div>
@@ -156,7 +153,10 @@ onMounted(async () => {
                 </div>
               </BCol>
               <BCol md="6">
-                <span class="badge bg-success f-14">{{ book.status }}</span>
+                <span v-if="book.status === 'Đang bán'" class="badge bg-success f-14">{{
+                  book.status
+                }}</span>
+                <span v-else class="badge bg-error f-14">{{ book.status }}</span>
                 <h5 class="my-3">{{ book.name }}</h5>
                 <div class="star f-18 mb-3">
                   <i class="fas fa-star text-warning"></i>
@@ -438,225 +438,51 @@ onMounted(async () => {
             <h5>Thể loại tương tự</h5>
           </BCardHeader>
           <BCardBody>
-            <BRow class="gy-3">
-              <BCol xl="4" class="col-sm-6 col-xxl-3 col-xl-4">
-                <BCard no-body class="product-card mb-0">
+            <BRow>
+              <BCol v-for="item in dataBooks" :key="item.id" class="col-sm-3 col-xl-2">
+                <BCard no-body class="product-card">
                   <div class="card-img-top">
-                    <router-link to="/product-details">
-                      <img
-                        src="https://th.bing.com/th/id/OIP.2eZsIlbHCRqQwdT-mlOkAQHaE7?w=270&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                        alt="image"
-                        class="img-prod img-fluid"
-                      />
-                    </router-link>
-                    <BCardBody class="card-body position-absolute end-0 top-0">
-                      <div class="form-check prod-likes">
-                        <input type="checkbox" class="form-check-input" />
-                        <HeartIcon class="prod-likes-icon"></HeartIcon>
-                      </div>
-                    </BCardBody>
-                    <BCardBody class="position-absolute start-0 top-0">
-                      <span class="badge bg-danger badge-prod-card">30%</span>
-                    </BCardBody>
-                  </div>
-                  <BCardBody>
-                    <router-link to="/product-details">
-                      <p class="prod-content mb-0 text-muted">Apple watch -4</p>
-                    </router-link>
-                    <div
-                      class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap"
-                    >
-                      <h4 class="mb-0 text-truncate">
-                        <b>$299.00</b>
-                        <span
-                          class="text-sm text-muted f-w-400 text-decoration-line-through"
-                          >$399.00</span
-                        >
-                      </h4>
-                      <div class="d-inline-flex align-items-center">
-                        <i class="ph-duotone ph-star text-warning me-1"></i>
-                        4.5 <small class="text-muted">/ 5</small>
-                      </div>
+                    <div class="image-container">
+                      <img :src="item.imageUrl" alt="image" class="img-prod img-fluid" />
                     </div>
-                    <div class="d-flex">
-                      <div class="flex-shrink-0">
-                        <a
-                          href="#"
-                          class="avtar avtar-s btn-link-secondary btn-prod-card"
-                        >
-                          <i class="ph-duotone ph-eye f-18"></i>
-                        </a>
-                      </div>
-                      <div class="flex-grow-1 ms-3">
-                        <div class="d-grid">
-                          <button class="btn btn-link-secondary btn-prod-card">
-                            Thêm vào giỏ
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </BCardBody>
-                </BCard>
-              </BCol>
-              <BCol xl="4" class="col-sm-6 col-xxl-3 col-xl-4">
-                <div class="card product-card mb-0">
-                  <div class="card-img-top">
-                    <router-link to="/product-details">
-                      <img
-                        src="https://th.bing.com/th/id/OIP.2eZsIlbHCRqQwdT-mlOkAQHaE7?w=270&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                        alt="image"
-                        class="img-prod img-fluid"
-                      />
-                    </router-link>
-                    <div class="card-body position-absolute end-0 top-0">
-                      <div class="form-check prod-likes">
-                        <input type="checkbox" class="form-check-input" />
-                        <HeartIcon class="prod-likes-icon"></HeartIcon>
-                      </div>
-                    </div>
-                  </div>
-                  <BCardBody>
-                    <router-link to="/product-details">
-                      <p class="prod-content mb-0 text-muted">Apple watch -4</p>
-                    </router-link>
-                    <div
-                      class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap"
-                    >
-                      <h4 class="mb-0 text-truncate">
-                        <b>$299.00</b>
-                        <span
-                          class="text-sm text-muted f-w-400 text-decoration-line-through"
-                          >$399.00</span
-                        >
-                      </h4>
-                      <div class="d-inline-flex align-items-center">
-                        <i class="ph-duotone ph-star text-warning me-1"></i>
-                        4.5 <small class="text-muted">/ 5</small>
-                      </div>
-                    </div>
-                    <div class="d-flex">
-                      <div class="flex-shrink-0">
-                        <a
-                          href="#"
-                          class="avtar avtar-s btn-link-secondary btn-prod-card"
-                        >
-                          <i class="ph-duotone ph-eye f-18"></i>
-                        </a>
-                      </div>
-                      <div class="flex-grow-1 ms-3">
-                        <div class="d-grid">
-                          <button class="btn btn-link-secondary btn-prod-card">
-                            Thêm vào giỏ
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </BCardBody>
-                </div>
-              </BCol>
-              <BCol xl="4" class="col-sm-6 col-xxl-3 col-xl-4">
-                <BCard no-body class="product-card mb-0">
-                  <div class="card-img-top">
-                    <router-link to="/product-details">
-                      <img
-                        src="https://th.bing.com/th/id/OIP.2eZsIlbHCRqQwdT-mlOkAQHaE7?w=270&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                        alt="image"
-                        class="img-prod img-fluid"
-                      />
-                    </router-link>
                     <BCardBody class="position-absolute end-0 top-0">
                       <div class="form-check prod-likes">
                         <input type="checkbox" class="form-check-input" />
-                        <HeartIcon class="prod-likes-icon"></HeartIcon>
-                      </div>
-                    </BCardBody>
-                    <BCardBody class="position-absolute start-0 top-0">
-                      <span class="badge bg-danger badge-prod-card">30%</span>
-                    </BCardBody>
-                  </div>
-                  <BCardBody>
-                    <router-link to="/product-details">
-                      <p class="prod-content mb-0 text-muted">Apple watch -4</p>
-                    </router-link>
-                    <div
-                      class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap"
-                    >
-                      <h4 class="mb-0 text-truncate">
-                        <b>$299.00</b>
-                        <span
-                          class="text-sm text-muted f-w-400 text-decoration-line-through"
-                          >$399.00</span
-                        >
-                      </h4>
-                      <div class="d-inline-flex align-items-center">
-                        <i class="ph-duotone ph-star text-warning me-1"></i>
-                        4.5 <small class="text-muted">/ 5</small>
-                      </div>
-                    </div>
-                    <div class="d-flex">
-                      <div class="flex-shrink-0">
-                        <a
-                          href="#"
-                          class="avtar avtar-s btn-link-secondary btn-prod-card"
-                        >
-                          <i class="ph-duotone ph-eye f-18"></i>
-                        </a>
-                      </div>
-                      <div class="flex-grow-1 ms-3">
-                        <div class="d-grid">
-                          <button class="btn btn-link-secondary btn-prod-card">
-                            Thêm vào giỏ
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </BCardBody>
-                </BCard>
-              </BCol>
-              <BCol xl="4" class="col-sm-6 col-xxl-3 col-xl-4">
-                <BCard no-body class="product-card mb-0">
-                  <div class="card-img-top">
-                    <router-link to="/product-details">
-                      <img
-                        src="https://th.bing.com/th/id/OIP.2eZsIlbHCRqQwdT-mlOkAQHaE7?w=270&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                        alt="image"
-                        class="img-prod img-fluid"
-                      />
-                    </router-link>
-                    <BCardBody class="position-absolute end-0 top-0">
-                      <div class="form-check prod-likes">
-                        <input type="checkbox" class="form-check-input" />
-                        <HeartIcon class="prod-likes-icon"></HeartIcon>
+                        <i data-feather="heart" class="prod-likes-icon"></i>
                       </div>
                     </BCardBody>
                   </div>
                   <BCardBody>
-                    <router-link to="/product-details">
-                      <p class="prod-content mb-0 text-muted">Apple watch -4</p>
-                    </router-link>
+                    <div>
+                      <p class="prod-content mb-0 text-muted">{{ item.name }}</p>
+                    </div>
                     <div
-                      class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap"
+                      class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap gap-1"
                     >
-                      <h4 class="mb-0 text-truncate">
-                        <b>$299.00</b>
+                      <h4
+                        class="mb-0 text-truncate"
+                        style="display: flex; flex-direction: column"
+                      >
+                        <b>{{ formatCurrency(book.price) }} VND</b>
                         <span
                           class="text-sm text-muted f-w-400 text-decoration-line-through"
-                          >$399.00</span
                         >
+                          {{ formatCurrency(book.priceAfterDiscount) }} VND
+                        </span>
                       </h4>
                       <div class="d-inline-flex align-items-center">
                         <i class="ph-duotone ph-star text-warning me-1"></i>
-                        4.5 <small class="text-muted">/ 5</small>
+                        {{ item.averageRating }} <small class="text-muted">/ 5</small>
                       </div>
                     </div>
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <a
-                          href="#"
+                        <button
                           class="avtar avtar-s btn-link-secondary btn-prod-card"
+                          @click="viewBook(item.id)"
                         >
                           <i class="ph-duotone ph-eye f-18"></i>
-                        </a>
+                        </button>
                       </div>
                       <div class="flex-grow-1 ms-3">
                         <div class="d-grid">
@@ -676,3 +502,20 @@ onMounted(async () => {
     </BRow>
   </Layout>
 </template>
+<style scoped>
+.image-container {
+  width: 100%;
+  padding-top: 75%; /* 4:3 aspect ratio (adjust as needed) */
+  position: relative;
+  overflow: hidden;
+}
+
+.img-prod {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>

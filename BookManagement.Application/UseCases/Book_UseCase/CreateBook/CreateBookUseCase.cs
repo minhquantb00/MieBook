@@ -66,6 +66,10 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
                     Quantity = input.Quantity,
                 };
                 book = await _bookRepsitory.CreateAsync(book);
+                
+
+                book.Status = book.Quantity > 0 ? Commons.Enums.Enumerate.BookStatus.DangBan : Commons.Enums.Enumerate.BookStatus.HetHang;
+                book = await _bookRepsitory.UpdateAsync(book);
                 result.Succeeded = true;
                 return result;
             }catch (Exception ex)

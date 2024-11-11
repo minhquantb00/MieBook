@@ -48,7 +48,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
                 NumberOfPages = book.NumberOfPages,
                 Price = book.Price,
                 SoldQuantity = book.SoldQuantity,
-                Status = book.Status.ToString(),
+                Status = book.Status == Commons.Enums.Enumerate.BookStatus.HetHang ? "Hết hàng" : "Đang bán",
                 TopicBookName = book.TopicBookId.HasValue ? _topicBookRepository.GetAsync(item => item.Id == book.TopicBookId).Result.Name : "",
                 UpdateTime = book.UpdateTime,
                 Quantity = book.Quantity,

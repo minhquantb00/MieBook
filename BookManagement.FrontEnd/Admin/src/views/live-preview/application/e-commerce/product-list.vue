@@ -11,8 +11,13 @@ const getAllBooks = async () => {
   const result = await BookApi.getAllBooks(businessExecute.value);
   dataProducts.value = result.data.dataResponseBooks;
 };
+const formatCurrency = (value) => {
+  if (value === undefined || value === null) return "0";
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
 onMounted(async () => {
   await getAllBooks();
+  console.log(dataProducts.value);
 });
 </script>
 
@@ -61,7 +66,7 @@ onMounted(async () => {
                       </BRow>
                     </td>
                     <td>{{ item.author }}</td>
-                    <td class="text-end">{{ item.price }} VND</td>
+                    <td class="text-end">{{ formatCurrency(item.price) }} VND</td>
                     <td class="text-end">{{ item.quantity }}</td>
                     <td class="text-center">
                       <i
