@@ -29,9 +29,9 @@ onMounted(async () => {
         <BCard no-body class="table-card">
           <BCardBody>
             <div class="text-end p-sm-4 pb-sm-2">
-              <a href="@/application/ecom_product-add.html" class="btn btn-primary">
+              <RouterLink :to="{ path: '/add-product' }" class="btn btn-primary">
                 <i class="ti ti-plus f-18"></i> Add Product
-              </a>
+              </RouterLink>
             </div>
             <div class="table-responsive">
               <table class="table table-hover tbl-product" id="pc-dt-simple">
@@ -42,8 +42,8 @@ onMounted(async () => {
                     <th>Tác giả</th>
                     <th class="text-end">Gía bán</th>
                     <th class="text-end">Số lượng</th>
-                    <th class="text-center">Brand</th>
-                    <th class="text-center">Status</th>
+                    <th class="text-center">Danh mục</th>
+                    <th class="text-center">Trạng thái</th>
                   </tr>
                 </thead>
                 <tbody v-for="item in dataProducts" :key="item.id">
@@ -69,32 +69,12 @@ onMounted(async () => {
                     <td class="text-end">{{ formatCurrency(item.price) }} VND</td>
                     <td class="text-end">{{ item.quantity }}</td>
                     <td class="text-center">
-                      <i
-                        class="ph-duotone ph-check-circle text-success f-24"
-                        data-bs-toggle="tooltip"
-                        data-bs-title="success"
-                      ></i>
+                      {{ item.categoryName }}
                     </td>
                     <td class="text-center">
-                      <img
-                        src="@/assets/images/application/img-prod-brand-1.png"
-                        alt="user-image"
-                        class="wid-40"
-                      />
+                      {{ item.status }}
                       <div class="prod-action-links">
                         <ul class="list-inline me-auto mb-0">
-                          <li
-                            class="list-inline-item align-bottom"
-                            data-bs-toggle="tooltip"
-                            title="View"
-                          >
-                            <a
-                              href="#"
-                              class="avtar avtar-xs btn-link-secondary btn-pc-default"
-                            >
-                              <i class="ti ti-eye f-18"></i>
-                            </a>
-                          </li>
                           <li
                             class="list-inline-item align-bottom"
                             data-bs-toggle="tooltip"
