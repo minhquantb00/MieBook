@@ -439,7 +439,7 @@ watch(
           </BCardHeader>
           <BCardBody>
             <BRow>
-              <BCol v-for="item in dataBooks" :key="item.id" class="col-sm-3 col-xl-2">
+              <BCol v-for="item in dataBooks" :key="item.id" class="col-sm-4 col-xl-3">
                 <BCard no-body class="product-card">
                   <div class="card-img-top">
                     <div class="image-container">

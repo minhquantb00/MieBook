@@ -7,13 +7,28 @@ import { filterShippingMethodRequest } from "@/interfaces/requestModels/shipping
 import { BookApi } from "@/apis/bookApi";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 const dataShippingMethods = ref([]);
 const loading = ref(false);
 const time = ref();
+const route = useRoute();
 const router = useRouter();
 const selectedFile = ref(null);
+const idBook = ref(route.params.id);
+const book = ref({});
 const businessExecuteShippingMethod = ref(filterShippingMethodRequest);
+const getBookById = async () => {
+  try {
+    const result = await BookApi.getBookById(idBook.value);
+    if (result?.data?.dataResponseBook) {
+      book.value = result.data.dataResponseBook;
+    } else {
+      console.error("Không tìm thấy dữ liệu sách cho ID:", idBook.value);
+    }
+  } catch (error) {
+    console.error("Lỗi khi lấy dữ liệu sách theo ID:", error);
+  }
+};
 const getAllShippingMethods = async () => {
   const result = await ShippingMethodApi.getAllShippingMethods(
     businessExecuteShippingMethod.value
@@ -24,40 +39,56 @@ const businessExecuteBook = ref({});
 const handleFileUpload = (event) => {
   selectedFile.value = event.target.files[0];
 };
-const createNewBook = async () => {
+const updateBook = async () => {
   loading.value = true;
 
   // Create FormData and append all fields
   const formData = new FormData();
-  formData.append("name", businessExecuteBook.value.name);
+
+  // For 'name', append the value even if it's not changed (it will be empty if no new value provided)
+  formData.append("id", idBook.value);
+  formData.append("name", businessExecuteBook.value.name || book.value.name);
+
+  // Check if the field is undefined and provide a default value if necessary
   formData.append(
     "categoryId",
-    businessExecuteBook.value.categoryId === undefined
-      ? 6
-      : businessExecuteBook.value.categoryId
+    businessExecuteBook.value.categoryId !== undefined
+      ? businessExecuteBook.value.categoryId
+      : 6
   );
+
   formData.append(
     "topicBookId",
-    businessExecuteBook.value.topicBookId === undefined
-      ? 1
-      : businessExecuteBook.value.topicBookId
+    businessExecuteBook.value.topicBookId !== undefined
+      ? businessExecuteBook.value.topicBookId
+      : 1
   );
-  formData.append("description", businessExecuteBook.value.description);
-  formData.append("quantity", businessExecuteBook.value.quantity);
-  formData.append("author", businessExecuteBook.value.author);
-  formData.append("manufactureDate", businessExecuteBook.value.manufactureDate);
-  formData.append("numberOfPages", businessExecuteBook.value.numberOfPages);
-  formData.append("price", businessExecuteBook.value.price);
 
+  formData.append(
+    "description",
+    businessExecuteBook.value.description || book.value.description
+  );
+  formData.append("quantity", businessExecuteBook.value.quantity || book.value.quantity);
+  formData.append("author", businessExecuteBook.value.author || book.value.author);
+  formData.append(
+    "manufactureDate",
+    businessExecuteBook.value.manufactureDate || book.value.manufactureDate
+  );
+  formData.append(
+    "numberOfPages",
+    businessExecuteBook.value.numberOfPages || book.value.numberOfPages
+  );
+  formData.append("price", businessExecuteBook.value.price || book.value.price);
+  formData.append("imageUrl", selectedFile.value || book.value.imageUrl);
   // Append the selected file, if available
-  if (selectedFile.value) {
-    formData.append("imageUrl", selectedFile.value);
-  }
+  // if (selectedFile.value) {
+  //   formData.append("imageUrl", selectedFile.value);
+  // }
 
-  const result = await BookApi.createBook(formData);
+  const result = await BookApi.updateBook(formData);
 
   if (result.data.succeeded === true) {
-    toast("Tạo thông tin sách thành công", {
+    toast("Sửa thông tin sách thành công", {
       type: "success",
       transition: "flip",
       autoClose: 1500,
@@ -78,14 +109,16 @@ const createNewBook = async () => {
   }
   loading.value = false;
 };
+
 onMounted(async () => {
   await getAllShippingMethods();
+  await getBookById();
 });
 </script>
 
 <template>
   <Layout>
-    <pageheader title="Thêm mới sản phẩm" pageTitle="E-commerce" />
+    <pageheader title="Sửa thông tin sản phẩm" pageTitle="E-commerce" />
     <BRow>
       <div class="col-xl-6">
         <div class="card">
@@ -212,7 +245,7 @@ onMounted(async () => {
       <BCol sm="12">
         <BCard no-body>
           <BCardBody class="text-end btn-page">
-            <button class="btn btn-primary mb-0" @click="createNewBook()">
+            <button class="btn btn-primary mb-0" @click="updateBook()">
               Lưu thông tin
             </button>
             <button class="btn btn-outline-secondary mb-0">Reset</button>

@@ -33,7 +33,7 @@ const updateBook = async (params) => {
 }
 
 const deleteBook = async (id) => {
-  const result = await axiosIns.delete(`${CONTROLLER_NAME}/${id}`,{
+  const result = await axiosIns.delete(`${CONTROLLER_NAME}/DeleteBook/${id}`,{
     headers: {
       Authorization: `Bearer ${authorization}`,
     }

@@ -21,7 +21,6 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
         public string Author { get; set; }
         public DateTime ManufactureDate { get; set; }
         public int NumberOfPages { get; set; }
-        public double PriceAfterDiscount { get; set; }
         public long? CollectionId { get; set; }
         public long? CategoryId { get; set; }
         public long? TopicBookId { get; set; }

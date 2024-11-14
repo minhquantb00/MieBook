@@ -57,8 +57,9 @@ namespace BookManagement.Application.UseCases.Book_UseCase.UpdateBook
                 book.NumberOfPages = input.NumberOfPages.HasValue ? input.NumberOfPages.Value : book.NumberOfPages;
                 book.Description = !string.IsNullOrEmpty(input.Description) ? input.Description : book.Description;
                 book.Price = input.Price.HasValue ? input.Price.Value : book.Price;
-                book.ImageUrl = await HandleUploadImage.Upfile(input.ImageUrl);
+                book.ImageUrl = input.ImageUrl != null ? await HandleUploadImage.Upfile(input.ImageUrl) : book.ImageUrl;
                 book.CategoryId = input.CategoryId;
+                book.UpdateTime = DateTime.Now;
                 book.TopicBookId = input.TopicBookId;
                 book.Author = input.Author;
                 book.Quantity = input.Quantity.HasValue ? input.Quantity.Value : book.Quantity;

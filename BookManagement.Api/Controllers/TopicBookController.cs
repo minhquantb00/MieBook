@@ -67,7 +67,7 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCategories([FromQuery] GetTopicUseCaseInput request)
+        public async Task<IActionResult> GetAllTopicBooks([FromQuery] GetTopicUseCaseInput request)
         {
             var useCase = _serviceProvider.GetService<IUseCase<GetTopicUseCaseInput, GetTopicUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);

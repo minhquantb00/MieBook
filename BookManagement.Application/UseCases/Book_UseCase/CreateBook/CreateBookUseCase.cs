@@ -48,7 +48,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
                 {
                     Author = input.Author,
                     AverageRating = 0,
-                    PriceAfterDiscount = input.PriceAfterDiscount,
+                    PriceAfterDiscount = input.Price,
                     CategoryId = input.CategoryId,
                     Code = "MieShop",
                     CollectionId = input.CollectionId,

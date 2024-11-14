@@ -393,6 +393,12 @@ export default [
         component: () => import("../views/live-preview/application/e-commerce/add-product.vue"),
     },
     {
+      path: "/update-product/:id",
+      name: "update-product",
+      meta: { title: "Update Product" },
+      component: () => import("../views/live-preview/application/e-commerce/update-product.vue"),
+  },
+    {
         path: "/product-details/:id",
         name: "product-details",
         meta: { title: "product Details" },
