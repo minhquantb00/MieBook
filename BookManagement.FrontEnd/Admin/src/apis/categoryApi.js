@@ -49,7 +49,7 @@ const createCategory = async (params) => {
   return result
 }
 
-export const ShippingMethodApi = {
+export const CategoryApi = {
   createCategory, updateCategory,
   deleteCategory, getAllCategories, getCategoryById
 }

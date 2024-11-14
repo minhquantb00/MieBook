@@ -76,9 +76,9 @@ onMounted(async () => {
                     <th class="text-center">Trạng thái</th>
                   </tr>
                 </thead>
-                <tbody v-for="item in dataProducts" :key="item.id">
+                <tbody v-for="(item, index) in dataProducts" :key="item.id">
                   <tr>
-                    <td class="text-end">1</td>
+                    <td class="text-end">{{ index + 1 }}</td>
                     <td>
                       <BRow class="d-flex">
                         <BCol class="col-auto pe-5">

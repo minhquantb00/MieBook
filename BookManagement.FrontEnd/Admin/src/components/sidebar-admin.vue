@@ -119,8 +119,8 @@ export default {
               <span class="pc-mtext"> Quản lý sách</span>
             </router-link>
           </li>
-          <li class="pc-item" :class="{ active: this.$route.path === '/team' }">
-            <router-link to="/team" class="pc-link">
+          <li class="pc-item" :class="{ active: this.$route.path === '/category-list' }">
+            <router-link to="/category-list" class="pc-link">
               <span class="pc-micon">
                 <i class="ph-duotone ph-identification-card"></i>
               </span>
