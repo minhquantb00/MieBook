@@ -1,4 +1,5 @@
-﻿using BookManagement.Commons.UtilitiesGlobal;
+﻿using BookManagement.Application.UseCases.User_UseCase.MapperGlobal;
+using BookManagement.Commons.UtilitiesGlobal;
 using BookManagement.Domain.Entities;
 using BookManagement.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -16,11 +17,13 @@ namespace BookManagement.Application.UseCases.User_UseCase.Register
         private readonly IRepository<User> _userRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IRepository<Role> _roleRepository;
-        public RegisterUserUseCase(IRepository<User> userRepository, IHttpContextAccessor httpContextAccessor, IRepository<Role> roleRepository)
+        private readonly UserConverter _userConverter;
+        public RegisterUserUseCase(IRepository<User> userRepository, IHttpContextAccessor httpContextAccessor, IRepository<Role> roleRepository, UserConverter userConverter)
         {
             _userRepository = userRepository;
             _httpContextAccessor = httpContextAccessor;
             _roleRepository = roleRepository;
+            _userConverter = userConverter;
         }
 
         public async Task<RegisterUserUseCaseOutput> ExcuteAsync(RegisterUserUseCaseInput input)
@@ -64,6 +67,7 @@ namespace BookManagement.Application.UseCases.User_UseCase.Register
                     return output;
                 }
                 await _userRepository.AddUserToRoleAsync(user, new string[] { "User" });
+                output.DataResponseUser = _userConverter.EntityToDTO(user);
                 output.Succeeded = true;
                 return output;
             }

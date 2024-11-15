@@ -2,6 +2,7 @@
 import Rightbar from "@/components/right-bar.vue";
 import { RouterLink, useRouter } from "vue-router";
 import { AuthApi } from "@/apis/authApi";
+import { CartApi } from "@/apis/cartApi";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { ref } from "vue";
@@ -9,6 +10,9 @@ import { registerRequest } from "@/interfaces/requestModels/user/registerRequest
 
 const loading = ref(false);
 const businessExecute = ref(registerRequest);
+const businessExecuteCart = ref({
+  userId: null,
+});
 const time = ref();
 const router = useRouter();
 const isPasswordVisible = ref(false);
@@ -16,7 +20,10 @@ const register = async () => {
   loading.value = false;
   const result = await AuthApi.register(businessExecute.value);
   console.log(result);
-  if(businessExecute.value.confirmPassword !== businessExecute.value.password){
+  const user = result.data.dataResponseUser;
+  businessExecuteCart.value.userId = user.id;
+  await CartApi.createCart(businessExecuteCart.value);
+  if (businessExecute.value.confirmPassword !== businessExecute.value.password) {
     toast("Mật khẩu không trùng khớp", {
       type: "error",
       transition: "flip",
@@ -64,10 +71,7 @@ const register = async () => {
               <h4 class="f-w-500 mb-1">Đăng nhập với email</h4>
               <p class="mb-3">
                 Bạn đã có tài khoản?
-                <RouterLink
-                  href="#"
-                  :to="{ name: 'login-v1' }"
-                  class="link-primary"
+                <RouterLink href="#" :to="{ name: 'login-v1' }" class="link-primary"
                   >Đăng nhập</RouterLink
                 >
               </p>
@@ -84,10 +88,14 @@ const register = async () => {
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Giới tính</label>
-              <select class="form-select" id="exampleFormControlSelect1" v-model="businessExecute.gender">
+              <select
+                class="form-select"
+                id="exampleFormControlSelect1"
+                v-model="businessExecute.gender"
+              >
                 <option>Vui lòng chọn</option>
                 <option>Nam</option>
-                <option>Nữ</option>
+                <option>Nu</option>
               </select>
             </div>
             <!-- <div class="form-group mb-3">
@@ -122,15 +130,18 @@ const register = async () => {
                 :loading="loading"
                 :rules="[requiredValidator]"
                 :type="isPasswordVisible ? 'text' : 'password'"
-                :append-inner-icon="
-                  isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'
-                "
+                :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
               />
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Xác nhận mật khẩu</label>
-              <input type="password" class="form-control" :rules="[requiredValidator]" v-model="businessExecute.confirmPassword" />
+              <input
+                type="password"
+                class="form-control"
+                :rules="[requiredValidator]"
+                v-model="businessExecute.confirmPassword"
+              />
             </div>
             <div class="d-flex mt-1 justify-content-between">
               <div class="form-check">
@@ -146,7 +157,9 @@ const register = async () => {
               </div>
             </div>
             <div class="d-grid mt-4">
-              <button type="button" class="btn btn-primary" @click="register">Đăng ký</button>
+              <button type="button" class="btn btn-primary" @click="register">
+                Đăng ký
+              </button>
             </div>
             <div class="saprator my-3">
               <span>Hoặc</span>

@@ -65,6 +65,7 @@ onMounted(async () => {
                   <tr>
                     <th class="text-left">STT</th>
                     <th class="text-left">Tên danh mục</th>
+                    <th>Số lượng sách</th>
                     <th class="text-left">Action</th>
                   </tr>
                 </thead>
@@ -74,6 +75,8 @@ onMounted(async () => {
                     <td>
                       {{ item.name }}
                     </td>
+
+                    <td>{{ item.numberOfProducts }}</td>
                     <td class="text-center">
                       <div class="prod-action-links">
                         <ul class="list-inline me-auto mb-0">

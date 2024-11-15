@@ -1,4 +1,5 @@
 ﻿using BookManagement.Application.OuputBase;
+using BookManagement.Application.UseCases.User_UseCase.MapperGlobal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace BookManagement.Application.UseCases.User_UseCase.Register
 {
     public class RegisterUserUseCaseOutput : UseCaseOutputBase
     {
+        public DataResponseUser DataResponseUser { get; set; }
     }
 }
