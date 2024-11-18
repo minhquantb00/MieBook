@@ -6,15 +6,53 @@ import { Autoplay, A11y } from "swiper/modules";
 import { BookApi } from "@/apis/bookApi";
 import { useRoute, useRouter } from "vue-router";
 import { onMounted, ref, watch } from "vue";
-
+import { AddressUserApi } from "@/apis/addressUserApi";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+import { BillApi } from "@/apis/billApi";
+import { CartApi } from "@/apis/cartApi";
+import { CartItemApi } from "@/apis/cartItemApi";
 const modules = [Autoplay, A11y];
+const loading = ref(false);
+const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+const userId = ref();
 const route = useRoute();
+const time = ref();
 const idBook = ref(route.params.id);
 const router = useRouter();
 const book = ref({});
 const dataBookReview = ref([]);
 const dataBooks = ref([]);
+const modalShow13 = ref(false);
+const dataAddressUser = ref([]);
+const businessExecute = ref({
+  address: "",
+});
+const cart = ref({});
+const businessExecuteCartItem = ref({
+  cartId: null,
+  bookId: null,
+});
 
+const businessExecuteBill = ref({
+  shippingMethodId: 2,
+  addressUserId: null,
+  paymentMethodId: 1,
+  note: "",
+  userVoucherId: null,
+  createBillDetailUseCaseInputs: [],
+});
+
+const businessExecuteBillDetail = ref({
+  bookId: null,
+  quantity: 0,
+  unitPrice: 0,
+  note: "",
+});
+const selectAddress = (addressId) => {
+  console.log("Địa chỉ ID đã chọn: ", addressId);
+  businessExecuteBill.value.addressUserId = addressId; // Cập nhật địa chỉ đã chọn
+};
 const getBookById = async () => {
   try {
     const result = await BookApi.getBookById(idBook.value);
@@ -30,6 +68,49 @@ const getBookById = async () => {
     dataBookReview.value = [];
   }
 };
+const createAddressUser = async () => {
+  loading.value = true;
+  const result = await AddressUserApi.createAddressUser(businessExecute.value);
+
+  if (result.data.succeeded === true) {
+    toast("Thêm địa chỉ thành công", {
+      type: "success",
+      transition: "flip",
+      autoClose: 1500,
+      theme: "dark",
+      dangerouslyHTMLString: true,
+    });
+    await getAllAddressUsers();
+  } else {
+    toast(result.data.error[0], {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+  }
+  loading.value = false;
+};
+const increaseValue = (item) => {
+  item.quantity++;
+  if (item.quantity > book.value.quantity) {
+    alert("Số lượng kho không đủ");
+    item.quantity--;
+    return;
+  }
+};
+
+const displayModalDelivery = async () => {
+  const msg = document.querySelector(".varyingcontentModal");
+  (modalShow13.value = !modalShow13.value), (msg.innerText = "Thông tin giao hàng");
+  await getAllAddressUsers();
+};
+const decreaseValue = (item) => {
+  if (item.quantity > 0) {
+    item.quantity--;
+  }
+};
 
 const getAllBooks = async () => {
   const result = await BookApi.getAllBooks({
@@ -41,7 +122,11 @@ const getAllBooks = async () => {
   });
   dataBooks.value = result.data.dataResponseBooks;
 };
-
+const getAllAddressUsers = async () => {
+  const result = await AddressUserApi.getAddressUserByUserId(userId.value);
+  dataAddressUser.value = result.data.dataResponseAddressUser;
+  console.log(dataAddressUser.value);
+};
 const viewBook = (id) => {
   router.push({
     name: "product-details",
@@ -63,9 +148,103 @@ const formatDate = (date) => {
   return `${day}/${month}/${year}`;
 };
 
+const createBill = async () => {
+  loading.value = true;
+  if (
+    businessExecuteBill.value.addressUserId == null ||
+    businessExecuteBill.value.addressUserId == undefined
+  ) {
+    toast("Vui lòng chọn địa chỉ", {
+      type: "error",
+      transition: "flip",
+      autoClose: 1500,
+      theme: "dark",
+      dangerouslyHTMLString: true,
+    });
+    return;
+  }
+  businessExecuteBillDetail.value.bookId = book.value.id;
+  businessExecuteBillDetail.value.unitPrice = book.value.price;
+  businessExecuteBill.value.createBillDetailUseCaseInputs.push(
+    businessExecuteBillDetail.value
+  );
+  const result = await BillApi.createBill(businessExecuteBill.value);
+
+  if (result.data.succeeded === true) {
+    toast("Tạo hóa đơn thành công", {
+      type: "success",
+      transition: "flip",
+      autoClose: 1500,
+      theme: "dark",
+      dangerouslyHTMLString: true,
+    });
+    router.push("/home");
+  } else {
+    toast(result.data.error[0], {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+  }
+  loading.value = false;
+};
+
+const getCartByUserId = async () => {
+  if (userInfo) {
+    const result = await CartApi.getCartByUserId(userInfo.Id);
+    cart.value = result.data.dataResponseCart;
+  }
+};
+
+const createCartItem = async (bookId) => {
+  loading.value = true;
+  if (!userInfo) {
+    toast("Bạn cần phải đăng nhập trước", {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+    router.push("/login-v1");
+    return;
+  }
+  businessExecuteCartItem.value.bookId = bookId;
+  const result = await CartItemApi.createCartItem(businessExecuteCartItem.value);
+
+  if (result.data.succeeded === true) {
+    toast("Thêm vào giỏ hàng thành công", {
+      type: "success",
+      transition: "flip",
+      autoClose: 1500,
+      theme: "dark",
+      dangerouslyHTMLString: true,
+    });
+    time.value = setTimeout(() => {
+      router.push("/home");
+    }, 1500);
+  } else {
+    toast(result.data.error[0], {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+  }
+  loading.value = false;
+};
+
 onMounted(async () => {
   await getBookById();
   await getAllBooks();
+  userId.value = userInfo.Id;
+  await getCartByUserId();
+  if (cart.value.id !== undefined) {
+    businessExecuteCartItem.value.cartId = cart.value.id;
+  }
 });
 
 // Lắng nghe sự thay đổi của route.params.id để cập nhật sách và đánh giá mới
@@ -185,7 +364,7 @@ watch(
                       <button
                         type="button"
                         id="decrease"
-                        onclick="decreaseValue('number')"
+                        @click="decreaseValue(businessExecuteBillDetail)"
                         class="btn btn-link-secondary"
                       >
                         <i class="ti ti-minus"></i>
@@ -194,12 +373,12 @@ watch(
                         class="wid-35 text-center border-0 m-0 form-control rounded-0 shadow-none"
                         type="text"
                         id="number"
-                        value="0"
+                        v-model="businessExecuteBillDetail.quantity"
                       />
                       <button
                         type="button"
                         id="increase"
-                        onclick="increaseValue('number')"
+                        @click="increaseValue(businessExecuteBillDetail)"
                         class="btn btn-link-secondary"
                       >
                         <i class="ti ti-plus"></i>
@@ -216,12 +395,190 @@ watch(
                 <BRow>
                   <BCol Cols="6">
                     <div class="d-grid">
-                      <button type="button" class="btn btn-primary">Mua ngay</button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        @click="displayModalDelivery()"
+                      >
+                        Mua ngay
+                      </button>
+                      <BModal
+                        v-model="modalShow13"
+                        hide-footer
+                        title="Grids in Modals"
+                        class="v-modal-custom"
+                        title-class="varyingcontentModal"
+                      >
+                        <div class="modal-body p-0 pb-4">
+                          <form>
+                            <div
+                              class="collapse multi-collapse show"
+                              id="multiCollapseExample1"
+                            >
+                              <BCardBody class="border-bottom">
+                                <BRow class="align-items-center mb-4">
+                                  <BCol>
+                                    <h5 class="mb-0">Thông tin giao hàng</h5>
+                                  </BCol>
+                                  <BCol class="col-auto">
+                                    <button
+                                      class="btn btn-primary"
+                                      type="button"
+                                      data-bs-toggle="collapse"
+                                      data-bs-target=".multi-collapse"
+                                      aria-expanded="false"
+                                      aria-controls="multiCollapseExample1 multiCollapseExample2"
+                                    >
+                                      Thêm địa chỉ giao hàng
+                                    </button>
+                                  </BCol>
+                                </BRow>
+                              </BCardBody>
+                              <BCardBody>
+                                <div
+                                  class="address-check-block"
+                                  v-for="item in dataAddressUser"
+                                  :key="item.id"
+                                >
+                                  <div class="address-check border rounded p-3">
+                                    <div class="form-check">
+                                      <input
+                                        type="radio"
+                                        name="radio1"
+                                        class="form-check-input input-primary"
+                                        :id="'address-check-' + item.id"
+                                        :value="item.id"
+                                        v-model="businessExecuteBill.addressUserId"
+                                      />
+                                      <label
+                                        class="form-check-label d-block"
+                                        :for="'address-check-' + item.id"
+                                      >
+                                        <span class="h6 mb-0 d-block">{{
+                                          userInfo.FullName
+                                        }}</span>
+                                        <span class="text-muted address-details"
+                                          >Địa chỉ: {{ item.address }}</span
+                                        >
+                                        <BRow
+                                          class="align-items-center justify-content-between"
+                                        >
+                                          <BCol Cols="6">
+                                            <span class="text-muted mb-0">{{
+                                              userInfo.PhoneNumber
+                                            }}</span>
+                                          </BCol>
+                                          <BCol Cols="6" class="text-end">
+                                            <span
+                                              class="address-btns d-flex align-items-center justify-content-end gap-2"
+                                            >
+                                              <a
+                                                href="#"
+                                                class="avtar avtar-s btn-link-danger btn-pc-default"
+                                              >
+                                                <i class="ti ti-trash f-20"></i>
+                                              </a>
+                                              <span
+                                                class="btn btn-sm btn-outline-primary"
+                                                @click="selectAddress(item.id)"
+                                                >Giao đến địa chỉ này</span
+                                              >
+                                            </span>
+                                          </BCol>
+                                        </BRow>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </BCardBody>
+                            </div>
+                            <div
+                              class="collapse multi-collapse"
+                              id="multiCollapseExample2"
+                            >
+                              <BCardBody class="border-bottom">
+                                <BRow class="align-items-center">
+                                  <BCol class="col-auto"> </BCol>
+                                </BRow>
+                              </BCardBody>
+                              <BCardBody>
+                                <BRow>
+                                  <BCol Cols="12">
+                                    <BRow class="form-group align-items-center g-2">
+                                      <label class="col-lg-4 col-form-label py-0"
+                                        >Địa chỉ :<small class="text-muted d-block"
+                                          >Nhập địa chỉ</small
+                                        ></label
+                                      >
+                                      <div class="col-lg-8">
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          v-model="businessExecute.address"
+                                        />
+                                      </div>
+                                    </BRow>
+                                    <BRow class="form-group align-items-center g-2">
+                                      <label class="col-lg-4 col-form-label py-0"
+                                        >Số điện thoại:<small class="text-muted d-block"
+                                          >Nhập số điện thoại</small
+                                        ></label
+                                      >
+                                      <div class="col-lg-8">
+                                        <input type="text" class="form-control" />
+                                      </div>
+                                    </BRow>
+                                    <div class="text-end btn-page mb-0 mt-4">
+                                      <button
+                                        class="btn btn-outline-secondary"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target=".multi-collapse"
+                                        aria-expanded="false"
+                                        aria-controls="multiCollapseExample1 multiCollapseExample2"
+                                      >
+                                        Thoát
+                                      </button>
+                                      <button
+                                        class="btn btn-primary"
+                                        @click="createAddressUser"
+                                      >
+                                        Lưu thông tin
+                                      </button>
+                                    </div>
+                                  </BCol>
+                                </BRow>
+                              </BCardBody>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer pb-0">
+                          <BButton variant="secondary" @click="modalShow13 = false"
+                            >Thoát</BButton
+                          >
+                          <BButton variant="primary" @click="createBill"
+                            >Thanh toán ngay</BButton
+                          >
+                        </div>
+                      </BModal>
+                      <div class="pc-modal-content">
+                        <pre style="display: none"></pre>
+                        <BLink class="md-pc-modal-copy copy"
+                          ><i class="ph-duotone ph-copy"></i
+                        ></BLink>
+                        <BLink class="pc-collapse"
+                          ><i class="ph-duotone ph-code"></i
+                        ></BLink>
+                      </div>
                     </div>
                   </BCol>
                   <BCol Cols="6">
                     <div class="d-grid">
-                      <button type="button" class="btn btn-outline-secondary">
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        @click="createCartItem(book.id)"
+                      >
                         Thêm vào giỏ
                       </button>
                     </div>
@@ -486,7 +843,10 @@ watch(
                       </div>
                       <div class="flex-grow-1 ms-3">
                         <div class="d-grid">
-                          <button class="btn btn-link-secondary btn-prod-card">
+                          <button
+                            class="btn btn-link-secondary btn-prod-card"
+                            @click="createCartItem(book.id)"
+                          >
                             Thêm vào giỏ
                           </button>
                         </div>

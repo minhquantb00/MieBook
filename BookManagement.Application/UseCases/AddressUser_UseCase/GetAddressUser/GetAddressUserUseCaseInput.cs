@@ -8,5 +8,6 @@ namespace BookManagement.Application.UseCases.AddressUser_UseCase.GetAddressUser
 {
     public class GetAddressUserUseCaseInput
     {
+        public long UserId { get; set; }
     }
 }

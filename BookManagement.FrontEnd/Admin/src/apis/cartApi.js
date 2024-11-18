@@ -8,7 +8,10 @@ const getCartById = async (id) => {
     const result = await axiosIns.get(`${CONTROLLER_NAME}/GetCartById/${id}`);
     return result;
 }
-
+const getCartByUserId = async (id) => {
+  const result = await axiosIns.get(`${CONTROLLER_NAME}/GetCartByUserId/${id}`);
+  return result;
+}
 
 const createCart = async (params) => {
   const result = await axiosIns.post(`${CONTROLLER_NAME}/CreateCart`, params);
@@ -16,5 +19,5 @@ const createCart = async (params) => {
 }
 
 export const CartApi = {
-  createCart,  getCartById
+  createCart,  getCartById, getCartByUserId
 }

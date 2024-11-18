@@ -5,15 +5,92 @@ import { onMounted, ref } from "vue";
 import { BookApi } from "@/apis/bookApi";
 import { useRouter } from "vue-router";
 import { filterProductRequest } from "@/interfaces/requestModels/book/filterProductRequest";
-
-// const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+import { CategoryApi } from "@/apis/categoryApi";
+import { TopicBookApi } from "@/apis/topicBookApi";
+import { CartApi } from "@/apis/cartApi";
+import { CartItemApi } from "@/apis/cartItemApi";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+const loading = ref(false);
+const time = ref();
+const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+const cart = ref({});
 const router = useRouter();
 const dataProducts = ref([]);
 const businessExecute = ref(filterProductRequest);
+const dataCategories = ref([]);
+const dataTopicBooks = ref([]);
+const businessExecuteCartItem = ref({
+  cartId: null,
+  bookId: null,
+});
+
+const createCartItem = async (bookId) => {
+  loading.value = true;
+  if (!userInfo) {
+    toast("Bạn cần phải đăng nhập trước", {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+    router.push("/login-v1");
+    return;
+  }
+  businessExecuteCartItem.value.bookId = bookId;
+  const result = await CartItemApi.createCartItem(businessExecuteCartItem.value);
+
+  if (result.data.succeeded === true) {
+    toast("Thêm vào giỏ hàng thành công", {
+      type: "success",
+      transition: "flip",
+      autoClose: 1500,
+      theme: "dark",
+      dangerouslyHTMLString: true,
+    });
+    time.value = setTimeout(() => {
+      router.push("/home");
+    }, 1500);
+  } else {
+    toast(result.data.error[0], {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+  }
+  loading.value = false;
+};
 const getAllBooks = async () => {
   const result = await BookApi.getAllBooks(businessExecute.value);
   dataProducts.value = result.data.dataResponseBooks;
 };
+const businessExecuteCategory = ref({
+  name: "",
+});
+const businessExecuteTopicBook = ref({
+  name: "",
+});
+
+const getCartByUserId = async () => {
+  if (userInfo) {
+    const result = await CartApi.getCartByUserId(userInfo.Id);
+    cart.value = result.data.dataResponseCart;
+  }
+};
+
+const getAllCategories = async () => {
+  const result = await CategoryApi.getAllCategories(businessExecuteCategory.value);
+  dataCategories.value = result.data.dataResponseCategories;
+};
+
+const getAllTopicBooks = async () => {
+  const result = await TopicBookApi.getAllTopicBooks(businessExecuteTopicBook.value);
+  dataTopicBooks.value = result.data.dataResponseTopicBooks;
+};
+
 const viewBook = (id) => {
   router.push({
     name: "product-details",
@@ -25,7 +102,14 @@ const formatCurrency = (value) => {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 onMounted(async () => {
+  router.push("/home");
   await getAllBooks();
+  await getAllCategories();
+  await getAllTopicBooks();
+  await getCartByUserId();
+  if (cart.value.id !== undefined) {
+    businessExecuteCartItem.value.cartId = cart.value.id;
+  }
 });
 </script>
 
@@ -180,38 +264,19 @@ onMounted(async () => {
                                   Chủ đề
                                 </a>
                                 <BCollapse visible id="filtercollapse1">
-                                  <div>
+                                  <div v-for="topic in dataTopicBooks" :key="topic.id">
                                     <div class="form-check my-2">
                                       <input
                                         class="form-check-input"
                                         type="checkbox"
                                         id="genderfilter1"
                                         value="option1"
+                                        v-model="businessExecute.topicBookId"
                                       />
-                                      <label class="form-check-label" for="genderfilter1"
-                                        >Kinh doanh</label
-                                      >
-                                    </div>
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="genderfilter2"
-                                        value="option2"
-                                      />
-                                      <label class="form-check-label" for="genderfilter2"
-                                        >Self help</label
-                                      >
-                                    </div>
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="genderfilter3"
-                                        value="option3"
-                                      />
-                                      <label class="form-check-label" for="genderfilter3"
-                                        >Giải trí</label
+                                      <label
+                                        class="form-check-label"
+                                        for="genderfilter1"
+                                        >{{ topic.name }}</label
                                       >
                                     </div>
                                   </div>
@@ -229,179 +294,25 @@ onMounted(async () => {
                                   Danh mục
                                 </a>
                                 <BCollapse visible id="filtercollapse2">
-                                  <div>
+                                  <div
+                                    v-for="category in dataCategories"
+                                    :key="category.id"
+                                  >
                                     <div class="form-check my-2">
                                       <input
                                         class="form-check-input"
                                         type="checkbox"
                                         id="categoryfilter1"
                                         value="option1"
+                                        v-model="businessExecute.categoryId"
                                       />
                                       <label
                                         class="form-check-label"
                                         for="categoryfilter1"
-                                        >All</label
-                                      >
-                                    </div>
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="categoryfilter2"
-                                        value="option2"
-                                      />
-                                      <label
-                                        class="form-check-label"
-                                        for="categoryfilter2"
-                                        >Văn học</label
-                                      >
-                                    </div>
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="categoryfilter3"
-                                        value="option3"
-                                      />
-                                      <label
-                                        class="form-check-label"
-                                        for="categoryfilter3"
-                                        >Khoa học viễn tưởng</label
-                                      >
-                                    </div>
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="categoryfilter4"
-                                        value="option1"
-                                      />
-                                      <label
-                                        class="form-check-label"
-                                        for="categoryfilter4"
-                                        >Kinh doanh</label
-                                      >
-                                    </div>
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="categoryfilter5"
-                                        value="option2"
-                                      />
-                                      <label
-                                        class="form-check-label"
-                                        for="categoryfilter5"
-                                        >Du lịch</label
-                                      >
-                                    </div>
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="categoryfilter6"
-                                        value="option3"
-                                      />
-                                      <label
-                                        class="form-check-label"
-                                        for="categoryfilter6"
-                                        >Ẩm thực</label
+                                        >{{ category.name }}</label
                                       >
                                     </div>
                                   </div>
-                                </BCollapse>
-                              </li>
-
-                              <li class="list-group-item border-0 px-0 py-2">
-                                <a
-                                  v-b-toggle.filtercollapse4
-                                  variant="primary"
-                                  class="border-0 px-0 text-start w-100 pb-0"
-                                >
-                                  <div class="float-end">
-                                    <i class="ti ti-chevron-down"></i>
-                                  </div>
-                                  Khoảng giá
-                                </a>
-                                <BCollapse visible id="filtercollapse4">
-                                  <BRow>
-                                    <BCol class="col-6">
-                                      <div class="form-check my-2">
-                                        <input
-                                          class="form-check-input"
-                                          type="radio"
-                                          name="price"
-                                          id="pricefilter1"
-                                          value="option1"
-                                        />
-                                        <label class="form-check-label" for="pricefilter1"
-                                          >Below $10</label
-                                        >
-                                      </div>
-                                      <div class="form-check my-2">
-                                        <input
-                                          class="form-check-input"
-                                          type="radio"
-                                          name="price"
-                                          id="pricefilter2"
-                                          value="option2"
-                                        />
-                                        <label class="form-check-label" for="pricefilter2"
-                                          >$50 - $100</label
-                                        >
-                                      </div>
-                                      <div class="form-check my-2">
-                                        <input
-                                          class="form-check-input"
-                                          type="radio"
-                                          name="price"
-                                          id="pricefilter3"
-                                          value="option3"
-                                        />
-                                        <label class="form-check-label" for="pricefilter3"
-                                          >$150 - $200</label
-                                        >
-                                      </div>
-                                    </BCol>
-                                    <BCol class="col-6">
-                                      <div class="form-check my-2">
-                                        <input
-                                          class="form-check-input"
-                                          type="radio"
-                                          name="price"
-                                          id="pricefilter4"
-                                          value="option1"
-                                        />
-                                        <label class="form-check-label" for="pricefilter4"
-                                          >$10 - $50</label
-                                        >
-                                      </div>
-                                      <div class="form-check my-2">
-                                        <input
-                                          class="form-check-input"
-                                          type="radio"
-                                          name="price"
-                                          id="pricefilter5"
-                                          value="option2"
-                                        />
-                                        <label class="form-check-label" for="pricefilter5"
-                                          >$100 - $150</label
-                                        >
-                                      </div>
-                                      <div class="form-check my-2">
-                                        <input
-                                          class="form-check-input"
-                                          type="radio"
-                                          name="price"
-                                          id="pricefilter6"
-                                          value="option3"
-                                        />
-                                        <label class="form-check-label" for="pricefilter6"
-                                          >Over $200</label
-                                        >
-                                      </div>
-                                    </BCol>
-                                  </BRow>
                                 </BCollapse>
                               </li>
                             </ul>
@@ -420,7 +331,12 @@ onMounted(async () => {
                 <li class="list-inline-item">
                   <form class="form-search">
                     <i class="ph-duotone ph-magnifying-glass icon-search"></i>
-                    <input type="search" class="form-control" placeholder="Tìm kiếm" />
+                    <input
+                      type="search"
+                      class="form-control"
+                      placeholder="Tìm kiếm"
+                      v-model="businessExecute.keyword"
+                    />
                   </form>
                 </li>
               </ul>
@@ -480,7 +396,10 @@ onMounted(async () => {
                       </div>
                       <div class="flex-grow-1 ms-3">
                         <div class="d-grid">
-                          <button class="btn btn-link-secondary btn-prod-card">
+                          <button
+                            class="btn btn-link-secondary btn-prod-card"
+                            @click="createCartItem(item.id)"
+                          >
                             Thêm vào giỏ
                           </button>
                         </div>

@@ -3,6 +3,7 @@ using BookManagement.Application.UseCases.BookReview_UseCase.CreateBookReview;
 using BookManagement.Application.UseCases.BookReview_UseCase.GetBookReviewById;
 using BookManagement.Application.UseCases.Cart_UseCase.CreateCart;
 using BookManagement.Application.UseCases.Cart_UseCase.GetCartById;
+using BookManagement.Application.UseCases.CartItem_UseCase.GetCartByUserId;
 using BookManagement.Commons.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -37,6 +38,18 @@ namespace BookManagement.Api.Controllers
         public async Task<IActionResult> GetCartById([FromRoute] long id)
         {
             var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetCartByIdUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(id);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCartByUserId([FromRoute] long id)
+        {
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetCartByUserIdUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {

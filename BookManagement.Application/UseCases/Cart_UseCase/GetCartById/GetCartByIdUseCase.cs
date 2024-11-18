@@ -15,10 +15,12 @@ namespace BookManagement.Application.UseCases.Cart_UseCase.GetCartById
     {
         private readonly IRepository<Cart> _cartRepository;
         private readonly IRepository<User> _userRepository;
-        public GetCartByIdUseCase(IRepository<Cart> repository, IRepository<User> userRepository)
+        private readonly IRepository<CartItem> _cartItemRepository;
+        public GetCartByIdUseCase(IRepository<Cart> repository, IRepository<User> userRepository, IRepository<CartItem> cartItemRepository)
         {
             _cartRepository = repository;
             _userRepository = userRepository;
+            _cartItemRepository = cartItemRepository;
         }
         public async Task<GetCartByIdUseCaseOutput> ExcuteAsync(long id)
         {
@@ -36,6 +38,8 @@ namespace BookManagement.Application.UseCases.Cart_UseCase.GetCartById
             {
                 FullName = _userRepository.GetByIdAsync(query.UserId).Result.FullName,
                 Id = query.Id,
+                Quantity = _cartItemRepository.GetAllAsync(item => item.CartId == query.Id).Result.Count(),
+                TotalPrice = (decimal) _cartItemRepository.GetAllAsync(item => item.CartId == query.Id).Result.Sum(x => x.UnitPrice),
             };
             result.Succeeded = true;
             return result;

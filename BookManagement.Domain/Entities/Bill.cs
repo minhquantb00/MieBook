@@ -15,7 +15,8 @@ namespace BookManagement.Domain.Entities
         public virtual User? User { get; set; }
         public long ShippingMethodId { get; set; }
         public virtual ShippingMethod? ShippingMethod { get; set; }
-        public string Address {  get; set; }
+        public long AddressUserId {  get; set; }
+        public virtual AddressUser? AddressUser { get; set; }
         public string TradingCode { get; set; }
         public long PaymentMethodId { get; set; }
         public virtual PaymentMethod? PaymentMethod { get; set; }

@@ -3,12 +3,14 @@ using BookManagement.Application.UseCases.AddressUser_UseCase.CreateAddressUser;
 using BookManagement.Application.UseCases.AddressUser_UseCase.DeleteAddressUser;
 using BookManagement.Application.UseCases.AddressUser_UseCase.GetAddressUser;
 using BookManagement.Application.UseCases.AddressUser_UseCase.GetAddressUserById;
+using BookManagement.Application.UseCases.AddressUser_UseCase.GetAddressUserByUserId;
 using BookManagement.Application.UseCases.AddressUser_UseCase.UpdateAddressUser;
 using BookManagement.Application.UseCases.Book_UseCase.CreateBook;
 using BookManagement.Application.UseCases.Book_UseCase.DeleteBook;
 using BookManagement.Application.UseCases.Book_UseCase.GetBook;
 using BookManagement.Application.UseCases.Book_UseCase.GetBookById;
 using BookManagement.Application.UseCases.Book_UseCase.UpdateBook;
+using BookManagement.Application.UseCases.CartItem_UseCase.GetCartByUserId;
 using BookManagement.Commons.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -58,6 +60,15 @@ namespace BookManagement.Api.Controllers
         {
             var useCase = _serviceProvider.GetService<IUseCase<GetAddressUserUseCaseInput, GetAddressUserUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(request);
+            
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAddressUserById([FromRoute] long id)
+        {
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetAddressUserByIdUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {
                 return BadRequest(result);
@@ -66,9 +77,9 @@ namespace BookManagement.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAddressUserById([FromRoute] long id)
+        public async Task<IActionResult> GetAddressUserByUserId([FromRoute] long id)
         {
-            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetAddressUserByIdUseCaseOutput>>();
+            var useCase = _serviceProvider.GetService<IUseCaseGetById<long, GetAddressUserByUserIdUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(id);
             if (!result.Succeeded)
             {

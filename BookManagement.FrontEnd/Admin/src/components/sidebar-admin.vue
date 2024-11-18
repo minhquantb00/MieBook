@@ -127,6 +127,12 @@ export default {
               <span class="pc-mtext"> Quản lý danh mục</span>
             </router-link>
           </li>
+          <li class="pc-item" :class="{ active: this.$route.path === '/chart' }">
+            <router-link to="/chart" class="pc-link">
+              <span class="pc-micon"> <i class="ph-duotone ph-flower"></i> </span
+              ><span class="pc-mtext">Thống kê</span></router-link
+            >
+          </li>
           <li class="pc-item" :class="{ active: this.$route.path === '/user-card' }">
             <router-link to="/user-card" class="pc-link">
               <span class="pc-micon">
@@ -156,12 +162,6 @@ export default {
             <router-link to="/user-list" class="pc-link">
               <span class="pc-micon"> <i class="ph-duotone ph-flower"></i> </span
               ><span class="pc-mtext">Quản lý người dùng</span></router-link
-            >
-          </li>
-          <li class="pc-item" :class="{ active: this.$route.path === '/statistics' }">
-            <router-link to="/statistics" class="pc-link">
-              <span class="pc-micon"> <i class="ph-duotone ph-flower"></i> </span
-              ><span class="pc-mtext">Thống kê</span></router-link
             >
           </li>
         </ul>

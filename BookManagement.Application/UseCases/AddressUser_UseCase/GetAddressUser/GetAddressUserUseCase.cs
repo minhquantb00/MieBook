@@ -27,7 +27,7 @@ namespace BookManagement.Application.UseCases.AddressUser_UseCase.GetAddressUser
             {
                 Succeeded = false
             };
-            var query = await _repository.GetAllAsync();
+            var query = await _repository.GetAllAsync(x => x.UserId == input.UserId);
             result.DataResponseAddressUsers = query.AsNoTracking().Select(item => _addressUserConverter.EntityToDTO(item));
             return result;
         }

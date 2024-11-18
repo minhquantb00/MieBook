@@ -49,7 +49,7 @@ const createTopicBook = async (params) => {
   return result
 }
 
-export const ShippingMethodApi = {
+export const TopicBookApi = {
   createTopicBook, updateTopicBook,
   deleteTopicBook, getAllTopicBooks, getTopicBookById
 }
