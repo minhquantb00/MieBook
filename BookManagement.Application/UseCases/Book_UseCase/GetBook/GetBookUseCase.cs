@@ -35,7 +35,7 @@ namespace BookManagement.Application.UseCases.Book_UseCase.GetBook
             var query = await _bookRepository.GetAllAsync();
             if (!string.IsNullOrEmpty(input.Keyword))
             {
-                query = query.AsNoTracking().Where(record => record.Name.Contains(input.Keyword) || record.Author.Contains(input.Keyword));
+                query = query.AsNoTracking().Where(record => record.Name.Contains(input.Keyword));
             }
             if (input.CategoryId.HasValue)
             {

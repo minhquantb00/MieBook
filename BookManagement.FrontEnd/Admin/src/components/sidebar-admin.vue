@@ -7,7 +7,7 @@ export default {
   setup() {
     const logo = ref(null);
     let isDarkTheme = document.body.getAttribute("data-pc-layout") === "dark";
-
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     const updateLogo = () => {
       if (isDarkTheme) {
         logo.value.src = require("@/assets/images/logo-white.svg");
@@ -27,7 +27,7 @@ export default {
       }
     );
 
-    return { logo };
+    return { logo, userInfo };
   },
   components: {
     simplebar,
@@ -179,8 +179,8 @@ export default {
           />
         </div>
         <div class="flex-grow-1 ms-3 me-2">
-          <h6 class="mb-0">Jonh Smith</h6>
-          <small>Administrator</small>
+          <h6 class="mb-0">{{ userInfo.FullName }}</h6>
+          <small>{{ userInfo.Email }}</small>
         </div>
         <BDropdown variant="purple" dropup no-caret>
           <template v-slot:button-content>

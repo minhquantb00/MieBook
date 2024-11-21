@@ -8,11 +8,21 @@ import { BookApi } from "@/apis/bookApi";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { useRouter } from "vue-router";
+import { TopicBookApi } from "@/apis/topicBookApi";
+import { CategoryApi } from "@/apis/categoryApi";
 const dataShippingMethods = ref([]);
 const loading = ref(false);
 const time = ref();
 const router = useRouter();
 const selectedFile = ref(null);
+const topicBooks = ref([]);
+const categories = ref([]);
+const businessExecuteTopicBook = ref({
+  name: "",
+});
+const businessExecuteCategory = ref({
+  name: "",
+});
 const businessExecuteShippingMethod = ref(filterShippingMethodRequest);
 const getAllShippingMethods = async () => {
   const result = await ShippingMethodApi.getAllShippingMethods(
@@ -24,6 +34,17 @@ const businessExecuteBook = ref({});
 const handleFileUpload = (event) => {
   selectedFile.value = event.target.files[0];
 };
+
+const getAllTopicBooks = async () => {
+  const result = await TopicBookApi.getAllTopicBooks(businessExecuteTopicBook.value);
+  topicBooks.value = result.data.dataResponseTopicBooks;
+};
+
+const getAllCategories = async () => {
+  const result = await CategoryApi.getAllCategories(businessExecuteCategory.value);
+  categories.value = result.data.dataResponseCategories;
+};
+
 const createNewBook = async () => {
   loading.value = true;
 
@@ -80,6 +101,8 @@ const createNewBook = async () => {
 };
 onMounted(async () => {
   await getAllShippingMethods();
+  await getAllCategories();
+  await getAllTopicBooks();
 });
 </script>
 
@@ -100,22 +123,35 @@ onMounted(async () => {
                 class="form-control"
                 placeholder="Nhập tên sản phẩm"
                 v-model="businessExecuteBook.name"
+                required
               />
             </div>
             <div class="form-group">
               <label class="form-label">Chọn danh mục</label>
-              <select class="form-select" v-model="businessExecuteBook.categoryId">
-                <option>Sneakers</option>
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
+              <select
+                class="form-select"
+                v-model="businessExecuteBook.categoryId"
+                required
+              >
+                <option
+                  v-for="category in categories"
+                  :key="category.id"
+                  :value="category.id"
+                >
+                  {{ category.name }}
+                </option>
               </select>
             </div>
             <div class="form-group">
               <label class="form-label">Chủ đề</label>
-              <select class="form-select" v-model="businessExecuteBook.topicBookId">
-                <option>Giao hàng nhanh</option>
+              <select
+                class="form-select"
+                v-model="businessExecuteBook.topicBookId"
+                required
+              >
+                <option v-for="topic in topicBooks" :key="topic.id" :value="topic.id">
+                  {{ topic.name }}
+                </option>
               </select>
             </div>
             <div class="form-group mb-0">
@@ -124,6 +160,7 @@ onMounted(async () => {
                 class="form-control"
                 placeholder="Nhập mô tả sản phẩm"
                 v-model="businessExecuteBook.description"
+                required
               ></textarea>
             </div>
             <div class="form-group">
@@ -133,6 +170,7 @@ onMounted(async () => {
                 class="form-control"
                 placeholder="Nhập số lượng"
                 v-model="businessExecuteBook.quantity"
+                required
               />
             </div>
             <div class="form-group mb-0">
@@ -141,6 +179,7 @@ onMounted(async () => {
                 class="form-control"
                 placeholder="Nhập tên tác giả"
                 v-model="businessExecuteBook.author"
+                required
               ></textarea>
             </div>
 
@@ -151,6 +190,7 @@ onMounted(async () => {
                 type="date"
                 id="demo-date-only"
                 v-model="businessExecuteBook.manufactureDate"
+                required
               />
             </div>
           </div>
@@ -166,7 +206,13 @@ onMounted(async () => {
               <label class="btn btn-outline-secondary" for="flupld"
                 ><i class="ti ti-upload me-2"></i> Click to Upload</label
               >
-              <input type="file" id="flupld" class="d-none" @change="handleFileUpload" />
+              <input
+                type="file"
+                id="flupld"
+                class="d-none"
+                @change="handleFileUpload"
+                required
+              />
             </div>
           </BCardBody>
         </BCard>
@@ -195,6 +241,7 @@ onMounted(async () => {
                 class="form-control"
                 placeholder="Nhập số trang"
                 v-model="businessExecuteBook.numberOfPages"
+                required
               />
             </div>
             <div class="form-group">
@@ -204,6 +251,7 @@ onMounted(async () => {
                 class="form-control"
                 placeholder="Nhập gía"
                 v-model="businessExecuteBook.price"
+                required
               />
             </div>
           </BCardBody>

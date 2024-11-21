@@ -1,7 +1,7 @@
 <script setup>
 import Layout from "@/layout/main.vue";
 import pageheader from "@/components/page-header.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { BookApi } from "@/apis/bookApi";
 import { useRouter } from "vue-router";
 import { filterProductRequest } from "@/interfaces/requestModels/book/filterProductRequest";
@@ -24,6 +24,8 @@ const businessExecuteCartItem = ref({
   cartId: null,
   bookId: null,
 });
+const selectedCategories = ref([]); // Lưu các categoryId đã chọn
+const selectedTopics = ref([]); // Lưu các topicBookId đã chọn
 
 const createCartItem = async (bookId) => {
   loading.value = true;
@@ -63,6 +65,7 @@ const createCartItem = async (bookId) => {
   }
   loading.value = false;
 };
+
 const getAllBooks = async () => {
   const result = await BookApi.getAllBooks(businessExecute.value);
   dataProducts.value = result.data.dataResponseBooks;
@@ -73,6 +76,23 @@ const businessExecuteCategory = ref({
 const businessExecuteTopicBook = ref({
   name: "",
 });
+const onFilterChange = async () => {
+  // Đảm bảo chỉ có một categoryId được chọn (giới hạn chỉ một mục)
+  if (selectedCategories.value.length > 1) {
+    selectedCategories.value = [
+      selectedCategories.value[selectedCategories.value.length - 1],
+    ]; // Chỉ giữ lại mục cuối cùng
+  }
+
+  // Cập nhật giá trị filter
+  businessExecute.value.categoryId = selectedCategories.value.join(","); // Nối chuỗi categoryId thành dạng "id1,id2,id3"
+  businessExecute.value.topicBookId = selectedTopics.value.join(","); // Tương tự với topicBookId
+
+  console.log("Filters updated:", businessExecute.value);
+
+  // Gọi API để lấy danh sách sản phẩm mới
+  await getAllBooks();
+};
 
 const getCartByUserId = async () => {
   if (userInfo) {
@@ -101,8 +121,27 @@ const formatCurrency = (value) => {
   if (value === undefined || value === null) return "0";
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
+
+watch(
+  () => businessExecute.value.categoryId,
+  async (newCategoryId) => {
+    console.log("Category ID changed:", newCategoryId);
+    if (newCategoryId) {
+      await getAllBooks();
+    }
+  }
+);
+
+watch(
+  () => businessExecute.value.topicBookId,
+  async (newTopicBookId) => {
+    console.log("Topic Book ID changed:", newTopicBookId);
+    if (newTopicBookId) {
+      await getAllBooks();
+    }
+  }
+);
 onMounted(async () => {
-  router.push("/home");
   await getAllBooks();
   await getAllCategories();
   await getAllTopicBooks();
@@ -269,15 +308,17 @@ onMounted(async () => {
                                       <input
                                         class="form-check-input"
                                         type="checkbox"
-                                        id="genderfilter1"
-                                        value="option1"
-                                        v-model="businessExecute.topicBookId"
+                                        :id="'topicfilter1' + topic.id"
+                                        :value="topic.id"
+                                        v-model="selectedTopics"
+                                        @change="onFilterChange"
                                       />
                                       <label
                                         class="form-check-label"
-                                        for="genderfilter1"
-                                        >{{ topic.name }}</label
+                                        :for="'topicfilter1' + topic.id"
                                       >
+                                        {{ topic.name }}
+                                      </label>
                                     </div>
                                   </div>
                                 </BCollapse>
@@ -302,15 +343,17 @@ onMounted(async () => {
                                       <input
                                         class="form-check-input"
                                         type="checkbox"
-                                        id="categoryfilter1"
-                                        value="option1"
-                                        v-model="businessExecute.categoryId"
+                                        :id="'categoryfilter1' + category.id"
+                                        :value="category.id"
+                                        v-model="selectedCategories"
+                                        @change="onFilterChange"
                                       />
                                       <label
                                         class="form-check-label"
-                                        for="categoryfilter1"
-                                        >{{ category.name }}</label
+                                        :for="'categoryfilter1' + category.id"
                                       >
+                                        {{ category.name }}
+                                      </label>
                                     </div>
                                   </div>
                                 </BCollapse>
@@ -336,6 +379,7 @@ onMounted(async () => {
                       class="form-control"
                       placeholder="Tìm kiếm"
                       v-model="businessExecute.keyword"
+                      @input="onFilterChange"
                     />
                   </form>
                 </li>

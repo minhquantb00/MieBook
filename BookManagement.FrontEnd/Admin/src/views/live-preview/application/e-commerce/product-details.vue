@@ -12,6 +12,7 @@ import "vue3-toastify/dist/index.css";
 import { BillApi } from "@/apis/billApi";
 import { CartApi } from "@/apis/cartApi";
 import { CartItemApi } from "@/apis/cartItemApi";
+import { VnPayApi } from "@/apis/vnpayApi";
 const modules = [Autoplay, A11y];
 const loading = ref(false);
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -19,6 +20,9 @@ const userId = ref();
 const route = useRoute();
 const time = ref();
 const idBook = ref(route.params.id);
+const businessExecuteVnPay = ref({
+  billId: null,
+});
 const router = useRouter();
 const book = ref({});
 const dataBookReview = ref([]);
@@ -150,6 +154,17 @@ const formatDate = (date) => {
 
 const createBill = async () => {
   loading.value = true;
+  if (!userInfo) {
+    toast("Bạn cần phải đăng nhập trước", {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+    router.push("/login-v1");
+    return;
+  }
   if (
     businessExecuteBill.value.addressUserId == null ||
     businessExecuteBill.value.addressUserId == undefined
@@ -178,7 +193,25 @@ const createBill = async () => {
       theme: "dark",
       dangerouslyHTMLString: true,
     });
-    router.push("/home");
+    const bill = result.data.dataResponseBill;
+    if (bill.billStatus == "DaThanhToan") {
+      toast("Hóa đơn đã được thanh toán trước đó", {
+        type: "error",
+        transition: "flip",
+        theme: "dark",
+        autoClose: 1500,
+        dangerouslyHTMLString: true,
+      });
+    }
+    businessExecuteVnPay.value.billId = bill.id;
+    const dataUrl = await VnPayApi.createVnPayUrl(businessExecuteVnPay.value);
+    const url = dataUrl.data.url;
+
+    if (dataUrl && url) {
+      window.location.href = url;
+    } else {
+      alert("Không nhận được link thanh toán. Vui lòng thử lại.");
+    }
   } else {
     toast(result.data.error[0], {
       type: "error",

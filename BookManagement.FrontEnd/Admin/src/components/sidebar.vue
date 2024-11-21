@@ -7,7 +7,7 @@ export default {
   setup() {
     const logo = ref(null);
     let isDarkTheme = document.body.getAttribute("data-pc-layout") === "dark";
-
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     const updateLogo = () => {
       if (isDarkTheme) {
         logo.value.src = require("@/assets/images/logo-white.svg");
@@ -27,7 +27,7 @@ export default {
       }
     );
 
-    return { logo };
+    return { logo, userInfo };
   },
   components: {
     simplebar,
@@ -99,13 +99,8 @@ export default {
   <div class="navbar-wrapper" id="navbar-wrapper">
     <div class="m-header">
       <router-link to="/" class="b-brand text-primary">
-        <!-- ========   Change your logo from here   ============ -->
         <img ref="logo" alt="logo image" class="logo-lg custom_logo" />
-        <!-- <img :src="isDarkTheme ? '@/assets/images/logo-dark.svg' : '@/assets/images/logo-white.svg'" alt="logo image" class="logo-lg custom_logo"> -->
-        <!-- <img src="@/assets/images/logo-dark.svg" alt="" class="logo logo-lg">
-                <img src="@/assets/images/logo-white.svg" alt="" class="logo logo-lg"> -->
         <img src="@/assets/images/favicon.svg" alt="" class="logo logo-sm" />
-        <span class="badge bg-brand-color-2 rounded-pill ms-2 theme-version">v1.0</span>
       </router-link>
     </div>
     <simplebar data-simplebar style="height: 760px">
@@ -135,8 +130,8 @@ export default {
               <span class="pc-mtext"> Best Sellers</span>
             </router-link>
           </li>
-          <li class="pc-item" :class="{ active: this.$route.path === '/animation' }">
-            <router-link to="/animation" class="pc-link">
+          <li class="pc-item" :class="{ active: this.$route.path === '/cartoon-list' }">
+            <router-link to="/cartoon-list" class="pc-link">
               <span class="pc-micon"> <i class="ph-duotone ph-flower"></i> </span
               ><span class="pc-mtext">Truyện tranh</span></router-link
             >
@@ -151,10 +146,12 @@ export default {
                 'url(' + require('@/assets/images/layout/nav-card-bg.svg') + ')',
             }"
           >
-            <h5 class="text-dark">Help Center</h5>
-            <p class="text-dark text-opacity-75">Please contact us for more questions.</p>
-            <BLink href="#" class="btn btn-primary" target="_blank"
-              >Go to help Center</BLink
+            <h5 class="text-dark">Trung tâm trợ giúp</h5>
+            <p class="text-dark text-opacity-75">
+              Vui lòng liên hệ với chúng tôi nếu gần tự giúp đỡ
+            </p>
+            <router-link href="#" class="btn btn-primary" :to="{ path: '/contact-us' }"
+              >Đến trung tâm trợ giúp</router-link
             >
           </div>
         </div>
@@ -172,8 +169,8 @@ export default {
           />
         </div>
         <div class="flex-grow-1 ms-3 me-2">
-          <h6 class="mb-0">Jonh Smith</h6>
-          <small>Administrator</small>
+          <h6 class="mb-0">{{ userInfo.FullName }}</h6>
+          <small>{{ userInfo.Email }}</small>
         </div>
         <BDropdown variant="purple" dropup no-caret>
           <template v-slot:button-content>

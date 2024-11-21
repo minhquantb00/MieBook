@@ -10,8 +10,10 @@ const CONTROLLER_NAME = "Book";
 
 const getAllBooks = async (params) => {
   const result = await axiosIns.get(`${CONTROLLER_NAME}/GetAllBooks`, {
-    param: {
-        topicBookId: params.topicBookId
+    params: {
+        topicBookId: params.topicBookId,
+        categoryId: params.categoryId,
+        keyword: params.keyword
     }
   });
   return result;

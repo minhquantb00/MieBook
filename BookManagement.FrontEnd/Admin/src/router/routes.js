@@ -526,6 +526,13 @@ export default [
     component: () =>
       import("../views/live-preview/application/invoice/preview.vue"),
   },
+  {
+    path: "/cartoon-list",
+    name: "cartoon-list",
+    meta: { title: "cartoon-list" },
+    component: () =>
+      import("../views/live-preview/application/e-commerce/cartoon-list.vue"),
+  },
 
   // Auth 1
   {
@@ -626,6 +633,14 @@ export default [
     component: () =>
       import("../views/live-preview/pages/maintenance/comming-soon.vue"),
   },
+  {
+    path: "/vnpay-return",
+    name: "vnpay-return",
+    meta: { title: "VnPay Return" },
+    component: () =>
+      import("../views/live-preview/application/e-commerce/vnpayReturn.vue"),
+  },
+
 
   // Components
   {

@@ -59,11 +59,11 @@ namespace BookManagement.Application.UseCases.VNPay_UseCase.CreateUrlPayment
 
                     pay.AddRequestData("vnp_Version", "2.1.0");
                     pay.AddRequestData("vnp_Command", "pay");
-                    pay.AddRequestData("vnp_TmnCode", "NLWXHLN1");
+                    pay.AddRequestData("vnp_TmnCode", "ZENP933A");
                     pay.AddRequestData("vnp_Amount", (double.Parse((bill.TotalPriceAfterDiscount * 100).ToString()).ToString()));
                     pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
                     pay.AddRequestData("vnp_CurrCode", "VND");
-                    pay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress(httpContext));
+                    pay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress(httpContext) ?? "127.0.0.1");
                     pay.AddRequestData("vnp_Locale", "vn");
                     pay.AddRequestData("vnp_OrderInfo", $"Thanh toan don hang {bill.Id}");
                     pay.AddRequestData("vnp_OrderType", "other");

@@ -68,6 +68,7 @@ namespace BookManagement.Application.UseCases.VNPay_UseCase.VNPayReturn
 
                     bill.BillStatus = Commons.Enums.Enumerate.BillStatus.DaThanhToan;
                     bill.PayTime = DateTime.Now;
+                    bill = await _billRepository.UpdateAsync(bill);
 
                     var user = await _userRepository.GetAsync(item => item.Id == bill.UserId);
                     if (user != null)

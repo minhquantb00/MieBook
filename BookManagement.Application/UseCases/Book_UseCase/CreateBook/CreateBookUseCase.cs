@@ -44,6 +44,18 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
             }
             try
             {
+                var category = await _categoryRepository.GetAsync(x => x.Id == input.CategoryId);
+                if(category == null)
+                {
+                    result.Errors = new string[] { "Danh mục không tồn tại" };
+                    return result;
+                }
+                var topicBook = await _topicBookRepsitory.GetAsync(x=> x.Id == input.TopicBookId);
+                if(topicBook == null)
+                {
+                    result.Errors = new string[] { "Chủ đề không tồn tại" };
+                    return result;
+                }
                 Book book = new Book
                 {
                     Author = input.Author,
@@ -70,6 +82,9 @@ namespace BookManagement.Application.UseCases.Book_UseCase.CreateBook
 
                 book.Status = book.Quantity > 0 ? Commons.Enums.Enumerate.BookStatus.DangBan : Commons.Enums.Enumerate.BookStatus.HetHang;
                 book = await _bookRepsitory.UpdateAsync(book);
+
+                category.NumberOfProducts = _bookRepsitory.GetAllAsync(record => record.Id == book.Id).Result.Count();
+                category = await _categoryRepository.UpdateAsync(category);
                 result.Succeeded = true;
                 return result;
             }catch (Exception ex)

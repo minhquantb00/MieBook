@@ -1,10 +1,9 @@
 <script setup>
 import Layout from "@/layout/main.vue";
 import pageheader from "@/components/page-header.vue";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { BookApi } from "@/apis/bookApi";
 import { useRouter } from "vue-router";
-import { filterProductRequest } from "@/interfaces/requestModels/book/filterProductRequest";
 import { CategoryApi } from "@/apis/categoryApi";
 import { TopicBookApi } from "@/apis/topicBookApi";
 import { CartApi } from "@/apis/cartApi";
@@ -17,15 +16,21 @@ const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 const cart = ref({});
 const router = useRouter();
 const dataProducts = ref([]);
-const businessExecute = ref(filterProductRequest);
+// const businessExecute = ref(filterProductRequest);
 const dataCategories = ref([]);
 const dataTopicBooks = ref([]);
 const businessExecuteCartItem = ref({
   cartId: null,
   bookId: null,
 });
-const selectedCategories = ref([]); // Lưu các categoryId đã chọn
-const selectedTopics = ref([]); // Lưu các topicBookId đã chọn
+
+const businessExecuteFilter = ref({
+  keyword: "",
+  priceFrom: null,
+  priceTo: null,
+  categoryId: 11,
+  topicBookId: null,
+});
 
 const createCartItem = async (bookId) => {
   loading.value = true;
@@ -67,7 +72,8 @@ const createCartItem = async (bookId) => {
 };
 
 const getAllBooks = async () => {
-  const result = await BookApi.getAllBooks(businessExecute.value);
+  const result = await BookApi.getAllBooks(businessExecuteFilter.value);
+  console.log(businessExecuteFilter.value);
   dataProducts.value = result.data.dataResponseBooks;
 };
 const businessExecuteCategory = ref({
@@ -76,23 +82,6 @@ const businessExecuteCategory = ref({
 const businessExecuteTopicBook = ref({
   name: "",
 });
-const onFilterChange = async () => {
-  // Đảm bảo chỉ có một categoryId được chọn (giới hạn chỉ một mục)
-  if (selectedCategories.value.length > 1) {
-    selectedCategories.value = [
-      selectedCategories.value[selectedCategories.value.length - 1],
-    ]; // Chỉ giữ lại mục cuối cùng
-  }
-
-  // Cập nhật giá trị filter
-  businessExecute.value.categoryId = selectedCategories.value.join(","); // Nối chuỗi categoryId thành dạng "id1,id2,id3"
-  businessExecute.value.topicBookId = selectedTopics.value.join(","); // Tương tự với topicBookId
-
-  console.log("Filters updated:", businessExecute.value);
-
-  // Gọi API để lấy danh sách sản phẩm mới
-  await getAllBooks();
-};
 
 const getCartByUserId = async () => {
   if (userInfo) {
@@ -122,25 +111,6 @@ const formatCurrency = (value) => {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 
-watch(
-  () => businessExecute.value.categoryId,
-  async (newCategoryId) => {
-    console.log("Category ID changed:", newCategoryId);
-    if (newCategoryId) {
-      await getAllBooks();
-    }
-  }
-);
-
-watch(
-  () => businessExecute.value.topicBookId,
-  async (newTopicBookId) => {
-    console.log("Topic Book ID changed:", newTopicBookId);
-    if (newTopicBookId) {
-      await getAllBooks();
-    }
-  }
-);
 onMounted(async () => {
   await getAllBooks();
   await getAllCategories();
@@ -264,110 +234,6 @@ onMounted(async () => {
     <BRow>
       <div class="col-sm-12">
         <div class="ecom-wrapper">
-          <div
-            class="offcanvas-xxl offcanvas-start ecom-offcanvas"
-            tabindex="-1"
-            id="offcanvas_mail_filter"
-          >
-            <div class="offcanvas-body p-0 sticky-xxl-top">
-              <div id="ecom-filter" class="show collapse collapse-horizontal">
-                <BCollapse id="collapse-3" visible>
-                  <div class="ecom-filter">
-                    <div class="card">
-                      <div
-                        class="card-header d-flex align-items-center justify-content-between"
-                      >
-                        <h5>Filter</h5>
-                        <a
-                          href="#"
-                          class="avtar avtar-s btn-link-danger btn-pc-default"
-                          data-bs-dismiss="offcanvas"
-                          data-bs-target="#offcanvas_mail_filter"
-                        >
-                          <i class="ti ti-x f-20"></i>
-                        </a>
-                      </div>
-                      <div class="scroll-block">
-                        <simplebar data-simplebar style="height: 620px">
-                          <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item border-0 px-0 py-2">
-                                <a
-                                  v-b-toggle.filtercollapse1
-                                  variant="primary"
-                                  class="border-0 px-0 text-start w-100 pb-0"
-                                >
-                                  <div class="float-end">
-                                    <i class="ti ti-chevron-down"></i>
-                                  </div>
-                                  Chủ đề
-                                </a>
-                                <BCollapse visible id="filtercollapse1">
-                                  <div v-for="topic in dataTopicBooks" :key="topic.id">
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        :id="'topicfilter1' + topic.id"
-                                        :value="topic.id"
-                                        v-model="selectedTopics"
-                                        @change="onFilterChange"
-                                      />
-                                      <label
-                                        class="form-check-label"
-                                        :for="'topicfilter1' + topic.id"
-                                      >
-                                        {{ topic.name }}
-                                      </label>
-                                    </div>
-                                  </div>
-                                </BCollapse>
-                              </li>
-                              <li class="list-group-item border-0 px-0 py-2">
-                                <a
-                                  v-b-toggle.filtercollapse2
-                                  variant="primary"
-                                  class="border-0 px-0 text-start w-100 pb-0"
-                                >
-                                  <div class="float-end">
-                                    <i class="ti ti-chevron-down"></i>
-                                  </div>
-                                  Danh mục
-                                </a>
-                                <BCollapse visible id="filtercollapse2">
-                                  <div
-                                    v-for="category in dataCategories"
-                                    :key="category.id"
-                                  >
-                                    <div class="form-check my-2">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        :id="'categoryfilter1' + category.id"
-                                        :value="category.id"
-                                        v-model="selectedCategories"
-                                        @change="onFilterChange"
-                                      />
-                                      <label
-                                        class="form-check-label"
-                                        :for="'categoryfilter1' + category.id"
-                                      >
-                                        {{ category.name }}
-                                      </label>
-                                    </div>
-                                  </div>
-                                </BCollapse>
-                              </li>
-                            </ul>
-                          </div>
-                        </simplebar>
-                      </div>
-                    </div>
-                  </div>
-                </BCollapse>
-              </div>
-            </div>
-          </div>
           <div class="ecom-content" style="width: 100%">
             <div class="d-sm-flex align-items-center mb-4">
               <ul class="list-inline me-auto my-1">
@@ -378,8 +244,7 @@ onMounted(async () => {
                       type="search"
                       class="form-control"
                       placeholder="Tìm kiếm"
-                      v-model="businessExecute.keyword"
-                      @input="onFilterChange"
+                      v-model="businessExecuteFilter.keyword"
                     />
                   </form>
                 </li>
