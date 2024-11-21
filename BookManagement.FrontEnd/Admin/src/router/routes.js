@@ -124,9 +124,9 @@ export default [
     component: () => import("../views/live-preview/widget/user.vue"),
   },
   {
-    path: "/data",
-    name: "data",
-    meta: { title: "Data Widget" },
+    path: "/best-seller",
+    name: "best-seller",
+    meta: { title: "best-seller" },
     component: () => import("../views/live-preview/widget/data.vue"),
   },
   {
@@ -410,6 +410,13 @@ export default [
     meta: { title: "Add New Category" },
     component: () =>
       import("../views/live-preview/application/category/add-category.vue"),
+  },
+  {
+    path: "/add-voucher",
+    name: "add-voucher",
+    meta: { title: "Add New Voucher" },
+    component: () =>
+      import("../views/live-preview/application/e-commerce/add-voucher.vue"),
   },
   {
     path: "/update-product/:id",

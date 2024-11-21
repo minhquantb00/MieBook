@@ -40,7 +40,7 @@ namespace BookManagement.Application.UseCases.Voucher_UseCase.CreateVoucher
             {
                 Voucher voucher = new Voucher
                 {
-                    Code = "Mie_" + Guid.NewGuid(),
+                    Code = "Mie_" + new Random().Next(1000, 9999).ToString(),
                     CreateTime = DateTime.Now,
                     DiscountPercent = input.DiscountPercent,
                     Name = input.Name,

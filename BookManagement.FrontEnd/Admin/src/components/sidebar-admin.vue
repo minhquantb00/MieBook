@@ -16,7 +16,13 @@ export default {
       }
     };
 
+    const name = ref("Admin");
+    const email = ref("admin@gmail.com");
     onMounted(() => {
+      if (userInfo) {
+        name.value = userInfo.FullName;
+        email.value = userInfo.Email;
+      }
       updateLogo();
     });
 
@@ -141,23 +147,7 @@ export default {
               <span class="pc-mtext"> Quản lý voucher</span>
             </router-link>
           </li>
-          <li class="pc-item" :class="{ active: this.$route.path === '/invoice-list' }">
-            <router-link to="/invoice-list" class="pc-link">
-              <span class="pc-micon">
-                <i class="ph-duotone ph-chart-pie"></i>
-              </span>
-              <span class="pc-mtext"> Quản lý sự kiện</span>
-            </router-link>
-          </li>
 
-          <li class="pc-item" :class="{ active: this.$route.path === '/preview' }">
-            <router-link to="/preview" class="pc-link">
-              <span class="pc-micon">
-                <i class="ph-duotone ph-compass-tool"></i>
-              </span>
-              <span class="pc-mtext"> Quản lý payment</span>
-            </router-link>
-          </li>
           <li class="pc-item" :class="{ active: this.$route.path === '/user-list' }">
             <router-link to="/user-list" class="pc-link">
               <span class="pc-micon"> <i class="ph-duotone ph-flower"></i> </span
@@ -179,8 +169,10 @@ export default {
           />
         </div>
         <div class="flex-grow-1 ms-3 me-2">
-          <h6 class="mb-0">{{ userInfo.FullName }}</h6>
-          <small>{{ userInfo.Email }}</small>
+          <h6 class="mb-0">
+            {{ name }}
+          </h6>
+          <small>{{ email }}</small>
         </div>
         <BDropdown variant="purple" dropup no-caret>
           <template v-slot:button-content>

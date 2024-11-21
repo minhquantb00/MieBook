@@ -450,6 +450,7 @@ onMounted(() => {
           menu-class="dropdown-menu-end dropdown-user-profile dropdown-menu-end pc-h-dropdown"
           aria-haspopup="true"
           :offset="{ alignmentAxis: -145, crossAxis: 0, mainAxis: 20 }"
+          style="z-index: 10"
         >
           <template #button-content
             ><span class="text-muted">

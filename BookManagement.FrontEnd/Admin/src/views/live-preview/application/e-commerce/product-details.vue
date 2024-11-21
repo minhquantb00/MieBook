@@ -13,15 +13,23 @@ import { BillApi } from "@/apis/billApi";
 import { CartApi } from "@/apis/cartApi";
 import { CartItemApi } from "@/apis/cartItemApi";
 import { VnPayApi } from "@/apis/vnpayApi";
+import { BookReviewApi } from "@/apis/bookReviewApi";
 const modules = [Autoplay, A11y];
 const loading = ref(false);
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 const userId = ref();
 const route = useRoute();
+const selectedFile = ref(null);
 const time = ref();
 const idBook = ref(route.params.id);
 const businessExecuteVnPay = ref({
   billId: null,
+});
+const businessExecuteBookReview = ref({
+  bookId: null,
+  content: "",
+  imageUrl: null,
+  numberOfStars: 0,
 });
 const router = useRouter();
 const book = ref({});
@@ -56,6 +64,49 @@ const businessExecuteBillDetail = ref({
 const selectAddress = (addressId) => {
   console.log("Địa chỉ ID đã chọn: ", addressId);
   businessExecuteBill.value.addressUserId = addressId; // Cập nhật địa chỉ đã chọn
+};
+
+const createNewBookReview = async () => {
+  loading.value = true;
+
+  // Create FormData and append all fields
+  const formData = new FormData();
+  formData.append("name", businessExecuteBookReview.value.content);
+  formData.append("bookId", book.value.id);
+  formData.append("content", businessExecuteBookReview.value.content);
+  formData.append("numberOfStars", businessExecuteBookReview.value.numberOfStars);
+
+  // Append the selected file, if available
+  if (selectedFile.value) {
+    formData.append("imageUrl", selectedFile.value);
+  }
+
+  const result = await BookReviewApi.createBookReview(formData);
+
+  if (result.data.succeeded === true) {
+    toast("Tạo thông tin review sách thành công", {
+      type: "success",
+      transition: "flip",
+      autoClose: 1500,
+      theme: "dark",
+      dangerouslyHTMLString: true,
+    });
+    time.value = setTimeout(() => {
+      router.push({
+        name: "product-details",
+        params: { id: book.value.id },
+      });
+    }, 1500);
+  } else {
+    toast(result.data.error[0], {
+      type: "error",
+      transition: "flip",
+      theme: "dark",
+      autoClose: 1500,
+      dangerouslyHTMLString: true,
+    });
+  }
+  loading.value = false;
 };
 const getBookById = async () => {
   try {
@@ -131,6 +182,9 @@ const getAllAddressUsers = async () => {
   dataAddressUser.value = result.data.dataResponseAddressUser;
   console.log(dataAddressUser.value);
 };
+const handleFileUpload = (event) => {
+  selectedFile.value = event.target.files[0];
+};
 const viewBook = (id) => {
   router.push({
     name: "product-details",
@@ -151,7 +205,9 @@ const formatDate = (date) => {
 
   return `${day}/${month}/${year}`;
 };
-
+const selectStar = (star) => {
+  businessExecuteBookReview.value.numberOfStars = star;
+};
 const createBill = async () => {
   loading.value = true;
   if (!userInfo) {
@@ -718,7 +774,7 @@ watch(
                                 <div class="progress" style="height: 4px">
                                   <div
                                     class="progress-bar bg-warning"
-                                    style="width: 30%"
+                                    :style="{ width: book.percentOf5Star + '%' }"
                                   ></div>
                                 </div>
                               </BCol>
@@ -731,7 +787,7 @@ watch(
                                 <div class="progress" style="height: 4px">
                                   <div
                                     class="progress-bar bg-warning"
-                                    style="width: 60%"
+                                    :style="{ width: book.percentOf4Star + '%' }"
                                   ></div>
                                 </div>
                               </BCol>
@@ -744,7 +800,7 @@ watch(
                                 <div class="progress" style="height: 4px">
                                   <div
                                     class="progress-bar bg-warning"
-                                    style="width: 75%"
+                                    :style="{ width: book.percentOf3Star + '%' }"
                                   ></div>
                                 </div>
                               </BCol>
@@ -757,7 +813,7 @@ watch(
                                 <div class="progress" style="height: 4px">
                                   <div
                                     class="progress-bar bg-warning"
-                                    style="width: 40%"
+                                    :style="{ width: book.percentOf2Star + '%' }"
                                   ></div>
                                 </div>
                               </BCol>
@@ -770,7 +826,7 @@ watch(
                                 <div class="progress" style="height: 4px">
                                   <div
                                     class="progress-bar bg-warning"
-                                    style="width: 55%"
+                                    :style="{ width: book.percentOf1Star + '%' }"
                                   ></div>
                                 </div>
                               </BCol>
@@ -812,6 +868,73 @@ watch(
                             {{ item.content }}
                           </p>
                         </div>
+                      </div>
+                    </BCardBody>
+                  </BCard>
+                </div>
+                <div>
+                  <BCard>
+                    <BCardBody no-body>
+                      <div class="star-rating d-flex mb-2">
+                        <i
+                          v-for="star in 5"
+                          :key="star"
+                          class="fa-star"
+                          :class="{
+                            'fas text-warning':
+                              star <= businessExecuteBookReview.numberOfStars,
+                            'far text-muted':
+                              star > businessExecuteBookReview.numberOfStars,
+                          }"
+                          @click="selectStar(star)"
+                          style="cursor: pointer; font-size: 20px"
+                        ></i>
+                      </div>
+                      <div class="media align-items-center mt-3">
+                        <img
+                          class="img-radius d-none d-sm-inline-flex me-3 wid-40 rounded-circle"
+                          src="@/assets/images/user/avatar-1.jpg"
+                          alt="User image"
+                        />
+
+                        <div class="media-body me-3">
+                          <div class="input-comment">
+                            <input
+                              type="email"
+                              class="form-control"
+                              placeholder="Viết bình luận..."
+                              v-model="businessExecuteBookReview.content"
+                            />
+                            <ul class="list-inline start-0 mb-0">
+                              <li class="list-inline-item border-end pe-2 me-2">
+                                <a href="#" class="avtar avtar-xs btn-link-warning">
+                                  <i class="ti ti-mood-smile f-18"></i>
+                                </a>
+                              </li>
+                            </ul>
+                            <ul class="list-inline end-0 mb-0">
+                              <li class="list-inline-item">
+                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                  <label class="btn" for="flupld"
+                                    ><i class="ti ti-paperclip f-18"></i
+                                  ></label>
+                                  <input
+                                    type="file"
+                                    id="flupld"
+                                    class="d-none"
+                                    @change="handleFileUpload"
+                                  />
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <button
+                          class="avtar avtar-s btn btn-primary"
+                          @click="createNewBookReview"
+                        >
+                          <i class="ti ti-send f-18"></i>
+                        </button>
                       </div>
                     </BCardBody>
                   </BCard>

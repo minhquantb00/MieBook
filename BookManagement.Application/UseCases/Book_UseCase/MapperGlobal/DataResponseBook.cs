@@ -31,6 +31,12 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
         public string CategoryName { get; set; }
         public string TopicBookName { get; set; }
         public int ReviewQuantity { get; set; }
+        public double PercentOf5Star {  get; set; }
+        public double PercentOf4Star { get; set; }
+        public double PercentOf3Star { get; set; }
+        public double PercentOf2Star { get; set; }
+        public double PercentOf1Star { get; set; }
+        public int NumberOfCustomerBought {  get; set; }
         public IQueryable<DataResponseBookReview> DataResponseBookReviews { get; set; }
     }
 }

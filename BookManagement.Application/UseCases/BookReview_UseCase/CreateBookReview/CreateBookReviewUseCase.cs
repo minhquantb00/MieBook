@@ -55,7 +55,9 @@ namespace BookManagement.Application.UseCases.BookReview_UseCase.CreateBookRevie
                 };
                 bookReview = await _bookReviewRepository.CreateAsync(bookReview);
 
-                book.AverageRating = (int) _bookReviewRepository.GetAllAsync(item => item.BookId == book.Id).Result.Average(x => x.NumberOfStars);
+                var numberOfReview = _bookReviewRepository.GetAllAsync(record => record.BookId == bookReview.BookId).Result.Select(item => item.Id).Count();
+                var sumStart = _bookReviewRepository.GetAllAsync(_record => _record.BookId == bookReview.BookId).Result.Sum(item => item.NumberOfStars);
+                book.AverageRating = (int) sumStart / numberOfReview;
 
                 book = await _bookRepository.UpdateAsync(book);
                 result.Succeeded = true;

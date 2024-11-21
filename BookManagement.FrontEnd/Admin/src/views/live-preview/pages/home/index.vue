@@ -198,8 +198,9 @@ onMounted(async () => {
                 <p class="text-muted mb-0">Tổng doanh thu/ tháng</p>
                 <div class="d-flex align-items-end">
                   <h2 class="mb-0 f-w-500">
-                    <span class="text-muted">$</span> 134.6
-                    <small class="text-muted">k</small>
+                    <span class="text-muted"></span>
+                    {{ formatCurrency(cart.statisticOfMonth) || 0 }}
+                    <small class="text-muted">VND</small>
                   </h2>
                   <span class="badge bg-light-success ms-2"
                     ><i class="ti ti-chevrons-up"></i> 55%</span
@@ -250,7 +251,7 @@ onMounted(async () => {
               <div>
                 <p class="text-muted mb-0">Số khách đã mua</p>
                 <div class="d-flex align-items-end">
-                  <h2 class="mb-0 f-w-500">278</h2>
+                  <h2 class="mb-0 f-w-500">{{ cart.numberOfCustomerBought || 0 }}</h2>
                   <span class="badge bg-light-success ms-2"
                     ><i class="ti ti-chevrons-up"></i> 7%</span
                   >

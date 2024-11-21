@@ -15,8 +15,13 @@ export default {
         logo.value.src = require("@/assets/images/logo-dark.svg");
       }
     };
-
+    const name = ref("Admin");
+    const email = ref("admin@gmail.com");
     onMounted(() => {
+      if (userInfo) {
+        name.value = userInfo.FullName;
+        email.value = userInfo.Email;
+      }
       updateLogo();
     });
 
@@ -27,7 +32,7 @@ export default {
       }
     );
 
-    return { logo, userInfo };
+    return { logo, userInfo, name, email };
   },
   components: {
     simplebar,
@@ -114,16 +119,8 @@ export default {
               <span class="pc-mtext"> Trang chủ</span>
             </router-link>
           </li>
-          <li class="pc-item" :class="{ active: this.$route.path === '/user' }">
-            <router-link to="/user" class="pc-link">
-              <span class="pc-micon">
-                <i class="ph-duotone ph-identification-card"></i>
-              </span>
-              <span class="pc-mtext"> Sách mới</span>
-            </router-link>
-          </li>
-          <li class="pc-item" :class="{ active: this.$route.path === '/data' }">
-            <router-link to="/data" class="pc-link">
+          <li class="pc-item" :class="{ active: this.$route.path === '/best-seller' }">
+            <router-link to="/best-seller" class="pc-link">
               <span class="pc-micon">
                 <i class="ph-duotone ph-database"></i>
               </span>
@@ -169,8 +166,10 @@ export default {
           />
         </div>
         <div class="flex-grow-1 ms-3 me-2">
-          <h6 class="mb-0">{{ userInfo.FullName }}</h6>
-          <small>{{ userInfo.Email }}</small>
+          <h6 class="mb-0">
+            {{ name }}
+          </h6>
+          <small>{{ email }}</small>
         </div>
         <BDropdown variant="purple" dropup no-caret>
           <template v-slot:button-content>

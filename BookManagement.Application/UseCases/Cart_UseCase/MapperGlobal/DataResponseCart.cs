@@ -13,6 +13,8 @@ namespace BookManagement.Application.UseCases.Cart_UseCase.MapperGlobal
         public string FullName { get; set; }
         public decimal TotalPrice { get; set; }
         public int Quantity { get; set; }
+        public int NumberOfCustomerBought { get; set; }
+        public double StatisticOfMonth { get; set; }
         public IQueryable<DataResponseCartItem> DataResponseCartItems { get; set; }
     }
 }

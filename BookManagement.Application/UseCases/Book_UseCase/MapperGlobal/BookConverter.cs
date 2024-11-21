@@ -31,6 +31,12 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
         }
         public DataResponseBook EntityToDTO(Book book)
         {
+            var numberOfVote = _bookReviewRepository.GetAllAsync(record => record.BookId == book.Id && record.NumberOfStars != 0).Result.Select(item => item.Id).Count();
+            var numberOfVote5Star = _bookReviewRepository.GetAllAsync(record => record.BookId == book.Id && record.NumberOfStars == 5).Result.Select(item => item.Id).Count();
+            var numberOfVote4Star = _bookReviewRepository.GetAllAsync(record => record.BookId == book.Id && record.NumberOfStars == 4).Result.Select(item => item.Id).Count();
+            var numberOfVote3Star = _bookReviewRepository.GetAllAsync(record => record.BookId == book.Id && record.NumberOfStars == 3).Result.Select(item => item.Id).Count();
+            var numberOfVote2Star = _bookReviewRepository.GetAllAsync(record => record.BookId == book.Id && record.NumberOfStars == 2).Result.Select(item => item.Id).Count();
+            var numberOfVote1Star = _bookReviewRepository.GetAllAsync(record => record.BookId == book.Id && record.NumberOfStars == 1).Result.Select(item => item.Id).Count();
             return new DataResponseBook
             {
                 Author = book.Author,
@@ -54,6 +60,11 @@ namespace BookManagement.Application.UseCases.Book_UseCase.MapperGlobal
                 Quantity = book.Quantity,
                 ReviewQuantity = _bookReviewRepository.GetAllAsync(item => item.BookId == book.Id).Result.Count(),
                 DataResponseBookReviews = _bookReviewRepository.GetAllAsync().Result.AsNoTracking().Select(item => _bookReviewConverter.EntityToDTO(item)),
+                PercentOf1Star = numberOfVote != 0 ? ((numberOfVote1Star * 1.0 / numberOfVote)) * 100 : 0,
+                PercentOf2Star = numberOfVote != 0 ? (numberOfVote2Star *1.0 / numberOfVote) * 100 : 0,
+                PercentOf3Star = numberOfVote != 0 ? (numberOfVote3Star * 1.0 / numberOfVote) * 100 : 0,
+                PercentOf4Star = numberOfVote != 0 ? (numberOfVote4Star * 1.0 / numberOfVote) * 100 : 0,
+                PercentOf5Star = numberOfVote != 0 ? (numberOfVote5Star * 1.0 / numberOfVote) * 100 : 0,
             };
         }
     }

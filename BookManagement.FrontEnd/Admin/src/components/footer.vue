@@ -1,12 +1,12 @@
 <script>
 export default {
-    name: "FOOTER"
-}
+  name: "FOOTER",
+};
 </script>
 
 <template>
-        <div class="footer-wrapper container-fluid">
-            <BRow>
+  <div class="footer-wrapper container-fluid">
+    <!-- <BRow>
                 <BCol sm="6" class="my-1">
                     <p class="m-0">Light able &#9829; crafted by Team <a href="#"
                             target="_blank">themes</a></p>
@@ -20,6 +20,6 @@ export default {
                         </li>
                     </ul>
                 </BCol>
-            </BRow>
-        </div>
+            </BRow> -->
+  </div>
 </template>
